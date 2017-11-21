@@ -1,0 +1,15 @@
+void Token::display() {
+	printf("type: %s\n", token_names[type]);
+	if (type == IDENTITY) {
+		printf("id name: %s\n", string_value);
+	}
+	if (type == CHARACTER) {
+		printf("character: %c\n", character_value);
+	}
+	if (type == STRING) {
+		printf("string: %s\n", string_value);
+	}
+	if (type == UNSIGNED_INTEGER) {
+		printf("unsigned: %d\n", numerical_value);
+	}
+}

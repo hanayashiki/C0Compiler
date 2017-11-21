@@ -1,0 +1,2 @@
+const char a = 'a';
+const int b = 12345;
