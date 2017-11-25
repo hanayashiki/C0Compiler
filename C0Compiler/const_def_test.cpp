@@ -1,6 +1,6 @@
 #include "stdafx.h"
 
-int main() {
+int main_const_def_test() {
     Lexer lexer;
     SymbolTable symbol_table;
     FILE* f = fopen("const_def_test1.txt", "r");

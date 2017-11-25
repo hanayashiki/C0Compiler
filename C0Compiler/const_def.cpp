@@ -3,7 +3,7 @@
 bool Syntax::const_def() {
     // const int <const_assign>{, <const_assign>};
 
-    int type = Token::UNKNOWN;
+    int type = Symbol::UNKNOWN;
     // const
     if (match_type(Token::CONST)) {  
         next_token();
@@ -20,16 +20,12 @@ bool Syntax::const_def() {
     if (!const_assign(type)) {
         assert(0);
     }
-    /*// , b, c...
     while (match_type(Token::COMMA)) {
         next_token();
-        if (match_type(Token::IDENTITY)) {
-            Symbol* new_sym = new Symbol(read_token.getName(), type);
-            next_token();
-        } else {
+        if (!const_assign(type)) {
             assert(0);
         }
-    }*/
+    }
     return true;
 }
 
@@ -69,10 +65,7 @@ bool Syntax::const_assign(int type) {
 void Syntax::const_group() {
     int i = 0;
     while (match_type(Token::CONST)) {
-        i++;
-        cout << i << endl;
         const_def();
-        read_token.display();
         if (match_type(Token::SEMICOLON)) {
             next_token();
         } else {

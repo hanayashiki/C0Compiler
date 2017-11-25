@@ -1,2 +1,4 @@
 const char a = 'a';
 const int b = 12345;
+const int c = 1, e = 2, f = 3;
+const char g = 'g', h = 'h', i = 'i';

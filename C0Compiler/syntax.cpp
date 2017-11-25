@@ -17,5 +17,9 @@ void Syntax::next_token() {
 
 void Syntax::start() {
     next_token();
-    const_group();
+    if (match_type(Token::CONST)) {
+        const_group();
+    } else if (match_type(Token::INT) || match_type(Token::CHAR)) {
+        var_group();
+    }
 }

@@ -30,3 +30,21 @@ int Syntax::const_() {
     }
     return -1;
 }
+
+int Syntax::const_above_zero() {
+    int value;
+    // £¼ÎÞ·ûºÅÕûÊý£¾
+    if (read_token.type == Token::UNSIGNED_INTEGER) {
+        if ((read_token.integerPositiveOverflow == true) ||
+            (read_token.getIntValue() == 0)) {
+            assert(0);
+        }
+        value = read_token.getIntValue();
+        cout << "got value: " << value << endl;
+        next_token();
+        return value;
+    } else {
+        assert(0);
+        return -1;
+    }
+}

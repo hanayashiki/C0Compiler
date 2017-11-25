@@ -8,14 +8,14 @@ private:
     char character_value;
     int integer_value;
     // array
-    int array_type;
+    bool array_flag;
     int array_length;
 public:
     enum symbol_types {
+        UNKNOWN,
         FUNCTION,
         CHAR,
-        INT,
-        ARRAY
+        INT
     };
     Symbol(string name, int type_);
     Symbol(string name, int type_, bool const_);
@@ -25,5 +25,7 @@ public:
     // const
     bool setConstantValue(char value);
     bool setConstantValue(int value);
+    // array
+    void setArray(int len);
     string name;
 };

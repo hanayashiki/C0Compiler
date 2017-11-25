@@ -4,6 +4,7 @@ Symbol::Symbol(string name_, int type_) {
     name = name_;
     type = type_;
     const_flag = false;
+    array_flag = false;
 }
 
 Symbol::Symbol(string name_, int type_, bool const_) {
@@ -37,9 +38,6 @@ void Symbol::display() {
     case INT:
         cout << "int; ";
         break;
-    case ARRAY:
-        cout << "array; ";
-        break;
     default:
         cout << "unexpected type; ";
     }
@@ -51,5 +49,13 @@ void Symbol::display() {
             cout << integer_value;
         }
     }
+    if (array_flag) {
+        cout << "array length: " << array_length << "; ";
+    }
     cout << endl;
+}
+
+void Symbol::setArray(int len) {
+    array_flag = true;
+    array_length = len;
 }

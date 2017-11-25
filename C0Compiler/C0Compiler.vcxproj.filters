@@ -52,6 +52,9 @@
     <None Include="const_def_test1.txt">
       <Filter>源文件\test_code</Filter>
     </None>
+    <None Include="var_def_test1.txt">
+      <Filter>源文件\test_code</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -118,6 +121,9 @@
     </ClCompile>
     <ClCompile Include="var_def.cpp">
       <Filter>源文件\syntax</Filter>
+    </ClCompile>
+    <ClCompile Include="var_def_test.cpp">
+      <Filter>源文件\test</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -11,12 +11,18 @@ public:
     void start();
     
     Token read_token; 
-    void Syntax::next_token();
+    void next_token();
 
     int const_();
+    int const_above_zero();
     bool const_def();
     bool const_assign(int type);
     void const_group();
+
+    bool var_def();
+    bool var_entry(int basic_type);
+    void var_group();
+
 	int expression();
 };
 
