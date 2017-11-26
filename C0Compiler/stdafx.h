@@ -9,14 +9,20 @@
 #include <iostream>
 #include <stdio.h>
 #include <assert.h>
+#include <string>
+#include <set>
+#include <vector>
+
 #include "token.h"
+#include "lexical_error.h"
 #include "lexer.h"
 
 #include "symbol.h"
 #include "symbol_table.h"
+#include "syntax_error.h"
 #include "syntax.h"
 
-#include <string>
+
 
 
 

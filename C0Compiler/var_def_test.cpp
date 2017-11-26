@@ -1,6 +1,6 @@
 #include "stdafx.h"
 
-int main() {
+int main_var_def_test() {
     Lexer lexer;
     SymbolTable symbol_table;
     FILE* f = fopen("var_def_test1.txt", "r");

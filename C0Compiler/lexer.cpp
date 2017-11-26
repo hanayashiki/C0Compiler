@@ -7,6 +7,7 @@ Lexer::Lexer() {
 Token Lexer::getToken() {
 	int state = IDLE;
 	int num_value = 0;
+    bool leading_zero_flag = false;
 	string name_str;
 	Token token;
 	while (true) {
@@ -55,12 +56,10 @@ Token Lexer::getToken() {
 				name_str.append(1, c);
 				state = IDENTITY_BODY;
 			}
-			else if (c == '0') {
-				token.setType(Token::UNSIGNED_INTEGER);
-				token.setValue(0);
-				return token;
-			}
-			else if (isNoneZero(c)) {
+            else if (isNoneZero(c) || c == '0') {
+                if (c == '0') {
+                    leading_zero_flag = true;
+                }
 				token.setType(Token::UNSIGNED_INTEGER);
 				num_value = digitAugment(num_value, c, token);
 				state = UNSIGNED_INTEGER_BODY;
@@ -108,7 +107,9 @@ Token Lexer::getToken() {
 				state = STRING_BODY;
 			}
 			else {
-				errorHandler();
+                // 读到的第一个字符不合法，继续往下读，直到遇到合法的
+				errorHandler(LexicalError::ILLEGAL_FIRST_CHAR);
+                state = IDLE;
 			}
 			break;
 		case LESS_HEAD:
@@ -147,7 +148,7 @@ Token Lexer::getToken() {
 				return token;
 			}
 			else {
-				errorHandler();
+				errorHandler(0);
 			}
 			break;
 		case IDENTITY_BODY:
@@ -172,7 +173,15 @@ Token Lexer::getToken() {
 			if (isDigit(c)) {
 				num_value = digitAugment(num_value, c, token);
 				state = UNSIGNED_INTEGER_BODY;
+                if (leading_zero_flag) {
+                    errorHandler(LexicalError::LEADING_ZERO);
+                }
 			}
+            else if (isLetter(c)) {
+                errorHandler(LexicalError::CHAR_INSIDE_INT);
+                token.setValue(num_value);
+				return token;
+            }
 			else {
 				retract();
 				token.setValue(num_value);
@@ -186,7 +195,7 @@ Token Lexer::getToken() {
 				state = CHARACTER_TAIL;
 			}
 			else {
-				errorHandler();
+				errorHandler(0);
 			}
 			break;
 		case CHARACTER_TAIL:
@@ -194,7 +203,9 @@ Token Lexer::getToken() {
 				return token;
 			}
 			else {
-				errorHandler();
+                retract();
+				errorHandler(LexicalError::MISSING_SINGLE_QUOTE);
+                return token;
 			}
 			break;
 		case STRING_BODY:
@@ -207,7 +218,13 @@ Token Lexer::getToken() {
 				return token;
 			}
 			else {
-				errorHandler();
+                retract(); // 非法字符认为是分界符
+				errorHandler(LexicalError::ILLEGAL_CHAR_INSIDE);
+                token.setType(Token::STRING);
+				token.setValue(name_str);
+                cout << name_str;
+
+				return token;
 			}
 			break;
 		default:
@@ -252,12 +269,6 @@ bool Lexer::retract() {
 	return true;
 }
 
-void Lexer::errorHandler() {
-	// TODO: solve lexical error
-	printf("Lexical error at line %d\n", current_line);
-	while (1);
-}
-
 int Lexer::digitAugment(int num_value, char c, Token & token) {
 	assert(isDigit(c));
 	long long int num_longer = num_value;
@@ -285,4 +296,17 @@ int Lexer::getKeywordID(string & s) {
 bool Lexer::setSource(FILE* f) {
 	source = f;
 	return true;
+}
+
+void Lexer::errorHandler(int e) {
+	// TODO: solve lexical error
+	printf("Lexical error at line %d: ", current_line);
+    cout << lexical_error.ErrorDealers[e].desciption << endl;
+    if (lexical_error.ErrorDealers[e].next_legal != NULL) {
+        char c = getChar();
+        while (!(lexical_error.ErrorDealers[e].next_legal(c)) && (c != EOF)) {
+            c = getChar();
+        }
+        retract();
+    }
 }

@@ -1,0 +1,17 @@
+/*ILLEGAL_FIRST_CHAR*/
+##### 1 a1234 b c d
+&& ^^ return from wrong state
+
+/*ILLEGAL_CHAR_INSIDE*/
+"how do you do 
+a+b+c check if returned
+
+/*MISSING_SINGLE_QUOTE*/
+int a = 'a; if b = 1; call('abcde);
+
+/*LEADING_ZERO*/
+0 00001*12345 (00001) (0) 0101<1
+
+/*CHAR_INSIDE_INT*/
+
+9s 2b 2*3-1 33a33%333

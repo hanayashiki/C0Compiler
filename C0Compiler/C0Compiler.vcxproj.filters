@@ -55,6 +55,12 @@
     <None Include="var_def_test1.txt">
       <Filter>源文件\test_code</Filter>
     </None>
+    <None Include="lexer_test4.txt">
+      <Filter>源文件\test_code</Filter>
+    </None>
+    <None Include="lexer_test_submit.txt">
+      <Filter>源文件\test_code</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -80,6 +86,12 @@
     </ClInclude>
     <ClInclude Include="hash_utils.h">
       <Filter>头文件\symbol</Filter>
+    </ClInclude>
+    <ClInclude Include="lexical_error.h">
+      <Filter>头文件\lexical</Filter>
+    </ClInclude>
+    <ClInclude Include="syntax_error.h">
+      <Filter>头文件\syntax</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -124,6 +136,12 @@
     </ClCompile>
     <ClCompile Include="var_def_test.cpp">
       <Filter>源文件\test</Filter>
+    </ClCompile>
+    <ClCompile Include="lexical_error.cpp">
+      <Filter>源文件\lexical</Filter>
+    </ClCompile>
+    <ClCompile Include="syntax_error.cpp">
+      <Filter>源文件\syntax</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

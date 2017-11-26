@@ -5,7 +5,7 @@ bool SymbolTable::add_map(string name, Symbol* sym) {
 	return true;
 }
 
-Symbol* SymbolTable::get_sym(string & name) {
+Symbol* SymbolTable::get_sym(string name) {
 	return symbol_hash[name];
 }
 

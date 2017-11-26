@@ -76,16 +76,20 @@
     <None Include="lexer_test1.txt" />
     <None Include="lexer_test2.txt" />
     <None Include="lexer_test3.txt" />
+    <None Include="lexer_test4.txt" />
+    <None Include="lexer_test_submit.txt" />
     <None Include="requirements.txt" />
     <None Include="var_def_test1.txt" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="hash_utils.h" />
     <ClInclude Include="lexer.h" />
+    <ClInclude Include="lexical_error.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="symbol.h" />
     <ClInclude Include="symbol_table.h" />
     <ClInclude Include="syntax.h" />
+    <ClInclude Include="syntax_error.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="token.h" />
   </ItemGroup>
@@ -96,6 +100,7 @@
     <ClCompile Include="const_def_test.cpp" />
     <ClCompile Include="lexer.cpp" />
     <ClCompile Include="lexer_test.cpp" />
+    <ClCompile Include="lexical_error.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
@@ -104,6 +109,7 @@
     <ClCompile Include="symbol_table.cpp" />
     <ClCompile Include="symbol_table_test.cpp" />
     <ClCompile Include="syntax.cpp" />
+    <ClCompile Include="syntax_error.cpp" />
     <ClCompile Include="token.cpp" />
     <ClCompile Include="var_def.cpp" />
     <ClCompile Include="var_def_test.cpp" />

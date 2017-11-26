@@ -25,6 +25,7 @@ public:
 	Lexer();
 	Token getToken();
 	bool setSource(FILE * f);
+    enum errors;
 	enum states {
 		IDLE,
 		LESS_HEAD,
@@ -39,16 +40,17 @@ public:
 		CHARACTER_TAIL,
 		STRING_BODY
 	};
+    static bool isLetter(char c);
+	static bool isNoneZero(char c);
+	static bool isDigit(char c);
+	static bool isLegalStringChar(char c);
 private:
+    LexicalError lexical_error;
 	int current_line;	// 1-indexed
-	bool isLetter(char c);
-	bool isNoneZero(char c);
-	bool isDigit(char c);
-	bool isLegalStringChar(char c);
 	int digitAugment(int num_value, char c, Token & token);
 	int getKeywordID(string & s);
 	char getChar();
-	void errorHandler();
+	void errorHandler(int e);
 	bool retract();
 	FILE * source;
 };

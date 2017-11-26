@@ -14,6 +14,6 @@ private:
 	symbol_map symbol_hash;
 public:
 	bool add_map(string name, Symbol* sym);
-	Symbol* get_sym(string & name);
+	Symbol* get_sym(string name);
     void display();
 };
