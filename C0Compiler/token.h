@@ -70,7 +70,7 @@ public:
 
     char getCharValue() const;
     int getIntValue() const;
-    const string & getName() const;
+    const string getName() const;
 
 	enum token_types {
 		UNKNOWN,

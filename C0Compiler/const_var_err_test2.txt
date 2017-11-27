@@ -1,0 +1,5 @@
+const a = 1;
+const int b, c = 1;
+int d;
+int f
+int e;

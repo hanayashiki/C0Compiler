@@ -1,0 +1,39 @@
+﻿生成启动时间为 2017/11/28 1:06:27。
+     1>项目“D:\C0CompilerForVS2010\C0Compiler\C0Compiler\C0Compiler.vcxproj”在节点 2 上(build 个目标)。
+     1>InitializeBuildStatus:
+         正在创建“Release\C0Compiler.unsuccessfulbuild”，因为已指定“AlwaysCreate”。
+       ClCompile:
+         所有输出均为最新。
+         D:\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D WIN32 /D NDEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Yu"StdAfx.h" /Fp"Release\C0Compiler.pch" /Fo"Release\\" /Fd"Release\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt syntax_error.cpp
+         syntax_error.cpp
+       Link:
+         D:\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\C0CompilerForVS2010\C0Compiler\Release\C0Compiler.exe" /INCREMENTAL:NO /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Release\C0Compiler.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"D:\C0CompilerForVS2010\C0Compiler\Release\C0Compiler.pdb" /SUBSYSTEM:CONSOLE /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\C0CompilerForVS2010\C0Compiler\Release\C0Compiler.lib" /MACHINE:X86 Release\C0Compiler.obj
+         Release\const.obj
+         Release\const_def.obj
+         Release\const_def_test.obj
+         Release\lexer.obj
+         Release\lexer_test.obj
+         Release\lexical_error.obj
+         Release\retract_token_test.obj
+         Release\stdafx.obj
+         Release\symbol.obj
+         Release\symbol_table.obj
+         Release\symbol_table_test.obj
+         Release\syntax.obj
+         Release\syntax_error.obj
+         Release\token.obj
+         Release\var_def.obj
+         Release\var_def_test.obj
+         正在生成代码
+         已完成代码的生成
+         C0Compiler.vcxproj -> D:\C0CompilerForVS2010\C0Compiler\Release\C0Compiler.exe
+       Manifest:
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /outputresource:"D:\C0CompilerForVS2010\C0Compiler\Release\C0Compiler.exe;#1" /manifest Release\C0Compiler.exe.intermediate.manifest
+       FinalizeBuildStatus:
+         正在删除文件“Release\C0Compiler.unsuccessfulbuild”。
+         正在对“Release\C0Compiler.lastbuildstate”执行 Touch 任务。
+     1>已完成生成项目“D:\C0CompilerForVS2010\C0Compiler\C0Compiler\C0Compiler.vcxproj”(build 个目标)的操作。
+
+生成成功。
+
+已用时间 00:00:01.29

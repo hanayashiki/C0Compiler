@@ -1,10 +1,14 @@
 #pragma once
 #include "stdafx.h"
+#include <list>
 
 class Syntax {
 private:
+    SyntaxError syntax_error;
 	Lexer* lexer;
     SymbolTable* symbol_table;
+    list<Token> token_list;
+    list<Token>::iterator token_pointer;
     bool match_type(int token_type);
 public:
 	Syntax(Lexer* l, SymbolTable* s);
@@ -12,6 +16,9 @@ public:
     
     Token read_token; 
     void next_token();
+    void retract_token();
+    void search_pattern(SyntaxError::pattern_list & list);
+    void error_handler(int e);
 
     int const_();
     int const_above_zero();

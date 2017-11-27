@@ -45,7 +45,7 @@ void Token::display() {
 	}
 }
 
-const string & Token::getName() const {
+const string Token::getName() const {
     return string_value;
 }
 

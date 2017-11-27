@@ -11,6 +11,7 @@ Symbol::Symbol(string name_, int type_, bool const_) {
     name = name_;
     type = type_;
     const_flag = const_;
+    array_flag = false;
 }
 
 bool Symbol::setConstantValue(char value) {
@@ -44,9 +45,9 @@ void Symbol::display() {
     if (const_flag) {
         cout << "const value: ";
         if (type == CHAR) {
-            cout << "'" << character_value << "'";
+            cout << "'" << character_value << "'; ";
         } else {
-            cout << integer_value;
+            cout << integer_value << "; ";
         }
     }
     if (array_flag) {

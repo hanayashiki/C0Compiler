@@ -70,7 +70,7 @@ void Syntax::var_group() {
         if (match_type(Token::SEMICOLON)) {
             next_token();
         } else {
-            assert(0);
+            error_handler(SyntaxError::MISSING_SEMICOLON);
         }
     }
 }

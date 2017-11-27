@@ -1,6 +1,6 @@
 #include "stdafx.h"
-
-int main_var_def_test() {
+/*
+int main() {
     Lexer lexer;
     SymbolTable symbol_table;
     FILE* f = fopen("var_def_test1.txt", "r");
@@ -11,3 +11,4 @@ int main_var_def_test() {
     getchar();
     return 0;
 }
+*/

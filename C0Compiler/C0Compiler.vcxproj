@@ -73,6 +73,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <None Include="const_def_test1.txt" />
+    <None Include="const_var_err_test2.txt" />
     <None Include="lexer_test1.txt" />
     <None Include="lexer_test2.txt" />
     <None Include="lexer_test3.txt" />
@@ -101,6 +102,7 @@
     <ClCompile Include="lexer.cpp" />
     <ClCompile Include="lexer_test.cpp" />
     <ClCompile Include="lexical_error.cpp" />
+    <ClCompile Include="retract_token_test.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>

@@ -15,7 +15,8 @@ bool Syntax::const_def() {
         type = (read_token.type == Token::CHAR) ? Symbol::CHAR : Symbol::INT;
         next_token();
     } else {
-        assert(0);
+        error_handler(SyntaxError::CONST_DECLARATION_MISSING_TYPE);
+        return false;
     }
     if (!const_assign(type)) {
         assert(0);
@@ -38,16 +39,20 @@ bool Syntax::const_assign(int type) {
         new_sym = new Symbol(name, type, true);
         next_token();
     } else {
-        assert(0);
+        error_handler(SyntaxError::CONST_DECLARATION_MISSING_ASSIGNMENT);
+        delete(new_sym);
+        return false;
     }
     // = 
     if (match_type(Token::ASSIGN)) {
         next_token();
     } else {
-        assert(0);
+        error_handler(SyntaxError::CONST_DECLARATION_MISSING_ASSIGNMENT);
+        delete(new_sym);
+        return false;
     }
     // 1234 | 'a'
-    cout << "assign type:" << type << endl;
+    //cout << "assign type:" << type << endl;
     if ((type == Symbol::CHAR) && match_type(Token::CHARACTER)) {
         //'a'
         new_sym->setConstantValue(read_token.getCharValue());
@@ -56,7 +61,9 @@ bool Syntax::const_assign(int type) {
         //1234
         new_sym->setConstantValue(const_());
     } else {
-        assert(0);
+        error_handler(SyntaxError::CONST_DECLARATION_MISSING_ASSIGNMENT);
+        delete(new_sym);
+        return false;
     }
     symbol_table->add_map(name, new_sym);
     return true;
@@ -69,7 +76,7 @@ void Syntax::const_group() {
         if (match_type(Token::SEMICOLON)) {
             next_token();
         } else {
-            assert(0);
+            error_handler(SyntaxError::MISSING_SEMICOLON);
         }
     }
 }

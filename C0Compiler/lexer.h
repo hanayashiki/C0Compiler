@@ -26,6 +26,7 @@ public:
 	Token getToken();
 	bool setSource(FILE * f);
     enum errors;
+    	int current_line;	// 1-indexed
 	enum states {
 		IDLE,
 		LESS_HEAD,
@@ -46,7 +47,6 @@ public:
 	static bool isLegalStringChar(char c);
 private:
     LexicalError lexical_error;
-	int current_line;	// 1-indexed
 	int digitAugment(int num_value, char c, Token & token);
 	int getKeywordID(string & s);
 	char getChar();

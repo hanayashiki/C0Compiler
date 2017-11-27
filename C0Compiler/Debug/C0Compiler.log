@@ -1,11 +1,29 @@
-﻿生成启动时间为 2017/11/26 19:39:39。
+﻿生成启动时间为 2017/11/28 0:47:13。
      1>项目“D:\C0CompilerForVS2010\C0Compiler\C0Compiler\C0Compiler.vcxproj”在节点 2 上(build 个目标)。
      1>InitializeBuildStatus:
          正在创建“Debug\C0Compiler.unsuccessfulbuild”，因为已指定“AlwaysCreate”。
        ClCompile:
-         所有输出均为最新。
-         D:\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"StdAfx.h" /Fp"Debug\C0Compiler.pch" /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt lexer.cpp
+         D:\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yc"StdAfx.h" /Fp"Debug\C0Compiler.pch" /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt stdafx.cpp
+         stdafx.cpp
+         D:\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"StdAfx.h" /Fp"Debug\C0Compiler.pch" /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt C0Compiler.cpp const.cpp const_def.cpp const_def_test.cpp lexer.cpp lexer_test.cpp lexical_error.cpp retract_token_test.cpp symbol.cpp symbol_table.cpp symbol_table_test.cpp syntax.cpp syntax_error.cpp token.cpp var_def.cpp var_def_test.cpp
+         var_def.cpp
+         token.cpp
+         const_def.cpp
+         const.cpp
+         正在生成代码...
+         正在跳过...(未检测到相关更改)
+         var_def_test.cpp
+         syntax_error.cpp
+         syntax.cpp
+         symbol_table_test.cpp
+         symbol_table.cpp
+         symbol.cpp
+         retract_token_test.cpp
+         lexical_error.cpp
+         lexer_test.cpp
          lexer.cpp
+         const_def_test.cpp
+         C0Compiler.cpp
        ManifestResourceCompile:
          所有输出均为最新。
        Link:
@@ -17,6 +35,7 @@
          Debug\lexer.obj
          Debug\lexer_test.obj
          Debug\lexical_error.obj
+         Debug\retract_token_test.obj
          Debug\stdafx.obj
          Debug\symbol.obj
          Debug\symbol_table.obj
@@ -39,4 +58,4 @@
 
 生成成功。
 
-已用时间 00:00:00.63
+已用时间 00:00:01.53

@@ -20,7 +20,7 @@ int Syntax::const_() {
             assert(0);
         }
         value = read_token.getIntValue();
-        cout << "got value: " << value << endl;
+        //cout << "got value: " << value << endl;
         next_token();
         if (minus) {
             return -1 * value;
@@ -40,7 +40,6 @@ int Syntax::const_above_zero() {
             assert(0);
         }
         value = read_token.getIntValue();
-        cout << "got value: " << value << endl;
         next_token();
         return value;
     } else {

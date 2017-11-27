@@ -2,7 +2,7 @@
 
 using namespace std;
 
-int main() {
+int main_lexer_test() {
 	Lexer lexer;
 	Token token;
 	FILE* f = fopen("lexer_test_submit.txt", "r");

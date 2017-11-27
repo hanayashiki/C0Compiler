@@ -61,6 +61,9 @@
     <None Include="lexer_test_submit.txt">
       <Filter>源文件\test_code</Filter>
     </None>
+    <None Include="const_var_err_test2.txt">
+      <Filter>源文件\test_code</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -142,6 +145,9 @@
     </ClCompile>
     <ClCompile Include="syntax_error.cpp">
       <Filter>源文件\syntax</Filter>
+    </ClCompile>
+    <ClCompile Include="retract_token_test.cpp">
+      <Filter>源文件\test</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
