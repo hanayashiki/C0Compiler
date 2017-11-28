@@ -8,6 +8,7 @@ int main() {
     Syntax syntax(&lexer, &symbol_table);
     syntax.start();
     symbol_table.display();
+    cout << "main ended." << endl;
     getchar();
     return 0;
 }

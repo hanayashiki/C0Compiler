@@ -37,13 +37,12 @@ int Syntax::const_above_zero() {
     if (read_token.type == Token::UNSIGNED_INTEGER) {
         if ((read_token.integerPositiveOverflow == true) ||
             (read_token.getIntValue() == 0)) {
-            assert(0);
+            return -1;
         }
         value = read_token.getIntValue();
         next_token();
         return value;
     } else {
-        assert(0);
         return -1;
     }
 }

@@ -41,7 +41,7 @@ bool Syntax::const_assign(int type) {
     } else {
         error_handler(SyntaxError::CONST_DECLARATION_MISSING_ASSIGNMENT);
         delete(new_sym);
-        return false;
+        return true;
     }
     // = 
     if (match_type(Token::ASSIGN)) {
@@ -49,7 +49,7 @@ bool Syntax::const_assign(int type) {
     } else {
         error_handler(SyntaxError::CONST_DECLARATION_MISSING_ASSIGNMENT);
         delete(new_sym);
-        return false;
+        return true;
     }
     // 1234 | 'a'
     //cout << "assign type:" << type << endl;
@@ -63,7 +63,7 @@ bool Syntax::const_assign(int type) {
     } else {
         error_handler(SyntaxError::CONST_DECLARATION_MISSING_ASSIGNMENT);
         delete(new_sym);
-        return false;
+        return true;
     }
     symbol_table->add_map(name, new_sym);
     return true;

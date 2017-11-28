@@ -11,15 +11,15 @@ bool Syntax::match_type(int token_type) {
 }
 
 void Syntax::next_token() {
-    if ((token_list.size() == 0) || (token_pointer == token_list.end())) {  
+    if ((token_list.size() == 0) || (token_pointer == (token_list.end() - 1))) {  
         read_token = lexer->getToken();
         token_list.push_back(read_token);
         //read_token.display();
-        token_pointer = token_list.end();
+        token_pointer = token_list.end() - 1;
     } else {
+        token_pointer++;
         read_token = *token_pointer;
         //read_token.display();
-        token_pointer++;
     }
 }
 
@@ -39,4 +39,6 @@ void Syntax::start() {
     if (match_type(Token::INT) || match_type(Token::CHAR)) {
         var_group();
     }
+    cout << "------ending: token_list:--------";
+    display_token_list();
 }

@@ -37,7 +37,9 @@ bool Syntax::var_entry(int basic_type) {
         new_sym = new Symbol(name, basic_type);
         next_token();
     } else {
-        assert(0);
+        cout << "name not found\n";
+        error_handler(SyntaxError::VARIABLE_DECLARATION_MISSING_IDENTIFIER);
+        return true;
     }
     // [ '[' 123 ']' ]
     if (match_type(Token::LEFT_BRACKET)) {
@@ -49,12 +51,19 @@ bool Syntax::var_entry(int basic_type) {
 
     if (match_type(Token::UNSIGNED_INTEGER)) {
         array_length = const_above_zero();
+        if (array_length <= 0) {
+            error_handler(SyntaxError::ARRAY_ILLEGAL_LENGTH);
+        }
+    } else {
+        error_handler(SyntaxError::ARRAY_ILLEGAL_TOKEN_INSIDE);
+        return true;
     }
 
     if (match_type(Token::RIGHT_BRACKET)) {
         next_token();
     } else {
-        assert(0);
+        error_handler(SyntaxError::ARRAY_MISSING_RIGHT_BRACKET);
+        return true;
     }
 
     new_sym->setArray(array_length);

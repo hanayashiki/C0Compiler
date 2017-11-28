@@ -21,25 +21,29 @@ patterns = \
 		"pattern": ["Token::LEFT_BRACE"]
 	},
 	{
-		"name": "pattern_find_array_assignment",
+		"name": "find_array_assignment",
 		"pattern": ["Token::IDENTITY", "Token::LEFT_BRACKET", "ANYTOKENS",
     	"Token::RIGHT_BRACKET", "Token::ASSIGN"]
 	},
 	{
-		"name": "pattern_find_simple_assignment",
+		"name": "find_simple_assignment",
 		"pattern": ["Token::IDENTITY", "Token::ASSIGN"]
 	},
 	{
-		"name": "pattern_find_next_const_def",
+		"name": "find_next_const_def",
 		"pattern": ["Token::CONST"]
 	},
 	{
-	    "name": "pattern_find_next_var_int_def",
+	    "name": "find_next_var_int_def",
 		"pattern": ["Token::INT", "Token::IDENTITY"]
 	},
 	{
-	    "name": "pattern_find_next_var_char_def",
+	    "name": "find_next_var_char_def",
 		"pattern": ["Token::CHAR", "Token::IDENTITY"]
+	},
+	{
+		"name": "not_find",
+		"pattern": ["ANY"]
 	}
 
 ]

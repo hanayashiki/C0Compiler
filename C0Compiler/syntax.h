@@ -7,8 +7,8 @@ private:
     SyntaxError syntax_error;
 	Lexer* lexer;
     SymbolTable* symbol_table;
-    list<Token> token_list;
-    list<Token>::iterator token_pointer;
+    vector<Token> token_list;
+    vector<Token>::iterator token_pointer;
     bool match_type(int token_type);
 public:
 	Syntax(Lexer* l, SymbolTable* s);
@@ -31,5 +31,7 @@ public:
     void var_group();
 
 	int expression();
+
+    void display_token_list();
 };
 
