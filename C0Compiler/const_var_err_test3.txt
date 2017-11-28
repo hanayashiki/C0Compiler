@@ -1,0 +1,2 @@
+int illegel_leng[0], missing_right_bracket[1, illegal_token[a], legal[20];
+int a legal2;

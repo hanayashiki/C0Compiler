@@ -1,7 +1,11 @@
 // 定义所有有信息的符号
 
+class SymbolTable;
+
 class Symbol {
 private:
+    void init();
+public:
     // shared
     bool const_flag;
     // const
@@ -10,15 +14,16 @@ private:
     // array
     bool array_flag;
     int array_length;
-public:
+    // function
+    bool function_flag;
+
     enum symbol_types {
         UNKNOWN,
-        FUNCTION,
         CHAR,
-        INT
+        INT,
+        VOID
     };
-    Symbol(string name, int type_);
-    Symbol(string name, int type_, bool const_);
+    Symbol(string name, int type_, bool const_=false);
     void display();
     int id;
     int type;
@@ -28,4 +33,8 @@ public:
     // array
     void setArray(int len);
     string name;
+    // function
+    SymbolTable* symbol_table;
+    vector<int> parameter_type_list;
+    void setFunc();
 };

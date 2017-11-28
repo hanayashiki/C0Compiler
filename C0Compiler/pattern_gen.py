@@ -22,12 +22,12 @@ patterns = \
 	},
 	{
 		"name": "find_array_assignment",
-		"pattern": ["Token::IDENTITY", "Token::LEFT_BRACKET", "ANYTOKENS",
+		"pattern": ["Token::SEMICOLON", "Token::IDENTITY", "Token::LEFT_BRACKET", "ANYTOKENS",
     	"Token::RIGHT_BRACKET", "Token::ASSIGN"]
 	},
 	{
 		"name": "find_simple_assignment",
-		"pattern": ["Token::IDENTITY", "Token::ASSIGN"]
+		"pattern": ["Token::SEMICOLON", "Token::IDENTITY", "Token::ASSIGN"]
 	},
 	{
 		"name": "find_next_const_def",

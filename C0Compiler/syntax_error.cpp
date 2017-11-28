@@ -21,11 +21,11 @@ SyntaxError::SyntaxError() {
     vector<int> pattern_find_statement_block
     	(begin(pattern_meta5), end(pattern_meta5));
 	
-    int pattern_meta6[5] = {Token::IDENTITY, Token::LEFT_BRACKET, ANYTOKENS, Token::RIGHT_BRACKET, Token::ASSIGN};
+    int pattern_meta6[6] = {Token::SEMICOLON, Token::IDENTITY, Token::LEFT_BRACKET, ANYTOKENS, Token::RIGHT_BRACKET, Token::ASSIGN};
     vector<int> pattern_find_array_assignment
     	(begin(pattern_meta6), end(pattern_meta6));
 	
-    int pattern_meta7[2] = {Token::IDENTITY, Token::ASSIGN};
+    int pattern_meta7[3] = {Token::SEMICOLON, Token::IDENTITY, Token::ASSIGN};
     vector<int> pattern_find_simple_assignment
     	(begin(pattern_meta7), end(pattern_meta7));
 	
@@ -52,6 +52,8 @@ SyntaxError::SyntaxError() {
     pattern_group_escape_to_next_statement.push_back(pattern_find_next_const_def);
     pattern_group_escape_to_next_statement.push_back(pattern_find_next_var_int_def);
     pattern_group_escape_to_next_statement.push_back(pattern_find_next_var_char_def);
+    pattern_group_escape_to_next_statement.push_back(pattern_find_array_assignment);
+    pattern_group_escape_to_next_statement.push_back(pattern_find_simple_assignment);
 
     pattern_group_escape_to_next_statement_or_comma = pattern_list(
         pattern_group_escape_to_next_statement.begin(),
@@ -85,7 +87,7 @@ SyntaxError::SyntaxError() {
     // 4
     struct ErrorDealer dealer_array_illegal_length = {
         "The length of an array must be an appropriate positive integer. ",
-        pattern_group_find_nothing
+        pattern_group_escape_to_next_statement_or_comma
     };
     ErrorDealers.push_back(dealer_array_illegal_length);
     // 5
@@ -100,12 +102,33 @@ SyntaxError::SyntaxError() {
         pattern_group_escape_to_next_statement_or_comma
     };
     ErrorDealers.push_back(dealer_array_missing_right_bracket);
+    // 7
+    struct ErrorDealer dealer_redefined_identifier = {
+        "Redefined identifier. ",
+        pattern_group_find_nothing
+    };
+    ErrorDealers.push_back(dealer_redefined_identifier);
+    // 8
+    struct ErrorDealer dealer_undefined_identifier = {
+        "Undefined identifier. ",
+        pattern_group_find_nothing
+    };
+    ErrorDealers.push_back(dealer_undefined_identifier);
+    // 9
+    struct ErrorDealer dealer_invalid_left_identifier_type = {
+        "Only 'char' and 'int' can be assigned. ",
+        pattern_group_find_nothing
+    };
+    ErrorDealers.push_back(dealer_invalid_left_identifier_type);
 }
 
-void Syntax::error_handler(int e) {
+void Syntax::error_handler(int e, string info) {
     assert((e >= 0) && (e < SyntaxError::DEALER_COUNT));
     struct SyntaxError::ErrorDealer dealer = syntax_error.ErrorDealers.at(e);
     cout << "Syntax error at line " << lexer->current_line << " :";
+    if (info.size() > 0) {
+        cout << info << " :";
+    }
     cout << dealer.description << endl;
     search_pattern(dealer.pattern_list);
 }
@@ -115,8 +138,8 @@ void Syntax::search_pattern(SyntaxError::pattern_list & list) {
     for (unsigned idx = 0; idx < list.size(); idx++) {
         match_count.push_back(0);
     }
-    cout << "Start searching." << endl;
-    read_token.display();
+    // cout << "Start searching." << endl;
+    // read_token.display();
     while (!match_type(Token::END_OF_FILE)) {
         for (SyntaxError::pattern_list::iterator pattern_pointer = list.begin(); 
             pattern_pointer != list.end();
@@ -138,20 +161,20 @@ void Syntax::search_pattern(SyntaxError::pattern_list & list) {
             }
             if (match_count.at(pattern_id) == pattern_pointer->size()) {
                 // µ¹ÍË n - 1 ¸ñ
-                cout << "retract: -----\n";
+                //cout << "retract: -----\n";
                 for (unsigned i = 0; i < (pattern_pointer->size())-1; i++) {
-                    read_token.display();
-                    cout << "->";
+                    //read_token.display();
+                    //cout << "->";
                     retract_token();
-                    read_token.display();
+                    //read_token.display();
                 }
-                cout << "----match returned" << endl;
+                //cout << "----match returned" << endl;
                 return;
             }
         }
         //cout << "matching:" ;
         next_token();
-        read_token.display();
+        //read_token.display();
     }
 }
 

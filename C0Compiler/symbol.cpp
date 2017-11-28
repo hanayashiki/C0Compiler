@@ -1,17 +1,14 @@
 #include "stdafx.h"
 
-Symbol::Symbol(string name_, int type_) {
-    name = name_;
-    type = type_;
-    const_flag = false;
+void Symbol::init() {
     array_flag = false;
+    function_flag = false;
 }
 
-Symbol::Symbol(string name_, int type_, bool const_) {
-    name = name_;
-    type = type_;
-    const_flag = const_;
-    array_flag = false;
+Symbol::Symbol(string name_, int type_, bool const_): 
+    name(name_), type(type_), const_flag(const_)
+{
+    init();
 }
 
 bool Symbol::setConstantValue(char value) {
@@ -30,9 +27,6 @@ void Symbol::display() {
     cout << "name: " << name << "; ";
     cout << "type: ";
     switch (type) {
-    case FUNCTION:
-        cout << "function; ";
-        break;
     case CHAR:
         cout << "char; ";
         break;
@@ -53,10 +47,31 @@ void Symbol::display() {
     if (array_flag) {
         cout << "array length: " << array_length << "; ";
     }
+    if (function_flag) {
+        cout << "parameter list: " ;
+        for (vector<int>::iterator ptr = parameter_type_list.begin();
+            ptr != parameter_type_list.end(); ptr++) {
+            int type = *ptr;
+            switch (type) {
+            case INT:
+                cout << "int; ";
+                break;
+            case CHAR:
+                cout << "char; ";
+                break;
+            default:
+                cout << "unexpected type; ";
+            }
+        }
+    }
     cout << endl;
 }
 
 void Symbol::setArray(int len) {
     array_flag = true;
     array_length = len;
+}
+
+void Symbol::setFunc() {
+    function_flag = true;
 }

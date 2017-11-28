@@ -65,7 +65,7 @@ bool Syntax::const_assign(int type) {
         delete(new_sym);
         return true;
     }
-    symbol_table->add_map(name, new_sym);
+    add_sym(new_sym);
     return true;
 }
 

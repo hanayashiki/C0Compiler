@@ -39,6 +39,19 @@ void Syntax::start() {
     if (match_type(Token::INT) || match_type(Token::CHAR)) {
         var_group();
     }
-    cout << "------ending: token_list:--------";
-    display_token_list();
+    //cout << "------ending: token_list:--------";
+    //display_token_list();
+}
+
+string Syntax::anonymous() {
+    static long long int num = 0;
+    return "UNNAMED_" + to_string(num++);
+}
+
+void Syntax::add_sym(Symbol* sym) {
+    if (symbol_table->in_map(sym->name)) {
+        error_handler(SyntaxError::REDEFINED_IDENTIFIER, sym->name);
+        sym->name = anonymous(); // 赋予一个临时的名字，以便继续编译
+    }
+    symbol_table->add_map(sym->name, sym);
 }

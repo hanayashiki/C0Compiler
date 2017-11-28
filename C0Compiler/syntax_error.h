@@ -5,7 +5,7 @@ class SyntaxError;
 class SyntaxError {
 private:
 public:
-    static const int DEALER_COUNT = 7;
+    static const int DEALER_COUNT = 10;
     static const int ANYTOKENS = -1;
     static const int ANY = -2;
     SyntaxError();
@@ -25,7 +25,15 @@ public:
         VARIABLE_DECLARATION_MISSING_IDENTIFIER,
         ARRAY_ILLEGAL_LENGTH,
         ARRAY_ILLEGAL_TOKEN_INSIDE,
-        ARRAY_MISSING_RIGHT_BRACKET
+        ARRAY_MISSING_RIGHT_BRACKET,
+        REDEFINED_IDENTIFIER,
+        UNDEFINED_IDENTIFIER,
+        INVALID_LEFT_IDENTIFIER_TYPE,
+        FUNCTION_INVALID_TYPE, // TO DO
+        FUNCTION_MISSING_NAME, // TO DO
+        FUNCTION_MISSING_LEFT_PARENTHESIS, // TO DO
+        FUNCTION_MISSING_RIGHT_PARENTHESIS, // TO DO
+        BAD_ASSIGNMENT // TO DO
     };
     pattern_list 
         pattern_group_escape_to_next_statement;

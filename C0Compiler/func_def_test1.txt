@@ -1,0 +1,9 @@
+int a(int b, int c, int d) {
+}
+int b(char b, int c, char d) {
+	const int a = 1, const_ = 2;
+	int i, j, k[20];
+}
+int c() {}
+
+

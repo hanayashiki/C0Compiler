@@ -73,7 +73,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <None Include="const_def_test1.txt" />
+    <None Include="const_var_err_test1.txt" />
     <None Include="const_var_err_test2.txt" />
+    <None Include="const_var_err_test3.txt" />
+    <None Include="func_def_test1.txt" />
     <None Include="lexer_test1.txt" />
     <None Include="lexer_test2.txt" />
     <None Include="lexer_test3.txt" />
@@ -95,10 +98,15 @@
     <ClInclude Include="token.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="assign.cpp" />
     <ClCompile Include="C0Compiler.cpp" />
     <ClCompile Include="const.cpp" />
     <ClCompile Include="const_def.cpp" />
     <ClCompile Include="const_def_test.cpp" />
+    <ClCompile Include="expression.cpp" />
+    <ClCompile Include="func_def.cpp" />
+    <ClCompile Include="func_def_block.cpp" />
+    <ClCompile Include="func_def_test.cpp" />
     <ClCompile Include="lexer.cpp" />
     <ClCompile Include="lexer_test.cpp" />
     <ClCompile Include="lexical_error.cpp" />

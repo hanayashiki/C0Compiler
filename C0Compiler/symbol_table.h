@@ -13,7 +13,10 @@ class SymbolTable {
 private:
 	symbol_map symbol_hash;
 public:
+    SymbolTable* parent;
+    SymbolTable(SymbolTable* parent = NULL);
 	bool add_map(string name, Symbol* sym);
+    bool in_map(string name);
 	Symbol* get_sym(string name);
     void display();
 };

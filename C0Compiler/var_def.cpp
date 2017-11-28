@@ -37,7 +37,6 @@ bool Syntax::var_entry(int basic_type) {
         new_sym = new Symbol(name, basic_type);
         next_token();
     } else {
-        cout << "name not found\n";
         error_handler(SyntaxError::VARIABLE_DECLARATION_MISSING_IDENTIFIER);
         return true;
     }
@@ -45,7 +44,7 @@ bool Syntax::var_entry(int basic_type) {
     if (match_type(Token::LEFT_BRACKET)) {
         next_token();
     } else {
-        symbol_table->add_map(name, new_sym);
+        add_sym(new_sym);
         return true;
     }
 
@@ -53,6 +52,7 @@ bool Syntax::var_entry(int basic_type) {
         array_length = const_above_zero();
         if (array_length <= 0) {
             error_handler(SyntaxError::ARRAY_ILLEGAL_LENGTH);
+            return true;
         }
     } else {
         error_handler(SyntaxError::ARRAY_ILLEGAL_TOKEN_INSIDE);
@@ -67,7 +67,7 @@ bool Syntax::var_entry(int basic_type) {
     }
 
     new_sym->setArray(array_length);
-    symbol_table->add_map(name, new_sym);
+    add_sym(new_sym);
 
     return true;
 }

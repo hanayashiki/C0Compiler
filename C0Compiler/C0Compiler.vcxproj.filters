@@ -37,32 +37,50 @@
     <Filter Include="源文件\syntax">
       <UniqueIdentifier>{b598c050-e893-449d-926f-eb7a472ff871}</UniqueIdentifier>
     </Filter>
+    <Filter Include="源文件\test_code\const_var">
+      <UniqueIdentifier>{7bc9fe7f-b2bc-4348-b21e-9a8cc15e97a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\test_code\lexer">
+      <UniqueIdentifier>{b0370d5f-ecff-4571-94e7-6259a014c29e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\test_code\func_def">
+      <UniqueIdentifier>{a3a2a9d0-3390-4461-a26f-88b72a72fa0e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <None Include="lexer_test3.txt">
-      <Filter>源文件\test_code</Filter>
-    </None>
-    <None Include="lexer_test2.txt">
-      <Filter>源文件\test_code</Filter>
-    </None>
-    <None Include="lexer_test1.txt">
-      <Filter>源文件\test_code</Filter>
-    </None>
     <None Include="requirements.txt" />
     <None Include="const_def_test1.txt">
-      <Filter>源文件\test_code</Filter>
+      <Filter>源文件\test_code\const_var</Filter>
     </None>
-    <None Include="var_def_test1.txt">
-      <Filter>源文件\test_code</Filter>
-    </None>
-    <None Include="lexer_test4.txt">
-      <Filter>源文件\test_code</Filter>
-    </None>
-    <None Include="lexer_test_submit.txt">
-      <Filter>源文件\test_code</Filter>
+    <None Include="const_var_err_test1.txt">
+      <Filter>源文件\test_code\const_var</Filter>
     </None>
     <None Include="const_var_err_test2.txt">
-      <Filter>源文件\test_code</Filter>
+      <Filter>源文件\test_code\const_var</Filter>
+    </None>
+    <None Include="const_var_err_test3.txt">
+      <Filter>源文件\test_code\const_var</Filter>
+    </None>
+    <None Include="var_def_test1.txt">
+      <Filter>源文件\test_code\const_var</Filter>
+    </None>
+    <None Include="lexer_test1.txt">
+      <Filter>源文件\test_code\lexer</Filter>
+    </None>
+    <None Include="lexer_test2.txt">
+      <Filter>源文件\test_code\lexer</Filter>
+    </None>
+    <None Include="lexer_test3.txt">
+      <Filter>源文件\test_code\lexer</Filter>
+    </None>
+    <None Include="lexer_test4.txt">
+      <Filter>源文件\test_code\lexer</Filter>
+    </None>
+    <None Include="lexer_test_submit.txt">
+      <Filter>源文件\test_code\lexer</Filter>
+    </None>
+    <None Include="func_def_test1.txt">
+      <Filter>源文件\test_code\func_def</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -148,6 +166,21 @@
     </ClCompile>
     <ClCompile Include="retract_token_test.cpp">
       <Filter>源文件\test</Filter>
+    </ClCompile>
+    <ClCompile Include="func_def.cpp">
+      <Filter>源文件\syntax</Filter>
+    </ClCompile>
+    <ClCompile Include="func_def_test.cpp">
+      <Filter>源文件\test</Filter>
+    </ClCompile>
+    <ClCompile Include="func_def_block.cpp">
+      <Filter>源文件\syntax</Filter>
+    </ClCompile>
+    <ClCompile Include="assign.cpp">
+      <Filter>源文件\syntax</Filter>
+    </ClCompile>
+    <ClCompile Include="expression.cpp">
+      <Filter>源文件\syntax</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
