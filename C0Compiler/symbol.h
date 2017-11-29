@@ -16,12 +16,13 @@ public:
     int array_length;
     // function
     bool function_flag;
-
     enum symbol_types {
         UNKNOWN,
         CHAR,
         INT,
-        VOID
+        VOID,
+
+        LABEL
     };
     Symbol(string name, int type_, bool const_=false);
     void display();

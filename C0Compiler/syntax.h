@@ -11,7 +11,7 @@ private:
     vector<Token> token_list;
     vector<Token>::iterator token_pointer;
     bool match_type(int token_type);
-    bool Syntax::match_pattern(string p, int token_count);
+    bool match_pattern(string p, int token_count);
 
     string pattern_func;
     string pattern_int_def;
@@ -25,9 +25,12 @@ public:
     void retract_token();
     void search_pattern(SyntaxError::pattern_list & list);
     void error_handler(int e, string info="");
+    void error_handler(string info);
     void add_sym(Symbol* sym);
-    Symbol* temp_symbol(int type);
+    Symbol* temp_symbol(int type, bool save=true);
+    Symbol* new_label(string prefix="", bool save=true);
 
+    int get_type(int left_type, int right_type);
 
     int const_();
     int const_above_zero();
@@ -47,8 +50,14 @@ public:
 
     bool assign();
 
-	Symbol* expression(Symbol*);
+	Symbol* expression(Symbol* s = NULL);
+    Symbol* expression_tail(Symbol*);
+    Symbol* term(Symbol* s=NULL);
+    Symbol* term_tail(Symbol*);
     Symbol* factor();
+    
+    bool call_func(Symbol* target_symbol);
+    bool call_func_list(Symbol* func_sym);
 
     void display_token_list();
 };

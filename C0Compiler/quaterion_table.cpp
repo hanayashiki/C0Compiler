@@ -6,6 +6,7 @@ QuaterionTable::QuaterionTable() {
 
 bool QuaterionTable::add_quaterion(Quaterion & q) {
     q_list.push_back(q);
+    q.emit();
     return true;
 }
 

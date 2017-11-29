@@ -1,0 +1,6 @@
+int b, c, d;
+int test(int test1, char var) {
+	int a[1];
+	char c;
+	b = test(b+c+d, c);
+}

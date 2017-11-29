@@ -58,6 +58,15 @@
     <Filter Include="源文件\test_code\expression">
       <UniqueIdentifier>{b51227d9-c19a-4bb6-b095-c800eea03768}</UniqueIdentifier>
     </Filter>
+    <Filter Include="源文件\syntax\utils">
+      <UniqueIdentifier>{7eb9f190-f23e-4a6d-b251-9faf967affe4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\syntax\assign">
+      <UniqueIdentifier>{e5d3574b-ba1b-4e14-993f-4b55659df9e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\syntax\define">
+      <UniqueIdentifier>{e6c1bdff-3076-456f-828a-9694fb1c89e4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="requirements.txt" />
@@ -98,6 +107,18 @@
       <Filter>源文件\test_code\quaterion</Filter>
     </None>
     <None Include="expression_test1.txt">
+      <Filter>源文件\test_code\expression</Filter>
+    </None>
+    <None Include="expression_test2.txt">
+      <Filter>源文件\test_code\expression</Filter>
+    </None>
+    <None Include="expression_test3.txt">
+      <Filter>源文件\test_code\expression</Filter>
+    </None>
+    <None Include="expression_test4.txt">
+      <Filter>源文件\test_code\expression</Filter>
+    </None>
+    <None Include="expression_test5_func.txt">
       <Filter>源文件\test_code\expression</Filter>
     </None>
   </ItemGroup>
@@ -164,20 +185,8 @@
     <ClCompile Include="symbol.cpp">
       <Filter>源文件\symbol</Filter>
     </ClCompile>
-    <ClCompile Include="const_def.cpp">
-      <Filter>源文件\syntax</Filter>
-    </ClCompile>
-    <ClCompile Include="syntax.cpp">
-      <Filter>源文件\syntax</Filter>
-    </ClCompile>
-    <ClCompile Include="const.cpp">
-      <Filter>源文件\syntax</Filter>
-    </ClCompile>
     <ClCompile Include="const_def_test.cpp">
       <Filter>源文件\test</Filter>
-    </ClCompile>
-    <ClCompile Include="var_def.cpp">
-      <Filter>源文件\syntax</Filter>
     </ClCompile>
     <ClCompile Include="var_def_test.cpp">
       <Filter>源文件\test</Filter>
@@ -185,26 +194,11 @@
     <ClCompile Include="lexical_error.cpp">
       <Filter>源文件\lexical</Filter>
     </ClCompile>
-    <ClCompile Include="syntax_error.cpp">
-      <Filter>源文件\syntax</Filter>
-    </ClCompile>
     <ClCompile Include="retract_token_test.cpp">
       <Filter>源文件\test</Filter>
     </ClCompile>
-    <ClCompile Include="func_def.cpp">
-      <Filter>源文件\syntax</Filter>
-    </ClCompile>
     <ClCompile Include="func_def_test.cpp">
       <Filter>源文件\test</Filter>
-    </ClCompile>
-    <ClCompile Include="func_def_block.cpp">
-      <Filter>源文件\syntax</Filter>
-    </ClCompile>
-    <ClCompile Include="assign.cpp">
-      <Filter>源文件\syntax</Filter>
-    </ClCompile>
-    <ClCompile Include="expression.cpp">
-      <Filter>源文件\syntax</Filter>
     </ClCompile>
     <ClCompile Include="quaterion.cpp">
       <Filter>源文件\quaterion</Filter>
@@ -218,11 +212,47 @@
     <ClCompile Include="assign_test.cpp">
       <Filter>源文件\test</Filter>
     </ClCompile>
+    <ClCompile Include="syntax.cpp">
+      <Filter>源文件\syntax\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="syntax_error.cpp">
+      <Filter>源文件\syntax\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="expression.cpp">
+      <Filter>源文件\syntax\assign</Filter>
+    </ClCompile>
+    <ClCompile Include="factor.cpp">
+      <Filter>源文件\syntax\assign</Filter>
+    </ClCompile>
+    <ClCompile Include="assign.cpp">
+      <Filter>源文件\syntax\assign</Filter>
+    </ClCompile>
+    <ClCompile Include="const.cpp">
+      <Filter>源文件\syntax\define</Filter>
+    </ClCompile>
+    <ClCompile Include="const_def.cpp">
+      <Filter>源文件\syntax\define</Filter>
+    </ClCompile>
+    <ClCompile Include="func_def.cpp">
+      <Filter>源文件\syntax\define</Filter>
+    </ClCompile>
+    <ClCompile Include="func_def_block.cpp">
+      <Filter>源文件\syntax\define</Filter>
+    </ClCompile>
     <ClCompile Include="match_pattern.cpp">
-      <Filter>源文件\syntax</Filter>
+      <Filter>源文件\syntax\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="var_def.cpp">
+      <Filter>源文件\syntax\define</Filter>
     </ClCompile>
     <ClCompile Include="start.cpp">
-      <Filter>源文件\syntax</Filter>
+      <Filter>源文件\syntax\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="term.cpp">
+      <Filter>源文件\syntax\assign</Filter>
+    </ClCompile>
+    <ClCompile Include="call_func.cpp">
+      <Filter>源文件\syntax\assign</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

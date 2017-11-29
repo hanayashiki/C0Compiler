@@ -41,15 +41,37 @@ string Syntax::anonymous() {
 }
 
 void Syntax::add_sym(Symbol* sym) {
-    if (symbol_table->in_map(sym->name)) {
+    if (symbol_table->in_current_map(sym->name)) {
         error_handler(SyntaxError::REDEFINED_IDENTIFIER, sym->name);
         sym->name = anonymous(); // 赋予一个临时的名字，以便继续编译
     }
     symbol_table->add_map(sym->name, sym);
 }
 
-Symbol* Syntax::temp_symbol(int type) {
+Symbol* Syntax::temp_symbol(int type, bool save) {
     static long long int num = 0;
     string name = "t" + to_string(num++);
-    return new Symbol(name, type);
+    Symbol* t = new Symbol(name, type);
+    if (save) {
+        add_sym(t);
+    }
+    return t;
+}
+
+int Syntax::get_type(int left_type, int right_type) {
+    if (left_type == right_type) {
+        return left_type;
+    } else {
+        return Symbol::INT; // INT is always bigger
+    }
+}
+
+Symbol* Syntax::new_label(string prefix, bool save) {
+    static long long int num = 0;
+    string name = prefix + "_" + to_string(num++);
+    Symbol* t = new Symbol(name, Symbol::LABEL);
+    if (save) {
+        add_sym(t);
+    }
+    return t;
 }

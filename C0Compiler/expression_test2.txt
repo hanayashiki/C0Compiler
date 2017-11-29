@@ -1,0 +1,5 @@
+int b, c, d;
+int test(int test1, char var) {
+	int a;
+	a = -test1*a + a;
+}

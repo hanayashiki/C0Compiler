@@ -1,11 +1,44 @@
-﻿生成启动时间为 2017/11/30 1:02:55。
+﻿生成启动时间为 2017/11/30 7:07:49。
      1>项目“D:\C0CompilerForVS2010\C0Compiler\C0Compiler\C0Compiler.vcxproj”在节点 2 上(build 个目标)。
      1>InitializeBuildStatus:
          正在创建“Debug\C0Compiler.unsuccessfulbuild”，因为已指定“AlwaysCreate”。
        ClCompile:
-         所有输出均为最新。
-         D:\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"StdAfx.h" /Fp"Debug\C0Compiler.pch" /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt match_pattern.cpp
+         D:\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yc"StdAfx.h" /Fp"Debug\C0Compiler.pch" /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt stdafx.cpp
+         stdafx.cpp
+         D:\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"StdAfx.h" /Fp"Debug\C0Compiler.pch" /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt C0Compiler.cpp assign.cpp assign_test.cpp call_func.cpp const.cpp const_def.cpp const_def_test.cpp expression.cpp factor.cpp func_def.cpp func_def_block.cpp func_def_test.cpp lexer.cpp lexer_test.cpp lexical_error.cpp match_pattern.cpp quaterion.cpp quaterion_table.cpp quaterion_test.cpp retract_token_test.cpp start.cpp symbol.cpp symbol_table.cpp symbol_table_test.cpp syntax.cpp syntax_error.cpp term.cpp token.cpp var_def.cpp var_def_test.cpp
+         var_def.cpp
+         term.cpp
+         syntax_error.cpp
+         syntax.cpp
+         start.cpp
          match_pattern.cpp
+         func_def_block.cpp
+         func_def.cpp
+         factor.cpp
+         expression.cpp
+         const_def.cpp
+         const.cpp
+         call_func.cpp
+         assign_test.cpp
+         assign.cpp
+         正在生成代码...
+     1>d:\c0compilerforvs2010\c0compiler\c0compiler\assign.cpp(69): warning C4715: “Syntax::assign”: 不是所有的控件路径都返回值
+         正在跳过...(未检测到相关更改)
+         var_def_test.cpp
+         token.cpp
+         symbol_table_test.cpp
+         symbol_table.cpp
+         symbol.cpp
+         retract_token_test.cpp
+         quaterion_test.cpp
+         quaterion_table.cpp
+         quaterion.cpp
+         lexical_error.cpp
+         lexer_test.cpp
+         lexer.cpp
+         func_def_test.cpp
+         const_def_test.cpp
+         C0Compiler.cpp
        ManifestResourceCompile:
          所有输出均为最新。
        Link:
@@ -13,10 +46,12 @@
          Debug\assign.obj
          Debug\assign_test.obj
          Debug\C0Compiler.obj
+         Debug\call_func.obj
          Debug\const.obj
          Debug\const_def.obj
          Debug\const_def_test.obj
          Debug\expression.obj
+         Debug\factor.obj
          Debug\func_def.obj
          Debug\func_def_block.obj
          Debug\func_def_test.obj
@@ -35,6 +70,7 @@
          Debug\symbol_table_test.obj
          Debug\syntax.obj
          Debug\syntax_error.obj
+         Debug\term.obj
          Debug\token.obj
          Debug\var_def.obj
          Debug\var_def_test.obj
@@ -51,4 +87,4 @@
 
 生成成功。
 
-已用时间 00:00:01.29
+已用时间 00:00:03.07

@@ -120,17 +120,28 @@ SyntaxError::SyntaxError() {
         pattern_group_find_nothing
     };
     ErrorDealers.push_back(dealer_invalid_left_identifier_type);
+    // 10
+    struct ErrorDealer dealer_bare_array_left_value = {
+        "Array must be followed by [<expression>]. ",
+        pattern_group_find_nothing
+    };
+    ErrorDealers.push_back(dealer_bare_array_left_value);
 }
 
 void Syntax::error_handler(int e, string info) {
     assert((e >= 0) && (e < SyntaxError::DEALER_COUNT));
     struct SyntaxError::ErrorDealer dealer = syntax_error.ErrorDealers.at(e);
-    cout << "Syntax error at line " << lexer->current_line << " :";
+    cout << "Syntax error at line " << lexer->current_line << " : ";
     if (info.size() > 0) {
-        cout << info << " :";
+        cout << info << " : ";
     }
     cout << dealer.description << endl;
     search_pattern(dealer.pattern_list);
+}
+
+void Syntax::error_handler(string info) {
+    cout << "Syntax error at line " << lexer->current_line << " : ";
+    cout << info << endl;
 }
 
 void Syntax::search_pattern(SyntaxError::pattern_list & list) {

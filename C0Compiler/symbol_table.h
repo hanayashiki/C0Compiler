@@ -17,6 +17,7 @@ public:
     SymbolTable(SymbolTable* parent = NULL);
 	bool add_map(string name, Symbol* sym);
     bool in_map(string name);
+    bool in_current_map(string & name);
 	Symbol* get_sym(string name);
     void display();
 };

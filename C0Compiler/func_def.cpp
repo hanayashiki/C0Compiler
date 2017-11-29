@@ -1,5 +1,7 @@
 #include "stdafx.h"
 
+#define Q Quaterion
+
 bool Syntax::func_def(bool is_void) {
     int type = Symbol::VOID;
     string name = anonymous();
@@ -56,6 +58,12 @@ bool Syntax::func_def(bool is_void) {
     if (match_type(Token::LEFT_BRACE)) {
         next_token();
     }
+
+    Symbol* label = new_label(name);
+    Q label_q(Q::LABEL, label);
+    q_table->add_quaterion(label_q);
+    Q prolog_q(Q::PROLOG, new_func);
+    q_table->add_quaterion(prolog_q);
 
     func_def_block();
     symbol_table->display();

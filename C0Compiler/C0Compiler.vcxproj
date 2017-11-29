@@ -77,6 +77,10 @@
     <None Include="const_var_err_test2.txt" />
     <None Include="const_var_err_test3.txt" />
     <None Include="expression_test1.txt" />
+    <None Include="expression_test2.txt" />
+    <None Include="expression_test3.txt" />
+    <None Include="expression_test4.txt" />
+    <None Include="expression_test5_func.txt" />
     <None Include="func_def_test1.txt" />
     <None Include="lexer_test1.txt" />
     <None Include="lexer_test2.txt" />
@@ -105,10 +109,12 @@
     <ClCompile Include="assign.cpp" />
     <ClCompile Include="assign_test.cpp" />
     <ClCompile Include="C0Compiler.cpp" />
+    <ClCompile Include="call_func.cpp" />
     <ClCompile Include="const.cpp" />
     <ClCompile Include="const_def.cpp" />
     <ClCompile Include="const_def_test.cpp" />
     <ClCompile Include="expression.cpp" />
+    <ClCompile Include="factor.cpp" />
     <ClCompile Include="func_def.cpp" />
     <ClCompile Include="func_def_block.cpp" />
     <ClCompile Include="func_def_test.cpp" />
@@ -130,6 +136,7 @@
     <ClCompile Include="symbol_table_test.cpp" />
     <ClCompile Include="syntax.cpp" />
     <ClCompile Include="syntax_error.cpp" />
+    <ClCompile Include="term.cpp" />
     <ClCompile Include="token.cpp" />
     <ClCompile Include="var_def.cpp" />
     <ClCompile Include="var_def_test.cpp" />

@@ -17,6 +17,10 @@ bool SymbolTable::in_map(string name) {
     }
 }
 
+bool SymbolTable::in_current_map(string & name) {
+    return symbol_hash.find(name) != symbol_hash.end();
+}
+
 Symbol* SymbolTable::get_sym(string name) {
     if (symbol_hash.find(name) != symbol_hash.end()) {
 	    return symbol_hash[name];

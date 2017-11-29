@@ -8,3 +8,7 @@
 *.vcxproj
 *.log
 *.idb
+*.suo
+*.ilk
+*.pdb
+*.idb

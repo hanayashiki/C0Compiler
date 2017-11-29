@@ -27,7 +27,11 @@ Quaterion::Quaterion(int op_name,
 Quaterion::Quaterion(int op_name,
     Symbol* left_) {
     init(op_name);
-    left = left_;
+    if (op_name == GET) {
+        dst = left_;
+    } else {
+        left = left_;
+    }
 }
 
 Quaterion::Quaterion(Symbol* dst_,
@@ -39,19 +43,25 @@ Quaterion::Quaterion(Symbol* dst_,
 
 void Quaterion::emit() {
     if ((op >= ADD) && (op <= EQ)) {
-        fprintf(dump_file, "%s = %s %s %s\n",
+        fprintf(dump_file, "%s = %s %s %s;\n",
             dst->name.c_str(), left->name.c_str(), op_names[op], right->name.c_str());
     }
     if (op == TO) {
-        fprintf(dump_file, "%s[%s] = %s\n",
+        fprintf(dump_file, "%s[%s] = %s;\n",
             dst->name.c_str(), left->name.c_str(), right->name.c_str());
     }
     if (op == AT) {
-        fprintf(dump_file, "%s = %s[%s]\n",
+        fprintf(dump_file, "%s = %s[%s];\n",
             dst->name.c_str(), left->name.c_str(), right->name.c_str());
     }
-    if (op == NONE) {
-        fprintf(dump_file, "%s = %s\n",
-            dst->name.c_str(), left->name.c_str());
+    if ((op >= NONE) && (op <= CAST_CHAR)) {
+        fprintf(dump_file, "%s = %s%s;\n",
+            dst->name.c_str(), op_names[op], left->name.c_str());
+    }
+    if (op == LABEL) {
+        fprintf(dump_file, "%s:\n", left->name.c_str());
+    }
+    if ((op >= PROLOG) && (op <= GET)) {
+        fprintf(dump_file, "%s %s\n", op_names[op], left->name.c_str());
     }
 }

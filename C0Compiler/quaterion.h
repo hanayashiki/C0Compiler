@@ -13,6 +13,16 @@ public:
         AT,  // c = a[i], c = A AT i
 
         NONE, // a = b
+        MINUS, // a = -b
+        CAST_INT, // a = (int) b
+        CAST_CHAR, // a = (char) b
+
+        LABEL,
+        PROLOG,
+
+        PUSH,    // push parameter
+        CALL,
+        GET,    // get returned value
         END  // sentinel
     };
     static const int OP_COUNT = END;
@@ -39,6 +49,17 @@ static char* op_names[Quaterion::OP_COUNT] =
     "!=", "==",
 
     "[]=",
-    "[]="
+    "[]=",
+
+    "",
+    "-",
+    "(int)",
+    "(char)",
+
+    ":",
+    "PROLOG",
+    "PUSH",
+    "CALL",
+    "GET" 
 };
 
