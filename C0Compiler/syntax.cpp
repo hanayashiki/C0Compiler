@@ -1,8 +1,9 @@
 #include "stdafx.h"
 
-Syntax::Syntax(Lexer * L, SymbolTable * s) {
+Syntax::Syntax(Lexer * L, SymbolTable * s, QuaterionTable* q) {
     lexer = L;
     symbol_table = s;
+    q_table = q;
     token_pointer = token_list.begin();
 }
 
@@ -16,6 +17,8 @@ void Syntax::next_token() {
         token_list.push_back(read_token);
         //read_token.display();
         token_pointer = token_list.end() - 1;
+        //cout << "way1--------" << endl;
+        //cout << "reason:" << (token_pointer == (token_list.end() - 1));
     } else {
         token_pointer++;
         read_token = *token_pointer;
@@ -26,21 +29,10 @@ void Syntax::next_token() {
 void Syntax::retract_token() {
     assert(token_pointer != token_list.begin());
     token_pointer--;
+    //cout << "I have retracted. " << (token_pointer == (token_list.end() - 1)) << endl;
     read_token = *token_pointer;
     //cout << "retract:" << endl;
     //read_token.display();
-}
-
-void Syntax::start() {
-    next_token();
-    if (match_type(Token::CONST)) {
-        const_group();
-    }
-    if (match_type(Token::INT) || match_type(Token::CHAR)) {
-        var_group();
-    }
-    //cout << "------ending: token_list:--------";
-    //display_token_list();
 }
 
 string Syntax::anonymous() {
@@ -54,4 +46,10 @@ void Syntax::add_sym(Symbol* sym) {
         sym->name = anonymous(); // 赋予一个临时的名字，以便继续编译
     }
     symbol_table->add_map(sym->name, sym);
+}
+
+Symbol* Syntax::temp_symbol(int type) {
+    static long long int num = 0;
+    string name = "t" + to_string(num++);
+    return new Symbol(name, type);
 }

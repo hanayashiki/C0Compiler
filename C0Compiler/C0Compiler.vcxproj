@@ -76,12 +76,14 @@
     <None Include="const_var_err_test1.txt" />
     <None Include="const_var_err_test2.txt" />
     <None Include="const_var_err_test3.txt" />
+    <None Include="expression_test1.txt" />
     <None Include="func_def_test1.txt" />
     <None Include="lexer_test1.txt" />
     <None Include="lexer_test2.txt" />
     <None Include="lexer_test3.txt" />
     <None Include="lexer_test4.txt" />
     <None Include="lexer_test_submit.txt" />
+    <None Include="quaterion_test1.txt" />
     <None Include="requirements.txt" />
     <None Include="var_def_test1.txt" />
   </ItemGroup>
@@ -89,6 +91,8 @@
     <ClInclude Include="hash_utils.h" />
     <ClInclude Include="lexer.h" />
     <ClInclude Include="lexical_error.h" />
+    <ClInclude Include="quaterion.h" />
+    <ClInclude Include="quaterion_table.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="symbol.h" />
     <ClInclude Include="symbol_table.h" />
@@ -99,6 +103,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="assign.cpp" />
+    <ClCompile Include="assign_test.cpp" />
     <ClCompile Include="C0Compiler.cpp" />
     <ClCompile Include="const.cpp" />
     <ClCompile Include="const_def.cpp" />
@@ -110,7 +115,12 @@
     <ClCompile Include="lexer.cpp" />
     <ClCompile Include="lexer_test.cpp" />
     <ClCompile Include="lexical_error.cpp" />
+    <ClCompile Include="match_pattern.cpp" />
+    <ClCompile Include="quaterion.cpp" />
+    <ClCompile Include="quaterion_table.cpp" />
+    <ClCompile Include="quaterion_test.cpp" />
     <ClCompile Include="retract_token_test.cpp" />
+    <ClCompile Include="start.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>

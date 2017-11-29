@@ -46,6 +46,18 @@
     <Filter Include="源文件\test_code\func_def">
       <UniqueIdentifier>{a3a2a9d0-3390-4461-a26f-88b72a72fa0e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="头文件\quaterion">
+      <UniqueIdentifier>{05cd32e1-999d-4965-a8d1-cf9f5269b875}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\quaterion">
+      <UniqueIdentifier>{5de11467-46eb-4c0c-b56d-d99f8d25268e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\test_code\quaterion">
+      <UniqueIdentifier>{76bcc438-7633-4b76-bb8e-8e65b453ee49}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\test_code\expression">
+      <UniqueIdentifier>{b51227d9-c19a-4bb6-b095-c800eea03768}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="requirements.txt" />
@@ -82,6 +94,12 @@
     <None Include="func_def_test1.txt">
       <Filter>源文件\test_code\func_def</Filter>
     </None>
+    <None Include="quaterion_test1.txt">
+      <Filter>源文件\test_code\quaterion</Filter>
+    </None>
+    <None Include="expression_test1.txt">
+      <Filter>源文件\test_code\expression</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -113,6 +131,12 @@
     </ClInclude>
     <ClInclude Include="syntax_error.h">
       <Filter>头文件\syntax</Filter>
+    </ClInclude>
+    <ClInclude Include="quaterion_table.h">
+      <Filter>头文件\quaterion</Filter>
+    </ClInclude>
+    <ClInclude Include="quaterion.h">
+      <Filter>头文件\quaterion</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -180,6 +204,24 @@
       <Filter>源文件\syntax</Filter>
     </ClCompile>
     <ClCompile Include="expression.cpp">
+      <Filter>源文件\syntax</Filter>
+    </ClCompile>
+    <ClCompile Include="quaterion.cpp">
+      <Filter>源文件\quaterion</Filter>
+    </ClCompile>
+    <ClCompile Include="quaterion_test.cpp">
+      <Filter>源文件\test</Filter>
+    </ClCompile>
+    <ClCompile Include="quaterion_table.cpp">
+      <Filter>源文件\quaterion</Filter>
+    </ClCompile>
+    <ClCompile Include="assign_test.cpp">
+      <Filter>源文件\test</Filter>
+    </ClCompile>
+    <ClCompile Include="match_pattern.cpp">
+      <Filter>源文件\syntax</Filter>
+    </ClCompile>
+    <ClCompile Include="start.cpp">
       <Filter>源文件\syntax</Filter>
     </ClCompile>
   </ItemGroup>

@@ -72,14 +72,3 @@ bool Syntax::var_entry(int basic_type) {
     return true;
 }
 
-void Syntax::var_group() {
-    int i = 0;
-    while (match_type(Token::INT) || match_type(Token::CHAR)) {
-        var_def();
-        if (match_type(Token::SEMICOLON)) {
-            next_token();
-        } else {
-            error_handler(SyntaxError::MISSING_SEMICOLON);
-        }
-    }
-}

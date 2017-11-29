@@ -3,6 +3,7 @@
 bool Syntax::assign() {
     Symbol* left_sym = NULL;
     string left_name;
+
     if (match_type(Token::IDENTITY)) {
         left_name = read_token.getName();
         left_sym = symbol_table->get_sym(left_name);
@@ -29,5 +30,5 @@ bool Syntax::assign() {
         return false;        
     }
     // TODO
-    expression(NULL);
+    expression(left_sym);
 }

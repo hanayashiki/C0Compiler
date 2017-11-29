@@ -7,5 +7,8 @@ bool Syntax::func_def_block() {
     if (match_type(Token::INT) || match_type(Token::CHAR)) {
         var_group();
     }
+    if (match_type(Token::IDENTITY)) {
+        assign();
+    }
     return true;
 }

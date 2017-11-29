@@ -10,14 +10,22 @@ bool SymbolTable::add_map(string name, Symbol* sym) {
 }
 
 bool SymbolTable::in_map(string name) {
-    return symbol_hash.find(name) != symbol_hash.end();
+    if (parent == NULL) {
+        return symbol_hash.find(name) != symbol_hash.end();
+    } else {
+        return (symbol_hash.find(name) != symbol_hash.end()) || (parent->in_map(name));
+    }
 }
 
 Symbol* SymbolTable::get_sym(string name) {
-    if (in_map(name)) {
+    if (symbol_hash.find(name) != symbol_hash.end()) {
 	    return symbol_hash[name];
     } else {
-        return NULL;
+        if (parent != NULL) {
+            return parent->get_sym(name);
+        } else {
+            return NULL;
+        }
     }
 }
 

@@ -119,3 +119,4 @@ bool Syntax::func_def_parameter_pair(Symbol* func_sym) {
     }
     return true;
 }
+

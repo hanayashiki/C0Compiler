@@ -68,15 +68,3 @@ bool Syntax::const_assign(int type) {
     add_sym(new_sym);
     return true;
 }
-
-void Syntax::const_group() {
-    int i = 0;
-    while (match_type(Token::CONST)) {
-        const_def();
-        if (match_type(Token::SEMICOLON)) {
-            next_token();
-        } else {
-            error_handler(SyntaxError::MISSING_SEMICOLON);
-        }
-    }
-}
