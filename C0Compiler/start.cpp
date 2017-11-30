@@ -1,8 +1,10 @@
 #include "stdafx.h"
 
 void Syntax::start() {
-    pattern_func = "(int|char)(identifier)\\(";
+    pattern_func_def = "(int|char)(identifier)\\(";
     pattern_int_def = "(int|char)identifier[^(]";
+    pattern_call_func = "identifier\\(";
+    pattern_assign = "identifier(\\[|\\=)";
     next_token();
     if (match_type(Token::CONST)) {
         const_group();
@@ -10,7 +12,7 @@ void Syntax::start() {
     if (match_pattern(pattern_int_def, 3)) {
         var_group();
     }
-    if (match_pattern(pattern_func, 3)) {
+    if (match_pattern(pattern_func_def, 3)) {
         type_func_group();
     }
     //cout << "------ending: token_list:--------";

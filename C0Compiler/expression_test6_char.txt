@@ -1,0 +1,11 @@
+int b, c, d, inside1, inside2;
+int test(int test1, char var) {
+	int a[1];
+	char c;
+	b = 'c' + c + 1 + - 2 + (inside1 + inside2);
+	inside1 = inside2;
+	a[1] = c;
+	test(test1, var);
+	test(a[0], var);
+	test1 = test(test1, var);
+}

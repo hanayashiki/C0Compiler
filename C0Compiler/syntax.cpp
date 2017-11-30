@@ -75,3 +75,35 @@ Symbol* Syntax::new_label(string prefix, bool save) {
     }
     return t;
 }
+
+Symbol* Syntax::const_sym(int value, int type) {
+    string name;
+    //cout << type;
+    if (type == Symbol::INT) {
+        name = to_string((long long int)value);
+    } else {
+        name = "\'";
+        name.push_back((char) value);
+        name.push_back('\'');
+    }
+    if (symbol_table->in_map(name)) {
+        return symbol_table->get_sym(name);
+    } else {
+        Symbol* t = new Symbol(name, type, true);
+        if (type == Symbol::INT) {
+            t->setConstantValue(value);
+        } else {
+            t->setConstantValue((char)value);
+        }
+        return t;
+    }
+}
+
+bool Syntax::semicolon_handler() {
+    if (match_type(Token::SEMICOLON)) {
+        next_token();
+    } else {
+        error_handler(SyntaxError::MISSING_SEMICOLON);
+    }
+    return true;
+}

@@ -16,7 +16,7 @@ Symbol* Syntax::expression(Symbol* target_symbol) {
 
     left = term();
     if (left == NULL) {
-        cout << "3\n" ; 
+        //cout << "3\n" ; 
         return NULL;
     }
     if (minus_flag) {
@@ -28,7 +28,7 @@ Symbol* Syntax::expression(Symbol* target_symbol) {
 
     self = expression_tail(left);
     if (self == NULL) {
-        cout << "4\n" ; 
+        //cout << "4\n" ; 
         return self;
     }
 

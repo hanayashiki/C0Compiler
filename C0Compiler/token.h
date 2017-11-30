@@ -1,6 +1,6 @@
 #pragma once
 #include "stdafx.h"
-#define TOKEN_TYPE_COUNT 40
+#define TOKEN_TYPE_COUNT 42
 
 using namespace std;
 
@@ -55,6 +55,8 @@ static char* token_names[TOKEN_TYPE_COUNT] = {
 	"default",
 	"return",
 
+    "printf",
+    "scanf",
 	"end of file",
 	"unknow_tail"
 };
@@ -124,6 +126,8 @@ public:
 		DEFAULT,				// default
 		RETURN,					// return
 
+        PRINTF,                 // printf
+        SCANF,                  // scanf
 		END_OF_FILE,			// file end
 		UNKNOWN_TAIL			// signifying the tail
 	};

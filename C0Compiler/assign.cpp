@@ -11,9 +11,11 @@ bool Syntax::assign() {
         left_sym = symbol_table->get_sym(left_name);
         if (left_sym == NULL) {
             error_handler(SyntaxError::UNDEFINED_IDENTIFIER, left_name);
+            return false;
         }
         if (left_sym->const_flag || left_sym->function_flag) {
             error_handler(SyntaxError::INVALID_LEFT_IDENTIFIER_TYPE);
+            return false;
         }
         next_token();
     } else {

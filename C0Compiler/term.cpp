@@ -9,11 +9,13 @@ Symbol* Syntax::term(Symbol* target_symbol) {
 
     left = factor();
     if (left == NULL) {
+        //cout << "term1" << endl;
         return NULL;
     }
 
     self = term_tail(left);
     if (self == NULL) {
+        //cout << "term2" << endl;
         return NULL;
     }
 

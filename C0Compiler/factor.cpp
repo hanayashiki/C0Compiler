@@ -11,14 +11,12 @@ Symbol* Syntax::factor() {
         next_token();
         if (fetch_sym == NULL) {
             error_handler(SyntaxError::UNDEFINED_IDENTIFIER, name);
-        }
-        if (fetch_sym->function_flag == true) {
+        } else if (fetch_sym->function_flag == true) {
             retract_token();
             Symbol* temp = temp_symbol(fetch_sym->type);
             call_func(temp);
             return temp;
-        }
-        if (fetch_sym->array_flag == true) {
+        } else if (fetch_sym->array_flag == true) {
             if (match_type(Token::LEFT_BRACKET)) {
                 next_token();
             } else {
@@ -43,7 +41,33 @@ Symbol* Syntax::factor() {
             return fetch_sym;
         }
     } else {
-        return NULL;
+        int value = 0;
+        if (match_type(Token::CHARACTER)) {
+            value = (int)read_token.getCharValue();
+            next_token();
+            Symbol* new_const = const_sym(value, Symbol::CHAR);
+            return new_const;
+        } else if (match_type(Token::ADD) || match_type(Token::MINUS) || 
+            match_type(Token::UNSIGNED_INTEGER)) {
+            value = const_();
+            Symbol* new_const = const_sym(value, Symbol::INT);
+            return new_const;
+        } else if (match_type(Token::LEFT_PARENTHESIS)) {
+            next_token();
+            Symbol* expr_sym = expression();
+            if (expr_sym == NULL) {
+                return NULL;
+            }
+            if (match_type(Token::RIGHT_PARENTHESIS)) {
+                next_token();
+            } else {
+                error_handler("')' is needed. ");
+                return NULL;
+            }
+            return expr_sym;
+        } else {
+            error_handler("Invalid factor. ");
+        }
     }
     return fetch_sym;
 }

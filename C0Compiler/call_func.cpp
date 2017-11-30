@@ -26,15 +26,19 @@ bool Syntax::call_func(Symbol* target_symbol) {
     if (call_func_list(func_sym) == false) {
         return false;
     }
+    read_token.display();
     if (match_type(Token::RIGHT_PARENTHESIS)) {
         next_token();
+    } else {
         error_handler("')' is needed");
         return false;
     }
     Q call_q(Q::CALL, func_sym);
     q_table->add_quaterion(call_q);
-    Q get_q(Q::GET, target_symbol);
-    q_table->add_quaterion(get_q);
+    if (target_symbol) {
+        Q get_q(Q::GET, target_symbol);
+        q_table->add_quaterion(get_q);
+    }
     return true;
 }
 

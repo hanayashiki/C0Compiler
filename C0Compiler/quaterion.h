@@ -22,8 +22,15 @@ public:
 
         PUSH,    // push parameter
         CALL,
+
+        BEQZ,   // branch on zero
+        BNEZ,   // branch on non-zero
+
         GET,    // get returned value
-        END  // sentinel
+        READ_CHAR,   // read char
+        READ_INT,    // read integer
+
+        END     // sentinel
     };
     static const int OP_COUNT = END;
 
@@ -60,6 +67,12 @@ static char* op_names[Quaterion::OP_COUNT] =
     "PROLOG",
     "PUSH",
     "CALL",
-    "GET" 
+
+    "if == 0 go to:",
+    "if != 0 go to:",
+
+    "GET",
+    "READ_CHAR",
+    "READ_INT"
 };
 

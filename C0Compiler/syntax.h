@@ -13,8 +13,11 @@ private:
     bool match_type(int token_type);
     bool match_pattern(string p, int token_count);
 
-    string pattern_func;
+    string pattern_func_def;
     string pattern_int_def;
+
+    string pattern_call_func;
+    string pattern_assign;
 public:
 	Syntax(Lexer* l, SymbolTable* s, QuaterionTable* q=NULL);
     static string Syntax::anonymous();
@@ -24,11 +27,13 @@ public:
     void next_token();
     void retract_token();
     void search_pattern(SyntaxError::pattern_list & list);
+    bool semicolon_handler();
     void error_handler(int e, string info="");
     void error_handler(string info);
     void add_sym(Symbol* sym);
     Symbol* temp_symbol(int type, bool save=true);
     Symbol* new_label(string prefix="", bool save=true);
+    Symbol* const_sym(int value, int type);
 
     int get_type(int left_type, int right_type);
 
@@ -58,6 +63,15 @@ public:
     
     bool call_func(Symbol* target_symbol);
     bool call_func_list(Symbol* func_sym);
+
+    bool statement();
+    bool statement_sequence();
+
+    bool if_statement();
+    Symbol* Syntax::if_comparison();
+
+    bool scanf_();
+    bool scanf_parameter_entry();
 
     void display_token_list();
 };

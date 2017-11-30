@@ -1,0 +1,17 @@
+int a;char c;
+int test_func(int foo, int bar) {
+	if (foo > 2) {
+	    a = 1;
+		if (foo < 2) {
+			a = a + 1;
+		}
+		a = 2;
+	}
+	if (foo <= 2) { 
+		foo = foo + 1;
+		a = foo;
+	} else {
+		foo = foo;
+	}
+	scanf(foo, a, c);
+}
