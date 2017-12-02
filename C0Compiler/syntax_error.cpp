@@ -131,7 +131,7 @@ SyntaxError::SyntaxError() {
 void Syntax::error_handler(int e, string info) {
     assert((e >= 0) && (e < SyntaxError::DEALER_COUNT));
     struct SyntaxError::ErrorDealer dealer = syntax_error.ErrorDealers.at(e);
-    cout << "Syntax error at line " << lexer->current_line << " : ";
+    cout << "Syntax error at line " << read_token.line << " : ";
     if (info.size() > 0) {
         cout << info << " : ";
     }
@@ -140,8 +140,14 @@ void Syntax::error_handler(int e, string info) {
 }
 
 void Syntax::error_handler(string info) {
-    cout << "Syntax error at line " << lexer->current_line << " : ";
+    cout << "Syntax error at line " << read_token.line << " : ";
     cout << info << endl;
+}
+
+bool Syntax::error_handler(string message, int pid) {
+    cout << "Syntax error at line " << read_token.line << " : ";
+    cout << message << endl;
+    return search_pattern(pid);
 }
 
 void Syntax::search_pattern(SyntaxError::pattern_list & list) {

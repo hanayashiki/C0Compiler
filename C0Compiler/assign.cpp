@@ -6,20 +6,27 @@ bool Syntax::assign(bool non_array) {
     Symbol* offset_temp = NULL;
     string left_name;
 
+    struct SyntaxError::StatementException e = {""};
+
     if (match_type(Token::IDENTITY)) {
         left_name = read_token.getName();
         left_sym = symbol_table->get_sym(left_name);
+        next_token();
         if (left_sym == NULL) {
-            error_handler(SyntaxError::UNDEFINED_IDENTIFIER, left_name);
+            e.what = "Undefined identifier: " + left_name;
+            throw e;
             return false;
         }
         if (left_sym->const_flag || left_sym->function_flag) {
-            error_handler(SyntaxError::INVALID_LEFT_IDENTIFIER_TYPE);
+            e.what = "Invalid assigned identifier: " + left_name;
+            throw e;
             return false;
         }
-        next_token();
     } else {
-        error_handler(SyntaxError::BAD_ASSIGNMENT);
+        next_token();
+        cout << "???\n";
+        e.what = "Invalid left part of assignment. ";
+        throw e;
         return false;
     }
     // for array
@@ -27,21 +34,23 @@ bool Syntax::assign(bool non_array) {
         if (match_type(Token::LEFT_BRACKET)) {
             next_token();
         } else {
-            error_handler(SyntaxError::BARE_ARRAY_LEFT_VALUE);
-            error_handler(SyntaxError::BAD_ASSIGNMENT);
+            e.what = "Identifier of array should be follow by a subscript.";
+            throw e;
             return false;
         }
         offset_temp = temp_symbol(Symbol::INT);
 
         if (expression(offset_temp) == NULL) {
-            error_handler(SyntaxError::BAD_ASSIGNMENT);
+            e.what = "Bad subscript expression. ";
+            throw e;
             return false;
         }
 
         if (match_type(Token::RIGHT_BRACKET)) {
             next_token();
         } else {
-            error_handler(SyntaxError::BAD_ASSIGNMENT, "Missing ']'. ");
+            e.what = "']' is needed. ";
+            throw e;
             return false;
         }
     }
@@ -49,19 +58,22 @@ bool Syntax::assign(bool non_array) {
     if (match_type(Token::ASSIGN)) {
         next_token();
     } else {
-        error_handler(SyntaxError::BAD_ASSIGNMENT);
+        e.what = "'=' is needed. ";
+        throw e;
         return false;        
     }
 
     if (!left_sym->array_flag) {
         if (expression(left_sym) == NULL) {
-            error_handler(SyntaxError::BAD_ASSIGNMENT);
+            e.what = "Bad right expression. ";
+            throw e;
             return false;
         }
     } else {
         arr_temp = temp_symbol(Symbol::INT);
         if (expression(arr_temp) == NULL) {
-            error_handler(SyntaxError::BAD_ASSIGNMENT);
+            e.what = "Bad right expression. ";
+            throw e;
             return false;
         }
         Quaterion offset_assign_q(Quaterion::TO, left_sym, 

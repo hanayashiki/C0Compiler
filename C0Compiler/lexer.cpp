@@ -20,6 +20,7 @@ Token Lexer::getToken() {
 				}
 				c = getChar();
 			}
+            token.line = current_line;
 			if (c == EOF) {
 				token.setType(Token::END_OF_FILE);
 				return token;

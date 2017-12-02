@@ -1,0 +1,14 @@
+start
+	const_def
+	var_def
+	func_def
+		const_def
+		var_def
+		statement_sequence
+			statement
+				assign
+			daemon = {
+				go to next legal statement
+			}
+				
+			

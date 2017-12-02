@@ -7,6 +7,7 @@ private:
     SyntaxError syntax_error;
 	Lexer* lexer;
     SymbolTable* symbol_table;
+    RegexHandler* reg_handler;
     QuaterionTable* q_table;
     vector<Token> token_list;
     vector<Token>::iterator token_pointer;
@@ -20,6 +21,7 @@ private:
     string pattern_assign;
 public:
 	Syntax(Lexer* l, SymbolTable* s, QuaterionTable* q=NULL);
+    ~Syntax();
     static string Syntax::anonymous();
     void start();
     
@@ -27,9 +29,11 @@ public:
     void next_token();
     void retract_token();
     void search_pattern(SyntaxError::pattern_list & list);
+    bool search_pattern(int pid);
     bool semicolon_handler();
     void error_handler(int e, string info="");
     void error_handler(string info);
+    bool error_handler(string m, int pid);
     void add_sym(Symbol* sym);
     Symbol* temp_symbol(int type, bool save=true);
     Symbol* new_label(string prefix="", bool save=true);

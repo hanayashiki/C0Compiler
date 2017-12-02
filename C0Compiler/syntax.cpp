@@ -5,6 +5,11 @@ Syntax::Syntax(Lexer * L, SymbolTable * s, QuaterionTable* q) {
     symbol_table = s;
     q_table = q;
     token_pointer = token_list.begin();
+    reg_handler = new RegexHandler();
+}
+
+Syntax::~Syntax() {
+    delete reg_handler;
 }
 
 bool Syntax::match_type(int token_type) {

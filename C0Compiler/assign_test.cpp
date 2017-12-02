@@ -4,7 +4,7 @@ int main() {
     Lexer lexer;
     SymbolTable symbol_table;
     QuaterionTable q_list;
-    FILE* f = fopen("ret_test_correct_syntax.txt", "r");
+    FILE* f = fopen("assign_error.txt", "r");
     Quaterion::dump_file = stdout;
     lexer.setSource(f);
     Syntax syntax(&lexer, &symbol_table, &q_list);

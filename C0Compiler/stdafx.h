@@ -17,12 +17,15 @@
 #include "lexical_error.h"
 #include "lexer.h"
 
+#include "regex_handler.h"
+
 #include "symbol.h"
 #include "symbol_table.h"
 #include "quaterion.h"
 #include "quaterion_table.h"
 #include "syntax_error.h"
 #include "syntax.h"
+
 
 
 

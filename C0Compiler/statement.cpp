@@ -31,33 +31,47 @@ bool Syntax::statement() {
         return printf_() && semicolon_handler();
     } else if (match_type(Token::SWITCH)) {
         // £¼Çé¿öÓï¾ä£¾
-        cout << "in to switch" << endl;
+        //cout << "in to switch" << endl;
         return switch_();
     } else if (match_type(Token::FOR)) {
         // £¼Ñ­»·Óï¾ä£¾
-        cout << "in to for" << endl;
+        //cout << "in to for" << endl;
         return for_();
     } else if (match_type(Token::RETURN)) {
         // £¼·µ»ØÓï¾ä£¾
-        cout << "in to ret" << endl;
+        //cout << "in to ret" << endl;
         return return_() && semicolon_handler();
     } else if (match_type(Token::SEMICOLON)) {
         // £¼¿Õ£¾
+        next_token();
         return true;
     }
 
+    SyntaxError::StatementException e = {"Unknown statement. "};
+    throw e;
     return false;
 }
 
 bool Syntax::statement_sequence() {
     // a whole sequence of a function
     while (true) {
-        if (statement() == false) {
-            read_token.display();
-            assert(0);
-            //error_handler()
+        try {
+            cout << "statement" << endl;
+            statement();
         }
+        catch (SyntaxError::StatementException & e) {
+            cout << "caught exception\n";
+            if (!error_handler(e.what, RegexHandler::JUMP_TO_NEXT_STATEMENT)) {
+                //cout << "not handled\n";
+                struct SyntaxError::FuncDefException new_e = 
+                {e.what};
+                throw new_e;
+            }
+        }
+        cout<<"try end\n";
+        read_token.display();
         if (match_type(Token::RIGHT_BRACE)) {
+            //cout << "?????\n";
             break;
         }
     }

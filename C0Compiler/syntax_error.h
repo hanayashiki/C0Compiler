@@ -17,6 +17,12 @@ public:
     };
     typedef vector<struct ErrorDealer> dealer_list;
     dealer_list ErrorDealers;
+    struct StatementException {
+        string what;
+    }; 
+    struct FuncDefException {
+        string what;
+    };
 
     enum error_types {
         CONST_DECLARATION_MISSING_TYPE,
