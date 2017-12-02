@@ -23,6 +23,10 @@ public:
         PUSH,    // push parameter
         CALL,
 
+        PRINT_CHAR,
+        PRINT_INT,
+        PRINT_STR,
+
         BEQZ,   // branch on zero
         BNEZ,   // branch on non-zero
 
@@ -30,6 +34,8 @@ public:
         READ_CHAR,   // read char
         READ_INT,    // read integer
 
+        _LINK,   // directive, link to a label, to avoid jump
+        GOTO,    // unconditional jump
         END     // sentinel
     };
     static const int OP_COUNT = END;
@@ -65,14 +71,22 @@ static char* op_names[Quaterion::OP_COUNT] =
 
     ":",
     "PROLOG",
+
     "PUSH",
     "CALL",
+
+    "PRINT_CHAR",
+    "PRINT_INT",
+    "PRINT_STR",
 
     "if == 0 go to:",
     "if != 0 go to:",
 
     "GET",
     "READ_CHAR",
-    "READ_INT"
+    "READ_INT",
+
+    "_LINK",
+    "GOTO",
 };
 

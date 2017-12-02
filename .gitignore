@@ -12,3 +12,7 @@
 *.ilk
 *.pdb
 *.idb
+*.lastbuildstate
+*.manifest
+*.rc
+*.codeanalysis

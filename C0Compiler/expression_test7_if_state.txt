@@ -14,4 +14,7 @@ int test_func(int foo, int bar) {
 		foo = foo;
 	}
 	scanf(foo, a, c);
+	printf("a printf test");
+	printf("printf test2", a);
+	printf(a);
 }

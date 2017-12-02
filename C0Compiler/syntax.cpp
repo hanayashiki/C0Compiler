@@ -22,7 +22,7 @@ void Syntax::next_token() {
     } else {
         token_pointer++;
         read_token = *token_pointer;
-        //read_token.display();
+       // read_token.display();
     }
 }
 

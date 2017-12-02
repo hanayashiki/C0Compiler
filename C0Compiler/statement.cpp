@@ -21,8 +21,16 @@ bool Syntax::statement() {
         return true;
     } else if (match_type(Token::SCANF)) {
         return scanf_() && semicolon_handler();
+    } else if (match_type(Token::PRINTF)) {
+        return printf_() & semicolon_handler();
+    } else if (match_type(Token::SWITCH)) {
+        cout << "in to switch" << endl;
+        return switch_();
+    } else if (match_type(Token::FOR)) {
+        cout << "in to for" << endl;
+        return for_();
     }
-    return true;
+    return false;
 }
 
 bool Syntax::statement_sequence() {

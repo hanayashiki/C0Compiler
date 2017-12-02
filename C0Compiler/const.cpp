@@ -46,3 +46,20 @@ int Syntax::const_above_zero() {
         return -1;
     }
 }
+
+Symbol* Syntax::const_factor() {
+    int value;
+    if (match_type(Token::CHARACTER)) {
+        value = (int)read_token.getCharValue();
+        next_token();
+        Symbol* new_const = const_sym(value, Symbol::CHAR);
+        return new_const;
+    } else if (match_type(Token::ADD) || match_type(Token::MINUS) || 
+        match_type(Token::UNSIGNED_INTEGER)) {
+        value = const_();
+        Symbol* new_const = const_sym(value, Symbol::INT);
+        return new_const;
+    }
+    error_handler("A const is needed. ");
+    return NULL;
+}

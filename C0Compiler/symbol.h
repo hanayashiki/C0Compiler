@@ -16,6 +16,8 @@ public:
     int array_length;
     // function
     bool function_flag;
+    // label
+    bool string_flag;
     enum symbol_types {
         UNKNOWN,
         CHAR,
@@ -38,4 +40,7 @@ public:
     SymbolTable* symbol_table;
     vector<int> parameter_type_list;
     void setFunc();
+    // label
+    void setString(string & s);
+    string string_content;
 };

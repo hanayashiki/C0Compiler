@@ -3,6 +3,7 @@
 void Symbol::init() {
     array_flag = false;
     function_flag = false;
+    string_flag = false;
 }
 
 Symbol::Symbol(string name_, int type_, bool const_): 
@@ -32,6 +33,9 @@ void Symbol::display() {
         break;
     case INT:
         cout << "int; ";
+        break;
+    case LABEL:
+        cout << "label; ";
         break;
     default:
         cout << "unexpected type; ";
@@ -74,4 +78,9 @@ void Symbol::setArray(int len) {
 
 void Symbol::setFunc() {
     function_flag = true;
+}
+
+void Symbol::setString(string & s) {
+    string_flag = true;
+    string_content = s;
 }

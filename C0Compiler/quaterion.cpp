@@ -61,7 +61,7 @@ void Quaterion::emit() {
     if (op == LABEL) {
         fprintf(dump_file, "%s:\n", left->name.c_str());
     }
-    if ((op >= PROLOG) && (op <= CALL)) {
+    if ((op >= PROLOG) && (op <= PRINT_STR)) {
         fprintf(dump_file, "%s %s\n", op_names[op], left->name.c_str());
     }
     if ((op >= BEQZ) && (op <= BNEZ)) {
@@ -70,5 +70,8 @@ void Quaterion::emit() {
     }
     if ((op >= GET) && op <= (READ_INT)) {
         fprintf(dump_file, "%s %s\n", op_names[op], dst->name.c_str());
+    }
+    if ((op >= _LINK) && (op <= GOTO)) {
+        fprintf(dump_file, "%s %s\n", op_names[op], left->name.c_str());
     }
 }

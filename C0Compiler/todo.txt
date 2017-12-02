@@ -1,0 +1,5 @@
+语法分析——中间代码
+	1. statement 出错处理
+	2. expression - assignment 转换与报错
+	3. const 常数值处理
+	4. switch 出错处理

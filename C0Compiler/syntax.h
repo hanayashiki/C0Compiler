@@ -53,13 +53,14 @@ public:
     bool Syntax::func_def_parameter_pair(Symbol* sym);
     void type_func_group();
 
-    bool assign();
+    bool assign(bool non_array=false);
 
 	Symbol* expression(Symbol* s = NULL);
     Symbol* expression_tail(Symbol*);
     Symbol* term(Symbol* s=NULL);
     Symbol* term_tail(Symbol*);
     Symbol* factor();
+    Symbol* const_factor();
     
     bool call_func(Symbol* target_symbol);
     bool call_func_list(Symbol* func_sym);
@@ -68,10 +69,20 @@ public:
     bool statement_sequence();
 
     bool if_statement();
-    Symbol* Syntax::if_comparison();
+    Symbol* if_comparison();
 
     bool scanf_();
     bool scanf_parameter_entry();
+
+    bool printf_();
+
+    bool switch_();
+    Symbol* switch_head();
+    Symbol* case_head();
+
+    bool for_();
+    bool for_augment(Quaterion & aug_q);
+    Symbol* for_augment_symbol();
 
     void display_token_list();
 };

@@ -1,0 +1,23 @@
+int kamui, shini, shenwei;
+
+int test() {
+    switch (kamui) {
+	    case 1:
+		printf(kamui);
+		case 2:
+		printf(shini);
+		case 3:
+		printf(shenwei);
+		case 4:
+		{
+			kamui = shini;
+			shini = shenwei;
+		}
+		case 'a':
+		{
+			shenwei = 1 + 2 + 3;
+		}
+		default:
+		printf("ooooo");
+	}
+}

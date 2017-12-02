@@ -1,6 +1,6 @@
 #include "stdafx.h"
 
-bool Syntax::assign() {
+bool Syntax::assign(bool non_array) {
     Symbol* left_sym = NULL;
     Symbol* arr_temp = NULL;
     Symbol* offset_temp = NULL;
@@ -22,8 +22,8 @@ bool Syntax::assign() {
         error_handler(SyntaxError::BAD_ASSIGNMENT);
         return false;
     }
-
-    if (left_sym->array_flag) {
+    // for array
+    if (left_sym->array_flag && !non_array) {
         if (match_type(Token::LEFT_BRACKET)) {
             next_token();
         } else {
@@ -52,7 +52,7 @@ bool Syntax::assign() {
         error_handler(SyntaxError::BAD_ASSIGNMENT);
         return false;        
     }
-    // TODO
+
     if (!left_sym->array_flag) {
         if (expression(left_sym) == NULL) {
             error_handler(SyntaxError::BAD_ASSIGNMENT);
