@@ -1,5 +1,5 @@
 #pragma once
-#define KEYWORD_COUNT (13)
+#define KEYWORD_COUNT (14)
 #define POSITIVE_MAX (2147483647)
 #define NEGATIVE_MIN_ABS (2147483648)
 
@@ -20,6 +20,7 @@ static string keywords[KEYWORD_COUNT] = {
 	"return",
     "printf",
     "scanf",
+    "main"
 };
 	
 class Lexer {

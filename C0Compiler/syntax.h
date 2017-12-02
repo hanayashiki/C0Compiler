@@ -47,10 +47,11 @@ public:
     bool var_entry(int basic_type);
     void var_group();
 
-    bool func_def(bool is_void);
+    bool func_def();
     bool func_def_parameter_list(Symbol* sym);
     bool func_def_block();
-    bool Syntax::func_def_parameter_pair(Symbol* sym);
+    bool return_();
+    bool func_def_parameter_pair(Symbol* sym);
     void type_func_group();
 
     bool assign(bool non_array=false);

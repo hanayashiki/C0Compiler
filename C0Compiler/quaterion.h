@@ -36,6 +36,7 @@ public:
 
         _LINK,   // directive, link to a label, to avoid jump
         GOTO,    // unconditional jump
+        RET,
         END     // sentinel
     };
     static const int OP_COUNT = END;
@@ -88,5 +89,6 @@ static char* op_names[Quaterion::OP_COUNT] =
 
     "_LINK",
     "GOTO",
+    "RET"
 };
 

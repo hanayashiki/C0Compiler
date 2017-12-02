@@ -2,38 +2,46 @@
 
 #define Q Quaterion
 
-bool Syntax::func_def(bool is_void) {
+bool Syntax::func_def() {
     int type = Symbol::VOID;
+    bool main_flag = false;
     string name = anonymous();
     Symbol* new_func = NULL;
+
     // type
-    if (is_void) {
-        if (match_type(Token::VOID)) {
-            next_token();    
-        } else {
-            error_handler(SyntaxError::FUNCTION_INVALID_TYPE);
-        } 
+    if (match_type(Token::VOID)) {
+        type = Symbol::VOID;
+        next_token();    
+    } else if (match_type(Token::INT)) {
+        type = Symbol::INT;
+        next_token(); 
+    } else if (match_type(Token::CHAR)) {
+        type = Symbol::CHAR;
+        next_token(); 
     } else {
-        if (match_type(Token::INT)) {
-            type = Symbol::INT;
-            next_token(); 
-        } else if (match_type(Token::CHAR)) {
-            type = Symbol::CHAR;
-            next_token(); 
-        } else {
-            error_handler(SyntaxError::FUNCTION_INVALID_TYPE);
-        }
+        error_handler(SyntaxError::FUNCTION_INVALID_TYPE);
     }
     // name
     if (match_type(Token::IDENTITY)) {
+        if (q_table->entry_symbol != NULL) {
+            error_handler("No definition of function should follow main. ");
+        }
         name = read_token.getName();
+        new_func = new Symbol(name, type);
+        new_func->setFunc();
         next_token(); 
+    } else if (match_type(Token::MAIN)) {
+        if (type != Symbol::VOID) {
+            error_handler("main() should be of void type.");
+        }
+        new_func = new Symbol("main", type);
+        new_func->setFunc();
+        main_flag = true;
+        q_table->entry_symbol = new_func;
+        next_token();
     } else {
         error_handler(SyntaxError::FUNCTION_MISSING_NAME);
     }
-
-    new_func = new Symbol(name, type);
-    new_func->setFunc();
 
     if (match_type(Token::LEFT_PARENTHESIS)) {
         next_token();
@@ -49,6 +57,10 @@ bool Syntax::func_def(bool is_void) {
     // (int a, int b...)
     func_def_parameter_list(new_func);
 
+    if (main_flag && (new_func->parameter_type_list.size() != 0)) {
+        error_handler("main() should contain no parameters. ");
+    }
+
     if (match_type(Token::RIGHT_PARENTHESIS)) {
         next_token();
     } else {
@@ -59,7 +71,7 @@ bool Syntax::func_def(bool is_void) {
         next_token();
     }
 
-    Symbol* label = new_label(name);
+    Symbol* label = new_label(new_func->name);
     Q label_q(Q::LABEL, label);
     q_table->add_quaterion(label_q);
     Q prolog_q(Q::PROLOG, new_func);

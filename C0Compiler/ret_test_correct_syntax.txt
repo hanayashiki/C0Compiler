@@ -1,0 +1,65 @@
+const int a = 1;
+int i, j, k;
+char arr[10];
+int arr2[10];
+int func1(int foo, int bar) {
+	int new_int, new_ints[10];
+	char character;
+	scanf(i, j, k);
+	switch(a) {
+	case 1:
+		for (i = 0; i < 10; i=i+1) {
+			j = 0;
+			arr[i] = new_ints[i];
+			printf("out", i);
+		}
+	case 2:
+		{
+			k = 0;
+			printf(a);
+		}
+	default:
+		i = a*1/2+(1+2)*a*5;
+	}
+	if (a > 0) {
+		return (a);
+	} else {
+		return (k);
+	}
+	switch (character) {
+	case 'a':
+		printf("a");
+	default:
+		printf(a);
+	}
+}
+int func2(int foo, int bar) {
+	scanf(i, j, k);
+	func1(i, j);
+	i = 'a';
+	switch(a) {
+	case 1:
+		for (i = 0; i < 10; i=i+1) {
+			j = 0;
+			arr[i] = 0;
+			printf("out", i);
+		}
+	case 2:
+		{
+			k = 0;
+			printf(a);
+		}
+	default:
+		i = -func1(i,j)+a*+1/-2+(1+2)*a*-5/'_';
+	}
+	if (a > 0) {
+		return (a);
+	}
+}
+void func3() {
+	i = 1;
+	return;
+}
+void main() {
+	i = ++1;
+}

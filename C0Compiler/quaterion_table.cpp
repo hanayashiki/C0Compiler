@@ -1,6 +1,7 @@
 #include "stdafx.h"
 
 QuaterionTable::QuaterionTable() {
+    entry_symbol = NULL;
     q_list.reserve(QLIST_RESERVE_SIZE);
 }
 

@@ -1,7 +1,7 @@
 #include "stdafx.h"
 
 void Syntax::start() {
-    pattern_func_def = "(int|char)(identifier)\\(";
+    pattern_func_def = "(int|char|void)(identifier|main)\\(";
     pattern_int_def = "(int|char)identifier[^(]";
     pattern_call_func = "identifier\\(";
     pattern_assign = "identifier(\\[|\\=)";
@@ -32,7 +32,7 @@ void Syntax::const_group() {
 
 void Syntax::var_group() {
     int i = 0;
-    while (match_pattern("(int|char)identifier[^(]", 3)) {
+    while (match_pattern(pattern_int_def, 3)) {
         var_def();
         if (match_type(Token::SEMICOLON)) {
             next_token();
@@ -43,8 +43,7 @@ void Syntax::var_group() {
 }
 
 void Syntax::type_func_group() {
-    while (match_type(Token::INT) || match_type(Token::CHAR)) {
-        func_def(false);
+    while (match_pattern(pattern_func_def, 3)) {
+        func_def();
     }
 }
-
