@@ -3,6 +3,7 @@
 #define Q Quaterion
 
 bool Syntax::return_() {
+    struct SyntaxError::StatementException e = {""};
     if (match_type(Token::RETURN)) {
         next_token();
     } else {
@@ -16,14 +17,19 @@ bool Syntax::return_() {
             next_token();
         }
         if (ret_sym == NULL) {
+            e.what = "Bad return expression. ";
+            throw e;
             return false;
         }
         Q ret_q(Q::RET, ret_sym);
         q_table->add_quaterion(ret_q);
         return true;
-    } else {
+    } else if (match_type(Token::SEMICOLON)){
         Q ret_q(Q::RET, NULL);
         q_table->add_quaterion(ret_q);
         return true;
+    } else {
+        e.what = "'return' must be followed by nothing or a parameter. ";
+        throw e;
     }
 }

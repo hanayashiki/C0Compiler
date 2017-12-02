@@ -17,6 +17,8 @@ private:
     string pattern_func_def;
     string pattern_int_def;
 
+    int last_id;
+
     string pattern_call_func;
     string pattern_assign;
 public:
@@ -32,8 +34,7 @@ public:
     bool search_pattern(int pid);
     bool semicolon_handler();
     void error_handler(int e, string info="");
-    void error_handler(string info);
-    bool error_handler(string m, int pid);
+    bool error_handler(string m, int pid=-1);
     void add_sym(Symbol* sym);
     Symbol* temp_symbol(int type, bool save=true);
     Symbol* new_label(string prefix="", bool save=true);
@@ -72,9 +73,10 @@ public:
 
     bool statement();
     bool statement_sequence();
+    void statement_try();
 
     bool if_statement();
-    Symbol* if_comparison();
+    Symbol* if_comparison(int right_end=Token::RIGHT_PARENTHESIS);
 
     bool scanf_();
     bool scanf_parameter_entry();

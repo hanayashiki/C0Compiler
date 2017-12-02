@@ -5,32 +5,40 @@
 bool Syntax::call_func(Symbol* target_symbol) {
     string name;
     Symbol* func_sym = NULL;
+    struct SyntaxError::StatementException e = {""};
+
     if (match_type(Token::IDENTITY)) {
         name = read_token.getName();
         func_sym = symbol_table->get_sym(name);
         next_token();
         if (func_sym == NULL) {
-            error_handler("Function not found. ");
+            e.what = "Undefined identifier: " + name + ". ";
+            throw e;
             return false;
         } else if (func_sym->function_flag == false) {
-            error_handler("Should be a function. ");
+            e.what = "'" + name + "' is not a function. ";
+            throw e;
             return false;
         }
     }
     if (match_type(Token::LEFT_PARENTHESIS)) {
         next_token();
     } else {
-        error_handler("Function should be followed by a parameter list. ");
+        e.what = "'(' is needed.";
+        throw e;
         return false;
     }
     if (call_func_list(func_sym) == false) {
+        e.what = "Inapproriate list of parameters. ";
+        throw e;
         return false;
     }
     read_token.display();
     if (match_type(Token::RIGHT_PARENTHESIS)) {
         next_token();
     } else {
-        error_handler("')' is needed");
+        e.what = "')' is needed. ";
+        throw e;
         return false;
     }
     Q call_q(Q::CALL, func_sym);

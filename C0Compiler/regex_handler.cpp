@@ -14,6 +14,8 @@ RegexHandler::RegexHandler() {
     string empty = ";(.*)";
     string right_brace = "\\}(.*)";
 
+    string comparison = "(identifier)(\\<|\\<\\=|\\>|\\>\\=|\\=\\=|\\!\\=)";
+
     string const_def = "const(.*)";
     string func_def = "(int|void|char)(main|identifier)\\((.*)";
 
@@ -32,6 +34,8 @@ RegexHandler::RegexHandler() {
         switch_ + "|" +
         return_ + "|" +
         empty;
+    match_patterns[JUMP_TO_NEXT_STATEMENT_FOR_] =
+        match_patterns[JUMP_TO_NEXT_STATEMENT] + "|" + comparison;
     // until some other patterns are matched 
     stop_patterns[JUMP_TO_NEXT_STATEMENT] =
         func_def + "|" +

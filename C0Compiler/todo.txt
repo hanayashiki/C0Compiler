@@ -3,3 +3,4 @@
 	2. expression - assignment 转换与报错
 	3. const 常数值处理
 	4. switch 出错处理
+	5. 数组下标静态越界报错

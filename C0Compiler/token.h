@@ -64,6 +64,7 @@ static char* token_names[TOKEN_TYPE_COUNT] = {
 
 class Token {
 public:
+    int token_id;
     int line; // at which the token is at.
 	Token();
 	void display();

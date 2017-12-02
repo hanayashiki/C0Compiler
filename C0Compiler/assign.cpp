@@ -23,6 +23,7 @@ bool Syntax::assign(bool non_array) {
             return false;
         }
     } else {
+        read_token.display();
         next_token();
         cout << "???\n";
         e.what = "Invalid left part of assignment. ";

@@ -6,7 +6,6 @@
 // ＜标识符＞＝＜标识符＞(+|-)＜步长＞‘)’＜语句＞
 // ＜步长＞::=＜非零数字＞｛＜数字＞｝
 
-
 bool Syntax::for_() {
     Symbol* judge_label = new_label("for_condition");
     Symbol* for_end_label = new_label("for_end");
@@ -22,44 +21,46 @@ bool Syntax::for_() {
     if (match_type(Token::LEFT_PARENTHESIS)) {
         next_token();
     } else {
-        // localization
+        error_handler("'(' is needed. ", RegexHandler::JUMP_TO_NEXT_STATEMENT);
     }
     // for (i = 1
-    if (assign(true) == false) {
-        // localization
+    try {
+        assign(true);
     }
-    // for (i = 1;
+    catch (SyntaxError::StatementException & e) {
+        error_handler(e.what, RegexHandler::JUMP_TO_NEXT_STATEMENT_FOR_);
+    }
+        // for (i = 1;
     semicolon_handler();
     Q start_jump_q(Q::GOTO, for_block_label);
     q_table->add_quaterion(start_jump_q);
     // for (i = 1; i < 10;
     Q judge_label_q(Q::LABEL, judge_label);
     q_table->add_quaterion(judge_label_q);
-    compare_sym = if_comparison();
+    compare_sym = if_comparison(Token::SEMICOLON);
     if (compare_sym == NULL) {
-        //
+        error_handler("Bad comparision. ", RegexHandler::JUMP_TO_NEXT_STATEMENT);
+    } else {
+        Q condition_jump_q(Q::BEQZ, NULL, compare_sym, for_end_label);
+        q_table->add_quaterion(condition_jump_q);
     }
-    Q condition_jump_q(Q::BEQZ, NULL, compare_sym, for_end_label);
-    q_table->add_quaterion(condition_jump_q);
     semicolon_handler();
     // for (i = 1; i < 10; i = i + 1
     
     Q aug_q(Q::END, NULL);
     if (for_augment(aug_q) == false) {
-        //
+        error_handler("Bad augmentation. ", RegexHandler::JUMP_TO_NEXT_STATEMENT);
     }
     // for (i = 1; i < 10; i = i + 1)
     if (match_type(Token::RIGHT_PARENTHESIS)) {
         next_token();
     } else {
         // localization
-        assert(0);
+        error_handler("')' is needed ", RegexHandler::JUMP_TO_NEXT_STATEMENT);
     }
     Q for_block_label_q(Q::LABEL, for_block_label);
     q_table->add_quaterion(for_block_label_q);
-    if (statement() == false) {
-        assert(0);
-    }
+    statement_try();
     q_table->add_quaterion(aug_q);
     Q jump_to_judge_q(Q::GOTO, judge_label);
     q_table->add_quaterion(jump_to_judge_q);
@@ -122,18 +123,15 @@ Symbol* Syntax::for_augment_symbol() {
         string left_name = read_token.getName();
         left_sym = symbol_table->get_sym(left_name);
         if (left_sym == NULL) {
-            error_handler(SyntaxError::UNDEFINED_IDENTIFIER, left_name);
             return NULL;
         }
         if (left_sym->const_flag || 
             left_sym->function_flag || 
             left_sym->array_flag) {
-            error_handler(SyntaxError::INVALID_LEFT_IDENTIFIER_TYPE);
             return NULL;
         }
         next_token();
     } else {
-        error_handler(SyntaxError::BAD_ASSIGNMENT);
         return NULL;
     }
     return left_sym;

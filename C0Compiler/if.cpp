@@ -54,7 +54,7 @@ bool Syntax::if_statement() {
     return true;
 }
 
-Symbol* Syntax::if_comparison() {
+Symbol* Syntax::if_comparison(int right_end) {
     Symbol* left = NULL, * right = NULL;
     int op = Q::END;
     left = expression();
@@ -79,7 +79,7 @@ Symbol* Syntax::if_comparison() {
     } else if (match_type(Token::EQUAL)) {
         op = Q::EQ;
         next_token();
-    } else {
+    } else if (match_type(right_end)) {
         return left; 
     }
 

@@ -4,6 +4,8 @@ Syntax::Syntax(Lexer * L, SymbolTable * s, QuaterionTable* q) {
     lexer = L;
     symbol_table = s;
     q_table = q;
+
+    last_id = -1;
     token_pointer = token_list.begin();
     reg_handler = new RegexHandler();
 }

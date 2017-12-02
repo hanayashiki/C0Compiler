@@ -2,6 +2,7 @@
 
 Lexer::Lexer() {
 	current_line = 1;
+    token_id = 0;
 }
 
 Token Lexer::getToken() {
@@ -10,6 +11,7 @@ Token Lexer::getToken() {
     bool leading_zero_flag = false;
 	string name_str;
 	Token token;
+    token.token_id = token_id++;
 	while (true) {
 		char c = getChar();
 		switch (state) {

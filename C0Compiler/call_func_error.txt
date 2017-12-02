@@ -1,0 +1,16 @@
+int not_a_func, b, c;
+
+int func() {}
+
+int func2(int a, int b){}
+
+void main() {
+	not_exist();
+	not_a_func();
+	
+	func;
+	func(b);
+	func();
+	func2(b);
+	b = c;
+}

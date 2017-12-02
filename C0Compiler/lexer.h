@@ -24,6 +24,8 @@ static string keywords[KEYWORD_COUNT] = {
 };
 	
 class Lexer {
+private:
+    int token_id;
 public:
 	Lexer();
 	Token getToken();

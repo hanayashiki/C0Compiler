@@ -45,6 +45,8 @@ bool Syntax::statement() {
         // £¼¿Õ£¾
         next_token();
         return true;
+    } else if (match_type(Token::RIGHT_BRACE)) {
+        return true;
     }
 
     SyntaxError::StatementException e = {"Unknown statement. "};
@@ -55,19 +57,7 @@ bool Syntax::statement() {
 bool Syntax::statement_sequence() {
     // a whole sequence of a function
     while (true) {
-        try {
-            cout << "statement" << endl;
-            statement();
-        }
-        catch (SyntaxError::StatementException & e) {
-            cout << "caught exception\n";
-            if (!error_handler(e.what, RegexHandler::JUMP_TO_NEXT_STATEMENT)) {
-                //cout << "not handled\n";
-                struct SyntaxError::FuncDefException new_e = 
-                {e.what};
-                throw new_e;
-            }
-        }
+        statement_try();
         cout<<"try end\n";
         read_token.display();
         if (match_type(Token::RIGHT_BRACE)) {
@@ -76,4 +66,18 @@ bool Syntax::statement_sequence() {
         }
     }
     return true;
+}
+
+void Syntax::statement_try() {
+    try {
+        cout << "statement" << endl;
+        statement();
+    }
+    catch (SyntaxError::StatementException e) {
+        cout << "caught exception\n";
+        if (!error_handler(e.what, RegexHandler::JUMP_TO_NEXT_STATEMENT)) {
+            //cout << "not handled\n";
+            throw e;
+        }
+    }   
 }

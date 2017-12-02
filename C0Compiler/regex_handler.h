@@ -8,6 +8,7 @@ public:
     RegexHandler();
     static const int HANDLER_COUNT = 10;
     enum {
-        JUMP_TO_NEXT_STATEMENT
+        JUMP_TO_NEXT_STATEMENT,
+        JUMP_TO_NEXT_STATEMENT_FOR_
     };
 };
