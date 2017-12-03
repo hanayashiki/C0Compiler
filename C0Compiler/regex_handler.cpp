@@ -40,6 +40,10 @@ RegexHandler::RegexHandler() {
         match_patterns[JUMP_TO_NEXT_STATEMENT] + "|" + comparison;
     match_patterns[JUMP_TO_NEXT_STATEMENT_CASE_] = 
         match_patterns[JUMP_TO_NEXT_STATEMENT] + "|" + case_ + "|" + colon;
+    match_patterns[JUMP_TO_NEXT_DEFINITION_FUNC] =
+        match_patterns[JUMP_TO_NEXT_DEFINITION_FUNC] = func_def;
+
+
     // until some other patterns are matched 
     stop_patterns[JUMP_TO_NEXT_STATEMENT] =
         func_def + "|" +

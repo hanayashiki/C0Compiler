@@ -43,7 +43,24 @@ void Syntax::var_group() {
 }
 
 void Syntax::type_func_group() {
-    while (match_pattern(pattern_func_def, 3)) {
-        func_def();
+    while (true) {
+        try {
+            if (match_pattern(pattern_func_def, 3)) {
+                func_def();
+            } else if (match_type(Token::END_OF_FILE)) {
+                return;
+            } else {
+                SyntaxError::StatementException e;
+                e.what = "Not a function definition. ";
+                throw e;
+            }
+        } catch (SyntaxError::StatementException & e) {
+
+            if (!error_handler(e.what, 
+                RegexHandler::JUMP_TO_NEXT_DEFINITION_FUNC)) {
+                    cout << "Fatal, compilation aborted at line " << read_token.line << ". \n";
+                return;
+            }
+        }
     }
 }

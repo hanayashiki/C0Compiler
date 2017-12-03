@@ -77,8 +77,7 @@ void Syntax::statement_try() {
         cout << "caught exception\n";
         if (!error_handler(e.what, RegexHandler::JUMP_TO_NEXT_STATEMENT)) {
             //cout << "not handled\n";
-            //throw e;
-            getchar();
+            throw e;
         }
     }   
 }
