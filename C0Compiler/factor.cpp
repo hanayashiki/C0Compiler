@@ -66,6 +66,7 @@ Symbol* Syntax::factor() {
             }
             return expr_sym;
         } else {
+            next_token();
             error_handler("Invalid factor. ");
         }
     }

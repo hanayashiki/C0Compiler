@@ -15,12 +15,14 @@ bool Syntax::switch_() {
         assert(0);
     }
 
+    struct SyntaxError::StatementException e = {""};
+
     Symbol* switch_end_label = new_label("switch_end");
 
     switch_sym = switch_head();
     if (switch_sym == NULL) {
         // localization
-        cout << "switch_sym fucked" << endl;
+        error_handler("Bad switch expression. ", RegexHandler::JUMP_TO_NEXT_STATEMENT_CASE_);
     }
 
     // '{'
@@ -28,12 +30,13 @@ bool Syntax::switch_() {
         next_token();
     } else {
         // localization
+        error_handler("'{' is needed. ", RegexHandler::JUMP_TO_NEXT_STATEMENT_CASE_);
     }
 
     bool default_matched = false;
 
     while (true) {
-        cout << "switch loop\n";
+        //cout << "switch loop\n";
         bool case_flag = false;
         if (match_type(Token::CASE) || match_type(Token::DEFAULT)) {
             Symbol *const_sym = NULL;
@@ -42,11 +45,15 @@ bool Syntax::switch_() {
             if (match_type(Token::CASE)) {
                 case_flag = true;
                 if (default_matched == true) {
-                    error_handler("'default should be the last case. '");
+                    error_handler("'default' should be the last case. '");
                 }
                 read_token.display();
                 cout << "call case head" << endl;
                 const_sym = case_head();
+                // list the mapping
+                if ((const_sym == NULL) && (case_flag == true)) {
+                    error_handler("Bad case description. ", RegexHandler::JUMP_TO_NEXT_STATEMENT_CASE_);
+                }
             } else {
                 // default
                 default_matched = true;
@@ -56,15 +63,12 @@ bool Syntax::switch_() {
             if (match_type(Token::COLON)) {
                 next_token();
             } else {
-                error_handler("':' is needed. ");
+                error_handler("':' is needed. ", RegexHandler::JUMP_TO_NEXT_STATEMENT_CASE_);
                 // xxxx
             }
-            // list the mapping
-            if (const_sym == NULL) {
-                // localization
-            }
+
             // if not match, jump
-            if (case_flag == true) {
+            if ((case_flag == true) && (const_sym != NULL) && (switch_sym != NULL)) {
                 Symbol* compare_temp = temp_symbol(Symbol::INT);
                 Q compare_q(Q::EQ, compare_temp, switch_sym, const_sym);
                 q_table->add_quaterion(compare_q);
@@ -72,9 +76,7 @@ bool Syntax::switch_() {
                 q_table->add_quaterion(bez_q);
             }
             // statement
-            if (statement() == false) {
-                // localization
-            }
+            statement_try();
             // after the statement, go out of the switch
             Q goto_q(Q::GOTO, switch_end_label);
             q_table->add_quaterion(goto_q);
@@ -90,12 +92,11 @@ bool Syntax::switch_() {
     if (match_type(Token::RIGHT_BRACE)) {
         next_token();
     } else {
-        error_handler("'}' is needed");
-        // localization
+        e.what = "'}' is needed";
+        throw e;
     }
     Q end_label_q(Q::LABEL, switch_end_label);
     q_table->add_quaterion(end_label_q);
-    cout << "switch end" << endl;
     return true;
 }
 
@@ -104,7 +105,7 @@ Symbol* Syntax::switch_head() {
     if (match_type(Token::LEFT_PARENTHESIS)) {
         next_token();
     } else {
-        error_handler("'switch' must be followed by a parameter list. ");
+        error_handler("'(' is needed. ");
         return NULL;
     }
 
@@ -127,18 +128,15 @@ Symbol* Syntax::case_head() {
     Symbol *switch_sym = NULL;
     read_token.display();
     if (match_type(Token::CASE)) {
-        cout << "matched case\n";
         next_token();
     } else {
         read_token.display();
-        cout << "failed\n";
         assert(0);
     }
     switch_sym = const_factor();
     if (switch_sym == NULL) {
-        cout << "const failed" << endl;
+        error_handler("'case' should be followed by an integer or character. ");
         return NULL;
     }
-    cout << "case head end\n";
     return switch_sym;
 }

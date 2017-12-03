@@ -9,45 +9,36 @@ bool Syntax::if_statement() {
     } else {
         assert(0);
     }
-    try {
-        if (match_type(Token::LEFT_PARENTHESIS)) {
-            next_token();
-        } else {
-            throw "IF_BAD_CONDITION";
-        }
-        Symbol* compare_temp = if_comparison();
-        if (compare_temp == NULL) {
-            throw "IF_BAD_CONDITION";
-        }
+    
+    if (match_type(Token::LEFT_PARENTHESIS)) {
+         next_token();
+    } else {
+         error_handler("'(' is needed. ",
+         RegexHandler::JUMP_TO_NEXT_STATEMENT_FOR_);
+    }
+    Symbol* compare_temp = if_comparison();
+    if (compare_temp == NULL) {
+        error_handler("Bad comparision expression. ", 
+        RegexHandler::JUMP_TO_NEXT_STATEMENT);
+    } else {
         Q beqz_q(Q::BEQZ, NULL, compare_temp, if_false);
         q_table->add_quaterion(beqz_q);
-        if (match_type(Token::RIGHT_PARENTHESIS)) {
-            next_token();
-        } else {
-            throw "IF_BAD_CONDITION";
-        }
     }
-    catch (string) {
-        delete if_false;
-        assert(0);
-        //error_handler(IF_BAD_CONDITION);
+    if (match_type(Token::RIGHT_PARENTHESIS)) {
+        next_token();
+    } else {
+        error_handler("')' is needed. ", 
+        RegexHandler::JUMP_TO_NEXT_STATEMENT);
     }
 
-    if (statement() == false) {
-        cout << "statement failed" << endl;
-        delete if_false;
-        return false;
-    }
+    statement_try();
 
     Q label_q(Q::LABEL, if_false);
     q_table->add_quaterion(label_q);
 
     if (match_type(Token::ELSE)) {
         next_token();
-        if (statement() == false) {
-            cout << "statement else failed" << endl;
-            return false;
-        }
+        statement_try();
     }
 
     add_sym(if_false);

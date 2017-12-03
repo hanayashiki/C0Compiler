@@ -1,0 +1,38 @@
+int a;
+
+int test_func() {
+	switch (*) {
+		case 1:
+			a = 1;
+		case 2:
+			a = 2;
+		default:
+			a = 3;
+	}
+	switch (a) 
+		case 1:
+			a = 1;
+		case 2:
+			a = 2;
+		default:
+			a = 3;
+	}
+	switch (a) {
+		case *:
+			a = 1;
+		default:
+			a = 2;
+	}
+	switch (a) {
+		case a
+			a = 1;
+		default:
+			a = 2;
+	}
+	switch (a) {
+		case a:
+			a = 1;
+		default:
+			a = 2;
+	
+}

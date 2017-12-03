@@ -15,6 +15,8 @@ RegexHandler::RegexHandler() {
     string right_brace = "\\}(.*)";
 
     string comparison = "(identifier)(\\<|\\<\\=|\\>|\\>\\=|\\=\\=|\\!\\=)";
+    string case_ = "(case|default)(.*)"; 
+    string colon = "\\:(.*)";
 
     string const_def = "const(.*)";
     string func_def = "(int|void|char)(main|identifier)\\((.*)";
@@ -36,6 +38,8 @@ RegexHandler::RegexHandler() {
         empty;
     match_patterns[JUMP_TO_NEXT_STATEMENT_FOR_] =
         match_patterns[JUMP_TO_NEXT_STATEMENT] + "|" + comparison;
+    match_patterns[JUMP_TO_NEXT_STATEMENT_CASE_] = 
+        match_patterns[JUMP_TO_NEXT_STATEMENT] + "|" + case_ + "|" + colon;
     // until some other patterns are matched 
     stop_patterns[JUMP_TO_NEXT_STATEMENT] =
         func_def + "|" +

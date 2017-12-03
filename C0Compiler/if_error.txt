@@ -1,0 +1,16 @@
+int fi;
+
+void main() {
+	if (<) {
+		fi = 1;
+	}
+	if (fi<1 {
+		fi = 3;
+	}
+	if (fi)
+		fi = 2;
+	}
+	if (fi) {
+		fi = ****;
+	}
+}
