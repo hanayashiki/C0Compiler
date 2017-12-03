@@ -3,6 +3,9 @@
 #define Q Quaterion
 
 bool Syntax::if_statement() {
+
+    cout << "This is if\n";
+
     Symbol *if_false = new_label("if_false", false);
     if (match_type(Token::IF)) {
         next_token();

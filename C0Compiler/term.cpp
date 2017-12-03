@@ -7,6 +7,8 @@ Symbol* Syntax::term(Symbol* target_symbol) {
     Symbol* left = NULL;
     Symbol* self = NULL;
 
+    cout << "This is term.\n";
+
     left = factor();
     if (left == NULL) {
         //cout << "term1" << endl;

@@ -55,6 +55,7 @@ bool Syntax::statement() {
 }
 
 bool Syntax::statement_sequence() {
+    cout << "This is statement_sequence\n";
     // a whole sequence of a function
     while (true) {
         statement_try();

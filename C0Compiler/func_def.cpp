@@ -9,6 +9,8 @@ bool Syntax::func_def() {
     string name = anonymous();
     Symbol* new_func = NULL;
 
+    cout << "This is func_def\n";
+
     // type
     if (match_type(Token::VOID)) {
         type = Symbol::VOID;
@@ -128,7 +130,7 @@ bool Syntax::func_def_parameter_pair(Symbol* func_sym) {
         next_token();
     } else {
         read_token.display();
-        //cout << "false at type match\n";
+        cout << "false at type match\n";
         return false;
     }
     if (match_type(Token::IDENTITY)) {

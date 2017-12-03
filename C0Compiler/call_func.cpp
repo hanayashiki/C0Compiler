@@ -7,6 +7,8 @@ bool Syntax::call_func(Symbol* target_symbol) {
     Symbol* func_sym = NULL;
     struct SyntaxError::StatementException e = {""};
 
+    cout << "This is call_func.\n";
+
     if (match_type(Token::IDENTITY)) {
         name = read_token.getName();
         func_sym = symbol_table->get_sym(name);
@@ -33,7 +35,7 @@ bool Syntax::call_func(Symbol* target_symbol) {
         throw e;
         return false;
     }
-    read_token.display();
+    //read_token.display();
     if (match_type(Token::RIGHT_PARENTHESIS)) {
         next_token();
     } else {

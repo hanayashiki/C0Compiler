@@ -3,6 +3,7 @@
 #define Q Quaterion
 
 bool Syntax::scanf_() {
+    cout << "This is scanf\n";
     if (match_type(Token::SCANF)) {
         next_token();
     } else {

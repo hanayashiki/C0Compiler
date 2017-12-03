@@ -11,6 +11,7 @@ bool Syntax::for_() {
     Symbol* for_end_label = new_label("for_end");
     Symbol* for_block_label = new_label("for_block");
     Symbol* compare_sym = NULL;
+    cout << "This is for\n";
     // for
     if (match_type(Token::FOR)) {
         next_token();

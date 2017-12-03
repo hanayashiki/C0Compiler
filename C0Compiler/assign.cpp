@@ -6,6 +6,8 @@ bool Syntax::assign(bool non_array) {
     Symbol* offset_temp = NULL;
     string left_name;
 
+    cout << "This is assign.\n";
+
     struct SyntaxError::StatementException e = {""};
 
     if (match_type(Token::IDENTITY)) {

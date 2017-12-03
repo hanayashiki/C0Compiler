@@ -3,6 +3,9 @@
 // ＜变量定义＞  ::= ＜类型标识符＞(＜标识符＞|＜标识符＞‘[’＜无符号整数＞‘]’)
 //  {,＜标识符＞|＜标识符＞‘[’＜无符号整数＞‘]’ }
 bool Syntax::var_def() {
+
+    cout << "This is var_def\n";
+
     int basic_type = Symbol::UNKNOWN;
     if (match_type(Token::INT)) {
         basic_type = Symbol::INT;

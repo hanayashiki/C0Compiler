@@ -3,6 +3,9 @@
 #define Q Quaterion
 
 bool Syntax::return_() {
+
+    cout << "This is return\n";
+
     struct SyntaxError::StatementException e = {""};
     value_function_return = true;
     if (match_type(Token::RETURN)) {

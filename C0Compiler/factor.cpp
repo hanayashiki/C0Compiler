@@ -5,6 +5,9 @@
 Symbol* Syntax::factor() {
     string name;
     Symbol* fetch_sym = NULL;
+    
+    cout << "This is factor.\n";
+
     if (match_type(Token::IDENTITY)) {
         name = read_token.getName();
         fetch_sym = symbol_table->get_sym(name);

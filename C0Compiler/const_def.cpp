@@ -3,6 +3,8 @@
 bool Syntax::const_def() {
     // const int <const_assign>{, <const_assign>};
 
+    cout << "This is const_def\n";
+
     int type = Symbol::UNKNOWN;
     // const
     if (match_type(Token::CONST)) {  

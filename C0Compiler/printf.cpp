@@ -5,6 +5,7 @@
 bool Syntax::printf_() {
     // ＜写语句＞    ::= printf ‘(’ ＜字符串＞,＜表达式＞ ‘)’|
     // printf ‘(’＜字符串＞ ‘)’| printf ‘(’＜表达式＞‘)’
+    cout << "This is printf\n";
     Symbol * string_label = NULL;
     Symbol * expr_sym = NULL;
     string str;

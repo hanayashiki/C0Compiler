@@ -7,6 +7,9 @@ Symbol* Syntax::expression(Symbol* target_symbol) {
     Symbol* left = NULL;
     Symbol* self = NULL;
     bool minus_flag = false;
+
+    cout << "This is expression.\n";
+
     if (match_type(Token::ADD)) {
         next_token();
     } else if (match_type(Token::MINUS)) {

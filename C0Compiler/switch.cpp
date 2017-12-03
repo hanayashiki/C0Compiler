@@ -8,6 +8,7 @@
 // £¼È±Ê¡£¾   ::=  default : £¼Óï¾ä£¾
 
 bool Syntax::switch_() {
+    cout << "This is switch.\n";
     Symbol* switch_sym = NULL;
     if (match_type(Token::SWITCH)) {
         next_token();
@@ -43,6 +44,7 @@ bool Syntax::switch_() {
             Symbol *case_end_label = new_label("case_end");
             // case XXX: | default: 
             if (match_type(Token::CASE)) {
+                cout << "This is case\n";
                 case_flag = true;
                 if (default_matched == true) {
                     error_handler("'default' should be the last case. '");
@@ -55,6 +57,7 @@ bool Syntax::switch_() {
                     error_handler("Bad case description. ", RegexHandler::JUMP_TO_NEXT_STATEMENT_CASE_);
                 }
             } else {
+                cout << "This is default\n";
                 // default
                 default_matched = true;
                 next_token();
