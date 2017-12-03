@@ -53,28 +53,28 @@ RegexHandler::RegexHandler() {
 bool Syntax::search_pattern(int pid) {
     int count = 0;
     while (true) {
-        cout << "searching\n";
+        //cout << "searching\n";
         if (match_pattern(reg_handler->match_patterns.at(pid), 
             reg_handler->max_match_len)) {
-            cout << "found\n";
-            read_token.display();
+            //cout << "found\n";
+            //read_token.display();
            // cout << reg_handler->match_patterns.at(pid);
             return true;
         }
         else if (match_pattern(reg_handler->stop_patterns.at(pid),
             reg_handler->max_match_len)) {
-            cout << "gave up\n";
+            //cout << "gave up\n";
             break;
         }
         next_token();
         count++;
         if (read_token.type == Token::END_OF_FILE) {
-            cout << "meet end\n";
+            //cout << "meet end\n";
             break;
         }
     }
     for (; count>0; count--) {
-         cout << "retracting\n";
+         //cout << "retracting\n";
          retract_token();
     }
     return false;

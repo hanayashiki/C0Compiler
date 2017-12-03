@@ -42,7 +42,7 @@ Symbol* Syntax::term_tail(Symbol* left) {
 
     right = factor();
     if (right == NULL) {
-        cout << "term right illegal";
+        //cout << "term right illegal";
         return NULL;
     }
     
@@ -51,18 +51,62 @@ Symbol* Syntax::term_tail(Symbol* left) {
 
     if (left->type != common_type) {
         Symbol* temp_minus = temp_symbol(common_type);
-        Q q(Q::CAST_INT, temp_minus, left);
-        q_table->add_quaterion(q);
+        if (left->const_flag) {
+            temp_minus->const_flag = true;
+            temp_minus->character_value = left->character_value;
+            temp_minus->integer_value = left->character_value;
+        } else {
+            Q q(Q::CAST_INT, temp_minus, left);
+            q_table->add_quaterion(q);
+        }
         left = temp_minus;
     }
     if (right->type != common_type) {
         Symbol* temp_minus = temp_symbol(common_type);
-        Q q(Q::CAST_INT, temp_minus, right);
-        q_table->add_quaterion(q);
+        if (right->const_flag) {
+            temp_minus->const_flag = true;
+            temp_minus->character_value = right->character_value;
+            temp_minus->integer_value = right->character_value;
+        } else {
+            Q q(Q::CAST_INT, temp_minus, right);
+            q_table->add_quaterion(q);
+        }
+
         right = temp_minus;
     }
-    Q mult_q(op, temp, left, right);
-    q_table->add_quaterion(mult_q);
-
+    if (left->const_flag && right->const_flag) {
+        temp->const_flag = true;
+        if (common_type == Symbol::CHAR) {
+            if (op == Q::MULT) {
+                temp->setConstantValue((char)(left->character_value
+                    *right->character_value));
+            }
+            if (op == Q::DIV) {
+                if (right->character_value != 0) {
+                    temp->setConstantValue((char)(left->character_value
+                        /right->character_value));
+                } else {
+                    error_handler("Divided-by-zero is not allowed.");
+                }
+            }
+        }
+        if (common_type == Symbol::INT) {
+            if (op == Q::MULT) {
+                temp->setConstantValue(left->integer_value
+                    *right->integer_value);
+            }
+            if (op == Q::DIV) {
+                if (right->character_value != 0) {
+                    temp->setConstantValue(left->integer_value
+                        /(right->integer_value));
+                } else {
+                    error_handler("Divided-by-zero is not allowed.");
+                }
+            }
+        }
+    } else {
+        Q mult_q(op, temp, left, right);
+        q_table->add_quaterion(mult_q);
+    }
     return term_tail(temp);
 }

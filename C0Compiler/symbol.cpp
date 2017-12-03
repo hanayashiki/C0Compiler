@@ -39,6 +39,7 @@ void Symbol::display() {
         break;
     case VOID:
         cout << "void; ";
+        break;
     default:
         cout << "unexpected type; ";
     }

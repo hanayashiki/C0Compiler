@@ -47,8 +47,8 @@ bool Syntax::switch_() {
                 if (default_matched == true) {
                     error_handler("'default' should be the last case. '");
                 }
-                read_token.display();
-                cout << "call case head" << endl;
+                //read_token.display();
+                //cout << "call case head" << endl;
                 const_sym = case_head();
                 // list the mapping
                 if ((const_sym == NULL) && (case_flag == true)) {
@@ -126,7 +126,7 @@ Symbol* Syntax::switch_head() {
 
 Symbol* Syntax::case_head() {
     Symbol *switch_sym = NULL;
-    read_token.display();
+    //read_token.display();
     if (match_type(Token::CASE)) {
         next_token();
     } else {

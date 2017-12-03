@@ -21,8 +21,15 @@ Symbol* Syntax::expression(Symbol* target_symbol) {
     }
     if (minus_flag) {
         Symbol* temp_minus = temp_symbol(left->type);
-        Q minus_q(Q::MINUS, temp_minus, left);
-        q_table->add_quaterion(minus_q);
+
+        if (left->const_flag) {
+            temp_minus->const_flag = true;
+            temp_minus->character_value = -(left->character_value);
+            temp_minus->integer_value = -(left->integer_value);
+        } else {
+            Q minus_q(Q::MINUS, temp_minus, left);
+            q_table->add_quaterion(minus_q);
+        }
         left = temp_minus;
     }
 
@@ -31,7 +38,6 @@ Symbol* Syntax::expression(Symbol* target_symbol) {
         //cout << "4\n" ; 
         return self;
     }
-
     // a = t1
     if (target_symbol) {
         Q assign_q(Q::NONE, target_symbol, self); 
@@ -63,19 +69,57 @@ Symbol* Syntax::expression_tail(Symbol* left) {
 
     if (left->type != common_type) {
         Symbol* temp_minus = temp_symbol(common_type);
-        Q q(Q::CAST_INT, temp_minus, left);
-        q_table->add_quaterion(q);
+        if (left->const_flag) {
+            temp_minus->const_flag = true;
+            temp_minus->character_value = left->character_value;
+            temp_minus->integer_value = left->character_value;
+            cout << temp_minus->integer_value << endl;
+        } else {
+            Q q(Q::CAST_INT, temp_minus, left);
+            q_table->add_quaterion(q);
+        }
         left = temp_minus;
     }
     if (right->type != common_type) {
         Symbol* temp_minus = temp_symbol(common_type);
-        Q q(Q::CAST_INT, temp_minus, right);
-        q_table->add_quaterion(q);
+        if (right->const_flag) {
+            temp_minus->const_flag = true;
+            temp_minus->character_value = right->character_value;
+            temp_minus->integer_value = right->character_value;
+            cout << temp_minus->integer_value << endl;
+        } else {
+            Q q(Q::CAST_INT, temp_minus, right);
+            q_table->add_quaterion(q);
+        }
         right = temp_minus;
     }
-    Q add_q(op, temp, left, right);
-    q_table->add_quaterion(add_q);
 
+    if (left->const_flag && right->const_flag) {
+        temp->const_flag = true;
+        if (common_type == Symbol::CHAR) {
+            if (op == Q::ADD) {
+                temp->setConstantValue((char)(left->character_value
+                    +right->character_value));
+            }
+            if (op == Q::SUB) {
+                temp->setConstantValue((char)(left->character_value
+                    -right->character_value));
+            }
+        }
+        if (common_type == Symbol::INT) {
+            if (op == Q::ADD) {
+                temp->setConstantValue(left->integer_value
+                    +right->integer_value);
+            }
+            if (op == Q::SUB) {
+                temp->setConstantValue(left->integer_value
+                    -right->integer_value);
+            }
+        }
+    } else {
+        Q add_q(op, temp, left, right);
+        q_table->add_quaterion(add_q);
+    }
     return expression_tail(temp);
 }
 

@@ -14,6 +14,8 @@ private:
     bool match_type(int token_type);
     bool match_pattern(string p, int token_count);
 
+    bool value_function_return;
+
     string pattern_func_def;
     string pattern_int_def;
 

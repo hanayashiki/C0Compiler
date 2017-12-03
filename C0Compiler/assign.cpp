@@ -23,9 +23,9 @@ bool Syntax::assign(bool non_array) {
             return false;
         }
     } else {
-        read_token.display();
+        //read_token.display();
         next_token();
-        cout << "???\n";
+        //cout << "???\n";
         e.what = "Invalid left part of assignment. ";
         throw e;
         return false;
@@ -41,10 +41,21 @@ bool Syntax::assign(bool non_array) {
         }
         offset_temp = temp_symbol(Symbol::INT);
 
-        if (expression(offset_temp) == NULL) {
+        Symbol* expr_temp = expression(offset_temp);
+
+        if (expr_temp == NULL) {
             e.what = "Bad subscript expression. ";
             throw e;
             return false;
+        } else if (expr_temp->type != Symbol::INT) {
+            error_handler("Type mismatch: array subscripts should be of int type. ");
+        } else if (expr_temp->const_flag && 
+            (expr_temp->integer_value >= left_sym->array_length ||
+            expr_temp->integer_value < 0)) {
+                error_handler("Constant array subscript exceeds limit: "
+                    + left_sym->name + "[" +
+                    to_string((long long int)expr_temp->integer_value)
+                    +"]");
         }
 
         if (match_type(Token::RIGHT_BRACKET)) {

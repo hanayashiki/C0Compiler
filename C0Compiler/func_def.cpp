@@ -4,6 +4,7 @@
 
 bool Syntax::func_def() {
     int type = Symbol::VOID;
+    value_function_return = false;
     bool main_flag = false;
     string name = anonymous();
     Symbol* new_func = NULL;
@@ -78,13 +79,17 @@ bool Syntax::func_def() {
     q_table->add_quaterion(prolog_q);
 
     func_def_block();
-    symbol_table->display();
+    //symbol_table->display();
 
     if (match_type(Token::RIGHT_BRACE)) {
         next_token();
     }
 
     symbol_table = symbol_table->parent;
+
+    if ((type != Symbol::VOID) && !value_function_return) {
+        error_handler("'"+new_func->name+"' should contain 'return'. ");
+    }
 
     return true;
 }
@@ -123,7 +128,7 @@ bool Syntax::func_def_parameter_pair(Symbol* func_sym) {
         next_token();
     } else {
         read_token.display();
-        cout << "false at type match\n";
+        //cout << "false at type match\n";
         return false;
     }
     if (match_type(Token::IDENTITY)) {
@@ -134,7 +139,7 @@ bool Syntax::func_def_parameter_pair(Symbol* func_sym) {
         next_token();
         return true;
     } else {
-        cout << "false at identity match\n";
+        //cout << "false at identity match\n";
         return false;
     }
     return true;

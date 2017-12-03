@@ -41,6 +41,9 @@ public:
     };
     static const int OP_COUNT = END;
 
+    
+    string get_name(Symbol* sym);
+
     Symbol* dst;
     Symbol* left;
     Symbol* right;

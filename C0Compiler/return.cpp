@@ -4,6 +4,7 @@
 
 bool Syntax::return_() {
     struct SyntaxError::StatementException e = {""};
+    value_function_return = true;
     if (match_type(Token::RETURN)) {
         next_token();
     } else {

@@ -58,8 +58,8 @@ bool Syntax::statement_sequence() {
     // a whole sequence of a function
     while (true) {
         statement_try();
-        cout<<"try end\n";
-        read_token.display();
+        //cout<<"try end\n";
+        //read_token.display();
         if (match_type(Token::RIGHT_BRACE)) {
             //cout << "?????\n";
             break;
@@ -70,11 +70,11 @@ bool Syntax::statement_sequence() {
 
 void Syntax::statement_try() {
     try {
-        cout << "statement" << endl;
+        //cout << "statement" << endl;
         statement();
     }
     catch (SyntaxError::StatementException e) {
-        cout << "caught exception\n";
+        //cout << "caught exception\n";
         if (!error_handler(e.what, RegexHandler::JUMP_TO_NEXT_STATEMENT)) {
             //cout << "not handled\n";
             throw e;

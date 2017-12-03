@@ -24,8 +24,11 @@ Symbol* Syntax::factor() {
                 return NULL;
             }
             Symbol* offset_sym = temp_symbol(Symbol::INT);
-            if (expression(offset_sym) == NULL) { // TODO: type check
+            Symbol* expr_sym = expression(offset_sym);
+            if (expr_sym == NULL) { // TODO+: type check
                 return NULL;
+            }  else if (expr_sym->type != Symbol::INT) {
+                error_handler("Type mismatch: array subscripts should be of int type. ");
             }
             if (match_type(Token::RIGHT_BRACKET)) {
                 next_token();
