@@ -66,11 +66,7 @@ Symbol* Syntax::temp_symbol(int type, bool save) {
 }
 
 int Syntax::get_type(int left_type, int right_type) {
-    if (left_type == right_type) {
-        return left_type;
-    } else {
-        return Symbol::INT; // INT is always bigger
-    }
+    return Symbol::INT; // INT is always bigger
 }
 
 Symbol* Syntax::new_label(string prefix, bool save) {

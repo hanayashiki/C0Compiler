@@ -1,0 +1,16 @@
+int integer, int_arr[10];
+char character, chars[10];
+
+void main() {
+	character = integer;
+	character = 1;
+	character = 'c';
+	integer = character;
+	integer = 1;
+	integer = 'c';
+
+	character = 'c'+'c';
+	character = 1 + 'c';
+	character = character + character;
+
+}

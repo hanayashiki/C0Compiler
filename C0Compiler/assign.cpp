@@ -82,7 +82,7 @@ bool Syntax::assign(bool non_array) {
             return false;
         }
     } else {
-        arr_temp = temp_symbol(Symbol::INT);
+        arr_temp = temp_symbol(left_sym->type);
         if (expression(arr_temp) == NULL) {
             e.what = "Bad right expression. ";
             throw e;

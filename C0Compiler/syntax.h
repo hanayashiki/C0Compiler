@@ -37,6 +37,7 @@ public:
     bool semicolon_handler();
     void error_handler(int e, string info="");
     bool error_handler(string m, int pid=-1);
+    void warning(string str);
     void add_sym(Symbol* sym);
     Symbol* temp_symbol(int type, bool save=true);
     Symbol* new_label(string prefix="", bool save=true);

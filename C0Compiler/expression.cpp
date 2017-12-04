@@ -40,9 +40,28 @@ Symbol* Syntax::expression(Symbol* target_symbol) {
     }
     // a = t1
     if (target_symbol) {
-        Q assign_q(Q::NONE, target_symbol, self); 
-        q_table->add_quaterion(assign_q);
+        // int i; char b; b = i;
+        if (target_symbol->type == Symbol::CHAR) {
+            if (self->type == Symbol::INT) {
+                Symbol* temp_int = temp_symbol(target_symbol->type);
+                Q q(Q::CAST_CHAR, temp_int, self);
+                q_table->add_quaterion(q);
+                self = temp_int;
+                warning("implicit convertion from int to char. ");
+            }
+        }
+        if (target_symbol->type == Symbol::INT) {
+            if (self->type == Symbol::CHAR) {
+                Symbol* temp_int = temp_symbol(target_symbol->type);
+                Q q(Q::CAST_INT, temp_int, self);
+                q_table->add_quaterion(q);
+                self = temp_int;
+                warning("implicit convertion from char to int. ");
+            }
+        }
     }
+    Q assign_q(Q::NONE, target_symbol, self); 
+    q_table->add_quaterion(assign_q);
     return self;
 }
 

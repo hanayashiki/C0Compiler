@@ -155,6 +155,11 @@ bool Syntax::error_handler(string message, int pid) {
     }
 }
 
+void Syntax::warning(string message) {
+    cout << "Syntax warning at line " << read_token.line << " : ";
+    cout << message << endl;
+}
+
 void Syntax::search_pattern(SyntaxError::pattern_list & list) {
     vector<int> match_count;
     for (unsigned idx = 0; idx < list.size(); idx++) {
