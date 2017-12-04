@@ -38,9 +38,18 @@ public:
     string name;
     // function
     SymbolTable* symbol_table;
-    vector<int> parameter_type_list;
+    typedef vector<Symbol*> param_list; 
+    param_list parameter_type_list;
     void setFunc();
     // label
     void setString(string & s);
     string string_content;
+    //
+    bool operator < (const Symbol &);
+    bool operator > (const Symbol &);
 };
+
+namespace SymbolUtils {
+    typedef vector<Symbol*> sym_list;
+    sym_list set_diff(sym_list & left, sym_list & right, bool do_sort=false);
+}

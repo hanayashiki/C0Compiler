@@ -59,9 +59,9 @@ Symbol* Syntax::expression(Symbol* target_symbol) {
                 warning("implicit convertion from char to int. ");
             }
         }
+        Q assign_q(Q::NONE, target_symbol, self); 
+        q_table->add_quaterion(assign_q);
     }
-    Q assign_q(Q::NONE, target_symbol, self); 
-    q_table->add_quaterion(assign_q);
     return self;
 }
 

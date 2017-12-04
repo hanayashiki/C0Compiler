@@ -51,14 +51,14 @@ bool Syntax::call_func(Symbol* target_symbol) {
 }
 
 bool Syntax::call_func_list(Symbol* func_sym) {
-    vector<int> & param_types = func_sym->parameter_type_list;
-    for (vector<int>::iterator iter = param_types.begin();
+    vector<Symbol*> & param_types = func_sym->parameter_type_list;
+    for (vector<Symbol*>::iterator iter = param_types.begin();
         iter != param_types.end(); iter++) {
         if (match_type(Token::RIGHT_PARENTHESIS)) {
             error_handler("Too few parameters. ");
             return false;
         }
-        Symbol* temp = temp_symbol(*iter);
+        Symbol* temp = temp_symbol((*iter)->type);
         Symbol* value = expression();
         if (match_type(Token::COMMA)) {
             if ((iter < param_types.end()-1)) {

@@ -135,7 +135,7 @@ bool Syntax::func_def_parameter_pair(Symbol* func_sym) {
         name = read_token.getName();
         param_sym = new Symbol(name, type);
         add_sym(param_sym);
-        func_sym->parameter_type_list.push_back(type);
+        func_sym->parameter_type_list.push_back(param_sym);
         next_token();
         return true;
     } else {

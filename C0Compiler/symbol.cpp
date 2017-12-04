@@ -56,9 +56,9 @@ void Symbol::display() {
     }
     if (function_flag) {
         cout << "parameter list: " ;
-        for (vector<int>::iterator ptr = parameter_type_list.begin();
+        for (vector<Symbol*>::iterator ptr = parameter_type_list.begin();
             ptr != parameter_type_list.end(); ptr++) {
-            int type = *ptr;
+            int type = (*ptr)->type;
             switch (type) {
             case INT:
                 cout << "int; ";
@@ -87,3 +87,12 @@ void Symbol::setString(string & s) {
     string_flag = true;
     string_content = s;
 }
+
+bool Symbol::operator<(const Symbol & s2) {
+    return this->name < s2.name;
+}
+
+bool Symbol::operator>(const Symbol & s2) {
+    return this->name > s2.name;
+}
+

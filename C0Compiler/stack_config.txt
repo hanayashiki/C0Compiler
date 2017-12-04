@@ -1,0 +1,5 @@
+stack
+param_1
+...
+param_n
+return_value

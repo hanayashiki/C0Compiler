@@ -10,9 +10,8 @@ class Symbol;
 typedef hash_map<string, Symbol*, hash_compare<string, string_less>> symbol_map;
 
 class SymbolTable {
-private:
-	symbol_map symbol_hash;
 public:
+    symbol_map symbol_hash;
     SymbolTable* parent;
     SymbolTable(SymbolTable* parent = NULL);
 	bool add_map(string name, Symbol* sym);
