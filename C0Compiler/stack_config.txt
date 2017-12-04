@@ -1,5 +1,11 @@
 stack
 param_1
 ...
-param_n
+param_m
 return_value
+local_1
+...
+local_n
+reg_1
+...
+reg_k

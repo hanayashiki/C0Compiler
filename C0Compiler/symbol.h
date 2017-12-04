@@ -51,5 +51,11 @@ public:
 
 namespace SymbolUtils {
     typedef vector<Symbol*> sym_list;
-    sym_list set_diff(sym_list & left, sym_list & right, bool do_sort=false);
+    bool comp(Symbol* & a, Symbol* & b);
+    sym_list diff(sym_list & left, sym_list & right, 
+        bool do_sort=false);
+    sym_list union_(sym_list & left, sym_list & right, 
+        bool do_sort=false);
+    sym_list intersection(sym_list & left, sym_list & right, 
+        bool do_sort=false);
 }

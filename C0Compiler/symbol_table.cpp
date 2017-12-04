@@ -1,5 +1,7 @@
 #include "stdafx.h"
 
+using namespace SymbolUtils;
+
 SymbolTable::SymbolTable(SymbolTable* p) {
     parent = p;
 }
@@ -41,3 +43,11 @@ void SymbolTable::display() {
     }
 }
 
+sym_list SymbolTable::get_all() {
+    sym_list l;
+    for (symbol_map::iterator iter = symbol_hash.begin();
+        iter != symbol_hash.end(); iter++) {
+        l.push_back(iter->second);
+    }
+    return l;
+}

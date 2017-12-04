@@ -4,6 +4,7 @@
 
 using namespace std;  
 using namespace stdext;  
+using namespace SymbolUtils;
 
 class Symbol;
 
@@ -18,5 +19,6 @@ public:
     bool in_map(string name);
     bool in_current_map(string & name);
 	Symbol* get_sym(string name);
+    sym_list get_all();
     void display();
 };
