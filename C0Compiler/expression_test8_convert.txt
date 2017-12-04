@@ -13,4 +13,6 @@ void main() {
 	character = 1 + 'c';
 	character = character + character;
 
+	character = 'c'*'c';
+
 }
