@@ -56,6 +56,8 @@ public:
     Quaterion(int op_name);
     Quaterion(Symbol* dst, Symbol* left); // a = b
     void emit();
+    bool is_endblock();
+    bool is_commutative();
 };
 
 static char* op_names[Quaterion::OP_COUNT] =

@@ -1,11 +1,16 @@
-﻿生成启动时间为 2017/12/4 22:35:46。
+﻿生成启动时间为 2017/12/5 22:34:52。
      1>项目“D:\C0CompilerForVS2010\C0Compiler\C0Compiler\C0Compiler.vcxproj”在节点 2 上(build 个目标)。
      1>InitializeBuildStatus:
          正在创建“Debug\C0Compiler.unsuccessfulbuild”，因为已指定“AlwaysCreate”。
        ClCompile:
-         所有输出均为最新。
-         D:\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"StdAfx.h" /Fp"Debug\C0Compiler.pch" /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt C0Compiler.cpp assign.cpp assign_test.cpp call_func.cpp const.cpp const_def.cpp const_def_test.cpp expression.cpp factor.cpp for.cpp func_def.cpp func_def_block.cpp func_def_test.cpp if.cpp lexer.cpp lexer_test.cpp lexical_error.cpp match_pattern.cpp mips_code.cpp mips_table.cpp printf.cpp quaterion.cpp quaterion_table.cpp quaterion_test.cpp regex_handler.cpp retract_token_test.cpp return.cpp scanf.cpp stack_test.cpp start.cpp statement.cpp switch.cpp symbol.cpp symbol_table.cpp symbol_table_test.cpp symbol_utils.cpp syntax.cpp syntax_error.cpp term.cpp token.cpp var_def.cpp var_def_test.cpp wheel_test.cpp
-         mips_table.cpp
+         D:\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yc"StdAfx.h" /Fp"Debug\C0Compiler.pch" /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt stdafx.cpp
+         stdafx.cpp
+         D:\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"StdAfx.h" /Fp"Debug\C0Compiler.pch" /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt C0Compiler.cpp assign.cpp assign_test.cpp call_func.cpp const.cpp const_def.cpp const_def_test.cpp expression.cpp factor.cpp for.cpp func_def.cpp func_def_block.cpp func_def_test.cpp if.cpp lexer.cpp lexer_test.cpp lexical_error.cpp match_pattern.cpp mips_code.cpp mips_strategies.cpp mips_table_map.cpp mips_table_translate.cpp mips_utils.cpp printf.cpp quaterion.cpp quaterion_table.cpp quaterion_test.cpp regex_handler.cpp retract_token_test.cpp return.cpp scanf.cpp stack_test.cpp start.cpp statement.cpp switch.cpp symbol.cpp symbol_table.cpp symbol_table_test.cpp symbol_utils.cpp syntax.cpp syntax_error.cpp term.cpp token.cpp translate_test.cpp var_def.cpp var_def_test.cpp wheel_test.cpp
+         translate_test.cpp
+         mips_utils.cpp
+         mips_table_translate.cpp
+         mips_table_map.cpp
+         mips_strategies.cpp
          正在生成代码...
          正在跳过...(未检测到相关更改)
          wheel_test.cpp
@@ -73,8 +78,12 @@
          Debug\lexical_error.obj
          Debug\match_pattern.obj
          Debug\mips_code.obj
-         Debug\mips_table.obj
+         Debug\mips_strategies.obj
+         Debug\mips_table_map.obj
+         Debug\mips_table_translate.obj
+         Debug\mips_utils.obj
          Debug\stack_test.obj
+         Debug\translate_test.obj
          Debug\wheel_test.obj
          Debug\symbol_utils.obj
          Debug\printf.obj
@@ -111,4 +120,4 @@
 
 生成成功。
 
-已用时间 00:00:01.80
+已用时间 00:00:01.71

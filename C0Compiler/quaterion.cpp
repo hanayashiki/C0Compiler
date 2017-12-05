@@ -57,6 +57,15 @@ string Quaterion::get_name(Symbol* sym) {
     return name;
 }
 
+bool Quaterion::is_endblock() {
+    return (op == CALL) || (op == BEQZ) || (op == BNEZ)
+        || (op == RET) || (op == GOTO);
+}
+
+bool Quaterion::is_commutative() {
+    return (op == ADD) || (op == MULT) || (op == NE) || (op == EQ);
+}
+
 void Quaterion::emit() {
     if ((op >= ADD) && (op <= EQ)) {
         fprintf(dump_file, "%s = %s %s %s;\n",

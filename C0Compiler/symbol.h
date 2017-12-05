@@ -47,6 +47,9 @@ public:
     //
     bool operator < (const Symbol &);
     bool operator > (const Symbol &);
+    // optimization
+    bool used;
+    bool defined;
 };
 
 namespace SymbolUtils {

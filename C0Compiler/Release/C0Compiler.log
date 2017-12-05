@@ -1,42 +1,11 @@
-﻿生成启动时间为 2017/11/30 6:11:42。
+﻿生成启动时间为 2017/12/5 10:37:42。
      1>项目“D:\C0CompilerForVS2010\C0Compiler\C0Compiler\C0Compiler.vcxproj”在节点 2 上(build 个目标)。
      1>InitializeBuildStatus:
-         正在创建“Release\C0Compiler.unsuccessfulbuild”，因为已指定“AlwaysCreate”。
+         正在对“Release\C0Compiler.unsuccessfulbuild”执行 Touch 任务。
        ClCompile:
-         D:\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D WIN32 /D NDEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Yc"StdAfx.h" /Fp"Release\C0Compiler.pch" /Fo"Release\\" /Fd"Release\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt stdafx.cpp
-         stdafx.cpp
-         D:\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D WIN32 /D NDEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Yu"StdAfx.h" /Fp"Release\C0Compiler.pch" /Fo"Release\\" /Fd"Release\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt assign.cpp assign_test.cpp C0Compiler.cpp call_func.cpp const.cpp const_def.cpp const_def_test.cpp expression.cpp factor.cpp func_def.cpp func_def_block.cpp func_def_test.cpp lexer.cpp lexer_test.cpp lexical_error.cpp match_pattern.cpp quaterion.cpp quaterion_table.cpp quaterion_test.cpp retract_token_test.cpp start.cpp symbol.cpp symbol_table.cpp symbol_table_test.cpp syntax.cpp syntax_error.cpp term.cpp token.cpp var_def.cpp var_def_test.cpp
-         assign.cpp
-         assign_test.cpp
-         C0Compiler.cpp
-         call_func.cpp
-         const.cpp
-         const_def.cpp
-         const_def_test.cpp
-         expression.cpp
-         factor.cpp
-         func_def.cpp
-         func_def_block.cpp
-         func_def_test.cpp
-         lexer.cpp
-         lexer_test.cpp
-         lexical_error.cpp
-         match_pattern.cpp
-         quaterion.cpp
-         quaterion_table.cpp
-         quaterion_test.cpp
-         retract_token_test.cpp
-         正在编译...
-         start.cpp
-         symbol.cpp
-         symbol_table.cpp
-         symbol_table_test.cpp
-         syntax.cpp
-         syntax_error.cpp
-         term.cpp
-         token.cpp
-         var_def.cpp
-         var_def_test.cpp
+         所有输出均为最新。
+         D:\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D WIN32 /D NDEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Yu"StdAfx.h" /Fp"Release\C0Compiler.pch" /Fo"Release\\" /Fd"Release\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt stack_test.cpp
+         stack_test.cpp
        Link:
          D:\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\C0CompilerForVS2010\C0Compiler\Release\C0Compiler.exe" /INCREMENTAL:NO /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Release\C0Compiler.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"D:\C0CompilerForVS2010\C0Compiler\Release\C0Compiler.pdb" /SUBSYSTEM:CONSOLE /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\C0CompilerForVS2010\C0Compiler\Release\C0Compiler.lib" /MACHINE:X86 Release\assign.obj
          Release\assign_test.obj
@@ -47,19 +16,32 @@
          Release\const_def_test.obj
          Release\expression.obj
          Release\factor.obj
+         Release\for.obj
          Release\func_def.obj
          Release\func_def_block.obj
          Release\func_def_test.obj
+         Release\if.obj
          Release\lexer.obj
          Release\lexer_test.obj
          Release\lexical_error.obj
          Release\match_pattern.obj
+         Release\mips_code.obj
+         Release\mips_table.obj
+         Release\stack_test.obj
+         Release\wheel_test.obj
+         Release\symbol_utils.obj
+         Release\printf.obj
          Release\quaterion.obj
          Release\quaterion_table.obj
          Release\quaterion_test.obj
+         Release\regex_handler.obj
          Release\retract_token_test.obj
+         Release\return.obj
+         Release\scanf.obj
          Release\start.obj
+         Release\statement.obj
          Release\stdafx.obj
+         Release\switch.obj
          Release\symbol.obj
          Release\symbol_table.obj
          Release\symbol_table_test.obj
@@ -70,7 +52,7 @@
          Release\var_def.obj
          Release\var_def_test.obj
          正在生成代码
-     1>d:\c0compilerforvs2010\c0compiler\c0compiler\assign.cpp(69): warning C4715: “Syntax::assign”: 不是所有的控件路径都返回值
+     1>d:\c0compilerforvs2010\c0compiler\c0compiler\assign.cpp(95): warning C4715: “Syntax::assign”: 不是所有的控件路径都返回值
          已完成代码的生成
          C0Compiler.vcxproj -> D:\C0CompilerForVS2010\C0Compiler\Release\C0Compiler.exe
        Manifest:
@@ -82,4 +64,4 @@
 
 生成成功。
 
-已用时间 00:00:04.53
+已用时间 00:00:02.83
