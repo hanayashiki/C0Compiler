@@ -18,6 +18,32 @@ void MipsTable::translate(Q & q) {
         commutative_translate(q);
     } else if (q.op == Q::NONE) {
         move_translate(q);
+    } else if (q.is_incommutative()) {
+        incommutative_translate(q);
+    }
+}
+
+void MipsTable::incommutative_translate(Q &q) {
+    int dst_reg = fetch_symbol(q.dst, false);
+    int left_reg, right_reg;
+    if (q.left->const_flag == true) {
+        MC::addiu(MC::_at, MC::_zero, q.left->integer_value);
+        left_reg = MC::_at;
+    } else {
+        left_reg = fetch_symbol(q.left);
+    }
+    if (q.right->const_flag == true) {
+        MC::addiu(MC::_at, MC::_zero, q.right->integer_value);
+        right_reg = MC::_at;
+    } else {
+        right_reg = fetch_symbol(q.right);
+    }
+    if (q.op == Q::SUB) {
+        MC::subu(dst_reg, left_reg, right_reg);
+    }
+    if (q.op == Q::DIV) {
+        MC::div(left_reg, right_reg);
+        MC::mflo(dst_reg);
     }
 }
 
@@ -72,6 +98,9 @@ void MipsTable::commutative_translate(Q & q) {
             MC::xori(MC::_at, src_reg, immediate);
             MC::sltiu(dst_reg, MC::_at, 1);
         }
+        if (q.op == Q::NE) {
+            MC::xor(dst_reg, src_reg, immediate);
+        }
     } else {
         int left_reg = fetch_symbol(q.left);
         int right_reg = fetch_symbol(q.right);
@@ -90,6 +119,9 @@ void MipsTable::commutative_translate(Q & q) {
             // else
             //  _at !=0; then in unsigned comparion
             //  _at >= 1; then dst_reg = 0
+        }
+        if (q.op == Q::NE) {
+            MC::xor(dst_reg, left_reg, right_reg);
         }
     }
 }

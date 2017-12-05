@@ -50,6 +50,7 @@ public:
 
     void translate(Quaterion & q);
     void commutative_translate(Quaterion & q);
+    void incommutative_translate(Quaterion & q);
     void move_translate(Quaterion & q);
     void label_translate(Quaterion & q);
 

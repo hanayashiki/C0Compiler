@@ -71,6 +71,11 @@ bool Quaterion::is_commutative() {
     return (op == ADD) || (op == MULT) || (op == NE) || (op == EQ);
 }
 
+bool Quaterion::is_incommutative() {
+    return (op == SUB) || (op == DIV) || (op == GT) ||
+        (op == LT) || (op == GTE) || (op == LTE);
+}
+
 void Quaterion::emit() {
     if ((op >= ADD) && (op <= EQ)) {
         fprintf(dump_file, "%s = %s %s %s;\n",

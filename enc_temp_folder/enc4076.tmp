@@ -4,7 +4,7 @@ class Quaterion {
 public:
     static FILE* dump_file;
     enum operators {
-        ADD, MULT,
+        ADD, MULT,  
         SUB, DIV,
         LT, LTE, GT, GTE,
         NE, EQ,

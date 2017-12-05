@@ -36,7 +36,12 @@ public:
     static void addiu(int tg_reg, int src_reg, int imm);
     static void addu(int tg_reg, int left_reg, int right_reg);
     static void mul(int tg_reg, int left_reg, int right_reg);
+    static void div(int left_reg, int right_reg);
+    static void mfhi(int dst_reg);
+    static void mflo(int dst_reg);
     
+    static void subu(int tg_reg, int left_reg, int right_reg);
+
     static void xor(int dst_reg, int left_reg, int right_reg);
     static void xori(int dst_reg, int left_reg, int imm);
 
