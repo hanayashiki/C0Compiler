@@ -25,3 +25,11 @@ void MipsTable::init_opt_info(q_ptr & qp) {
         }
     }
 */
+
+void MipsTable::display_temp_map() {
+    for (reg_map::iterator iter = temp_map->begin();
+        iter != temp_map->end(); iter++) {
+        cout << iter->first->name << ":$" << iter->second << "; " ;
+    }
+    cout << endl;
+}

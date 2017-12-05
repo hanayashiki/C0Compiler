@@ -15,6 +15,11 @@ Quaterion::Quaterion(int op_name,
     dst = dst_;
     left = left_;
     right = right_;
+    if ((op_name >= BEQ) && (op_name <= BNE)) {
+        dst = NULL;
+        label = dst_;
+        // special: dst to store the label
+    }
 }
 
 Quaterion::Quaterion(int op_name,
@@ -92,6 +97,11 @@ void Quaterion::emit() {
     if ((op >= BEQZ) && (op <= BNEZ)) {
         fprintf(dump_file, "%s %s %s;\n",
             op_names[op], get_name(left).c_str(), get_name(right).c_str());
+    }
+    if ((op >= BEQ) && (op <= BNE)) {
+        fprintf(dump_file, "%s %s %s %s;\n",
+            op_names[op], get_name(left).c_str(), get_name(right).c_str(),
+            get_name(label).c_str());
     }
     if ((op >= GET) && op <= (READ_INT)) {
         fprintf(dump_file, "%s %s;\n", op_names[op], get_name(dst).c_str());

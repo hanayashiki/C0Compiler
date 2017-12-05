@@ -79,7 +79,7 @@ public:
     void statement_try();
 
     bool if_statement();
-    Symbol* if_comparison(int right_end=Token::RIGHT_PARENTHESIS);
+    bool if_comparison(Symbol* if_false, int right_end=Token::RIGHT_PARENTHESIS);
 
     bool scanf_();
     bool scanf_parameter_entry();

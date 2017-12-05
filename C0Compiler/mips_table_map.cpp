@@ -32,8 +32,7 @@ MipsTable::MipsTable(Symbol* func_sym,
     }
         
     // alloc space for local variables
-    cout << symbol_list.size() << endl;
-    cout << param_list.size() << endl;
+
     sym_list symbol_left = diff(symbol_list, param_list, true);
     // watch out! param_list in this scope is sorted
     for (sym_list::iterator iter_p = symbol_left.begin();
@@ -41,7 +40,9 @@ MipsTable::MipsTable(Symbol* func_sym,
         iter_p++) {
         if (((*iter_p)->type == Symbol::INT) ||
            ((*iter_p)->type == Symbol::CHAR)) {
-            alloc_stack(*iter_p);
+            if ((*iter_p)->const_flag == false) {
+                 alloc_stack(*iter_p);
+            }
         }
     }
     // alloc space for registers
@@ -138,7 +139,9 @@ int MipsTable::fetch_symbol(Symbol* sym, bool load_value) {
             // mips code here
             reg = alloc_temp_reg(sym);  
         }
+        
     }
+    display_temp_map();
     //cout << sym->name << " at $" << reg << "; " << endl;
     return reg;
 }
@@ -159,8 +162,10 @@ int MipsTable::temp_write_back() {
     // a symbol that will not be used will be written back to
     // memory
     Symbol* to_write_back = findUselessSymbol();
+
     save_symbol(to_write_back);
     map_sym_reg(to_write_back, 0, temp_map);
+    // map to zero is unmapping
     
     return 0;
 }
@@ -168,13 +173,20 @@ int MipsTable::temp_write_back() {
 void MipsTable::map_sym_reg(Symbol* sym, int reg, reg_map* map) {
     reg_map::iterator iter;
     iter = map->find(sym);
+    int old_reg = 0;
     if (iter == map->end()) {
         map->insert(reg_map::value_type(sym, reg));
     } else {
+        old_reg = iter->second;
         iter->second = reg;
     }
-    reg_distrb.at(reg) = sym;
-}
+    if (reg != 0) {
+        reg_distrb.at(reg) = sym;
+    } else {
+        reg_distrb.at(old_reg) = NULL;
+    }
+
+ }
 
 void MipsTable::load_symbol(Symbol* sym) {
     if (sym->type == Symbol::INT) {

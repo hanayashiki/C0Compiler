@@ -54,6 +54,7 @@ Symbol* Syntax::factor() {
             match_type(Token::UNSIGNED_INTEGER)) {
             value = const_();
             Symbol* new_const = const_sym(value, Symbol::INT);
+            new_const->display();
             return new_const;
         } else if (match_type(Token::LEFT_PARENTHESIS)) {
             next_token();

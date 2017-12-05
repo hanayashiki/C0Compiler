@@ -42,3 +42,22 @@ void MipsCode::move(int tg_reg, int src_reg) {
     fprintf(out_file, "addiu $%d $%d 0\n", tg_reg, src_reg);
 }
 
+void MipsCode::mul(int dst_reg, int left_reg, int right_reg) {
+    fprintf(out_file, "mul $%d $%d $%d\n", dst_reg, 
+        left_reg, right_reg);
+}
+
+void MipsCode::xor(int dst_reg, int left_reg, int right_reg) {
+    fprintf(out_file, "xor $%d $%d $%d\n", dst_reg,
+        left_reg, right_reg);
+}
+
+void MipsCode::xori(int dst_reg, int left_reg, int imm) {
+    fprintf(out_file, "xori $%d $%d %d\n", dst_reg,
+        left_reg, imm);
+}
+
+void MipsCode::sltiu(int dst_reg, int left_reg, int imm) {
+    fprintf(out_file, "sltiu $%d $%d %d\n", dst_reg, left_reg,
+        imm);
+}

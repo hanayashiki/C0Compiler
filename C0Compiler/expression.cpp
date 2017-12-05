@@ -44,6 +44,7 @@ Symbol* Syntax::expression(Symbol* target_symbol) {
         if (target_symbol->type == Symbol::CHAR) {
             if (self->type == Symbol::INT) {
                 Symbol* temp_int = temp_symbol(target_symbol->type);
+                temp_int->const_flag = self->const_flag;
                 Q q(Q::CAST_CHAR, temp_int, self);
                 q_table->add_quaterion(q);
                 self = temp_int;
@@ -53,6 +54,7 @@ Symbol* Syntax::expression(Symbol* target_symbol) {
         if (target_symbol->type == Symbol::INT) {
             if (self->type == Symbol::CHAR) {
                 Symbol* temp_int = temp_symbol(target_symbol->type);
+                temp_int->const_flag = self->const_flag;
                 Q q(Q::CAST_INT, temp_int, self);
                 q_table->add_quaterion(q);
                 self = temp_int;

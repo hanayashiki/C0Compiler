@@ -1,4 +1,12 @@
 void main() {
-	int a, b, c;
+	int a, b, c, d, e, f;
 	a = b + c;
+	a = b * c;
+	a = b * 2;
+	a = 1;
+	a = d;
+	a = e;
+	a = f;
+	if (a == b);
+	if (a == 1);
 }

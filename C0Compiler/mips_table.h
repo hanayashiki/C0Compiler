@@ -28,6 +28,7 @@ public:
     mem_map* stack_map;  // 局部变量偏移量
     mem_map* root_map;   // 全局变量偏移量
     vector<Symbol*> reg_distrb;  // 寄存器分配情况
+    void display_temp_map();
     // 获得 Symbol 的寄存器
     int fetch_symbol(Symbol*, bool load_value=true);
 

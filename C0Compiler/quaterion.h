@@ -29,6 +29,8 @@ public:
 
         BEQZ,   // branch on zero
         BNEZ,   // branch on non-zero
+        BEQ,    // branch on equal
+        BNE,    // branch on not-equal
 
         GET,    // get returned value
         READ_CHAR,   // read char
@@ -47,6 +49,8 @@ public:
     Symbol* dst;
     Symbol* left;
     Symbol* right;
+
+    Symbol* label;
     int op;
 
     void init(int op_name);
@@ -87,6 +91,8 @@ static char* op_names[Quaterion::OP_COUNT] =
 
     "if == 0 go to:",
     "if != 0 go to:",
+    "if == go to:",
+    "if != go to:",
 
     "GET",
     "READ_CHAR",

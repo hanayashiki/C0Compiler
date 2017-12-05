@@ -16,13 +16,10 @@ bool Syntax::if_statement() {
          error_handler("'(' is needed. ",
          RegexHandler::JUMP_TO_NEXT_STATEMENT_FOR_);
     }
-    Symbol* compare_temp = if_comparison();
-    if (compare_temp == NULL) {
+
+    if (if_comparison(if_false) == false) {
         error_handler("Bad comparision expression. ", 
         RegexHandler::JUMP_TO_NEXT_STATEMENT);
-    } else {
-        Q beqz_q(Q::BEQZ, NULL, compare_temp, if_false);
-        q_table->add_quaterion(beqz_q);
     }
     if (match_type(Token::RIGHT_PARENTHESIS)) {
         next_token();
@@ -45,7 +42,7 @@ bool Syntax::if_statement() {
     return true;
 }
 
-Symbol* Syntax::if_comparison(int right_end) {
+bool Syntax::if_comparison(Symbol* if_false, int right_end) {
     Symbol* left = NULL, * right = NULL;
     int op = Q::END;
     left = expression();
@@ -71,16 +68,29 @@ Symbol* Syntax::if_comparison(int right_end) {
         op = Q::EQ;
         next_token();
     } else if (match_type(right_end)) {
-        return left; 
+        return false; 
     }
 
     right = expression();
     if (right == NULL) {
-        return NULL;
+        return false;
+    }
+    if ((op != Q::EQ) && (op != Q::NE)) {
+        Symbol* compare_temp = temp_symbol(Symbol::INT);
+        Q compare_q(op, compare_temp, left, right);
+        q_table->add_quaterion(compare_q);
+        Q beqz_q(Q::BEQZ, NULL, compare_temp, if_false);
+        q_table->add_quaterion(beqz_q);
+    } else {
+        if (op == Q::EQ) {
+            Q bne_q(Q::BEQ, if_false, left, right);
+            q_table->add_quaterion(bne_q);
+        }
+        if (op == Q::NE) {
+            Q beq_q(Q::BEQ, if_false, left, right);
+            q_table->add_quaterion(beq_q);
+        }
     }
 
-    Symbol* compare_temp = temp_symbol(Symbol::INT);
-    Q compare_q(op, compare_temp, left, right);
-    q_table->add_quaterion(compare_q);
-    return compare_temp;
+    return true;
 }

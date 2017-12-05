@@ -37,13 +37,11 @@ bool Syntax::for_() {
     // for (i = 1; i < 10;
     Q judge_label_q(Q::LABEL, judge_label);
     q_table->add_quaterion(judge_label_q);
-    compare_sym = if_comparison(Token::SEMICOLON);
-    if (compare_sym == NULL) {
+
+    if (if_comparison(for_end_label, Token::SEMICOLON) == false) {
         error_handler("Bad comparision. ", RegexHandler::JUMP_TO_NEXT_STATEMENT);
-    } else {
-        Q condition_jump_q(Q::BEQZ, NULL, compare_sym, for_end_label);
-        q_table->add_quaterion(condition_jump_q);
     }
+
     semicolon_handler();
     // for (i = 1; i < 10; i = i + 1
     

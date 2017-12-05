@@ -18,7 +18,7 @@ sym_list SymbolUtils::diff(sym_list & left, sym_list & right, bool do_sort) {
     if (do_sort) {
         sort(left.begin(), left.end(), comp);
         sort(right.begin(), right.end(), comp);
-        cout << "sorted";
+       // cout << "sorted";
     }/*
     for (sym_list::iterator iter = left.begin();
         iter != left.end(); iter++) {
