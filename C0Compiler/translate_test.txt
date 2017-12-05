@@ -1,5 +1,6 @@
 void main() {
 	int a, b, c, d, e, f;
+	char g;
 	a = b + c;
 	a = b * c;
 	a = b * 2;
@@ -7,6 +8,7 @@ void main() {
 	a = d;
 	a = e;
 	a = f;
+	a = g;
 	if (a == b);
 	if (a == 1);
 }

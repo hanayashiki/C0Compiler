@@ -15,19 +15,19 @@ MipsCode::MipsCode(string op_,
 }
 
 void MipsCode::lw(int tg_reg, int offset) {
-    fprintf(out_file, "lw $%d %d($%d)\n", tg_reg, offset, _sp);
+    fprintf(out_file, "lw $%d 0x%x($%d)\n", tg_reg, offset, _sp);
 }
 
 void MipsCode::lb(int tg_reg, int offset) {
-    fprintf(out_file, "lb $%d %d($%d)\n", tg_reg, offset, _sp);
+    fprintf(out_file, "lb $%d 0x%x($%d)\n", tg_reg, offset, _sp);
 }
 
 void MipsCode::sw(int src_reg, int offset) {
-    fprintf(out_file, "sw $%d %d($%d)\n", src_reg, offset, _sp);
+    fprintf(out_file, "sw $%d 0x%x($%d)\n", src_reg, offset, _sp);
 }
 
 void MipsCode::sb(int src_reg, int offset) {
-    fprintf(out_file, "sb $%d %d($%d)\n", src_reg, offset, _sp);
+    fprintf(out_file, "sb $%d 0x%x($%d)\n", src_reg, offset, _sp);
 }
 
 void MipsCode::addiu(int tg_reg, int src_reg, int imm) {

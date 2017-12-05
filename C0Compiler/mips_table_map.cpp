@@ -183,6 +183,7 @@ void MipsTable::map_sym_reg(Symbol* sym, int reg, reg_map* map) {
     if (reg != 0) {
         reg_distrb.at(reg) = sym;
     } else {
+        // map to zero is unmapping
         reg_distrb.at(old_reg) = NULL;
     }
 

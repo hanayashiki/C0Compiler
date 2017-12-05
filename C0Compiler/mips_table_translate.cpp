@@ -22,7 +22,7 @@ void MipsTable::translate(Q & q) {
 }
 
 void MipsTable::move_translate(Q &q) {
-    int dst_reg = fetch_symbol(q.dst);
+    int dst_reg = fetch_symbol(q.dst, false);
     if (q.left->const_flag == false) {
         int src_reg = fetch_symbol(q.left, false);
         MC::move(dst_reg, src_reg);
