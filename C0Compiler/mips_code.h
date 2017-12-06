@@ -28,10 +28,10 @@ public:
     MipsCode(string op, int reg_dst, int reg_left, int reg_right);
     void display();
 
-    static void lw(int tg_reg, int offset);
-    static void lb(int tg_reg, int offset);
-    static void sw(int src_reg, int offset);
-    static void sb(int src_reg, int offset);
+    static void lw(int tg_reg, int offset, int base_reg=_sp);
+    static void lb(int tg_reg, int offset, int base_reg=_sp);
+    static void sw(int src_reg, int offset, int base_reg=_sp);
+    static void sb(int src_reg, int offset, int base_reg=_sp);
 
     static void addiu(int tg_reg, int src_reg, int imm);
     static void addu(int tg_reg, int left_reg, int right_reg);
@@ -46,6 +46,18 @@ public:
     static void xori(int dst_reg, int left_reg, int imm);
 
     static void sltiu(int dst_reg, int left_reg, int imm);
+    
+    static void label_(string l);
+    static void beq(int left_reg, int right_reg, string l);
+    static void bne(int left_reg, int right_reg, string l);
+    static void j(string l);
 
-    static void move(int tg_reg, int src_reg);
+    static void sll(int dst_reg, int src_reg, int imm);
+
+    static void syscall();
+
+    // utils
+    static void const_to_at(int c); 
+    static void li(int reg, int const_);
+    static void move(int dst_reg, int src_reg);
 };

@@ -4,3 +4,43 @@
 	3. const 常数值处理
 	4. switch 出错处理
 	5. 数组下标静态越界报错
+
+	6. deal with string
+
+
+	    ADD+, MULT+,                      
+        SUB+, DIV+,
+        LT, LTE, GT, GTE,
+        NE+, EQ+,
+
+        TO+,  // a[i] = b, a = b TO i
+        AT+,  // c = a[i], c = A AT i
+
+        NONE+, // a = b
+        MINUS, // a = -b
+        CAST_INT, // a = (int) b
+        CAST_CHAR, // a = (char) b
+
+        LABEL+,
+        PROLOG,
+
+        PUSH,    // push parameter
+        CALL,
+
+        PRINT_CHAR,
+        PRINT_INT,
+        PRINT_STR,
+
+        BEQZ+,   // branch on zero
+        BNEZ+,   // branch on non-zero
+        BEQ+,    // branch on equal
+        BNE+,    // branch on not-equal
+
+        GET,    // get returned value
+        READ_CHAR,   // read char
+        READ_INT,    // read integer
+
+        _LINK,   // directive, link to a label, to avoid jump
+        GOTO,    // unconditional jump
+        RET,
+        END     // sentinel

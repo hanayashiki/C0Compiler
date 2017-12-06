@@ -83,7 +83,7 @@ bool Syntax::if_comparison(Symbol* if_false, int right_end) {
         q_table->add_quaterion(beqz_q);
     } else {
         if (op == Q::EQ) {
-            Q bne_q(Q::BEQ, if_false, left, right);
+            Q bne_q(Q::BNE, if_false, left, right);
             q_table->add_quaterion(bne_q);
         }
         if (op == Q::NE) {

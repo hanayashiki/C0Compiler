@@ -61,4 +61,5 @@ namespace SymbolUtils {
         bool do_sort=true);
     sym_list intersection(sym_list & left, sym_list & right, 
         bool do_sort=true);
+    int get_const_value(Symbol* sym);
 }

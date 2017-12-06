@@ -1,5 +1,42 @@
 #include "stdafx.h"
 
+#define MC MipsTable
+#define Q Quaterion
+#define INT_SIZE 4
+#define CHAR_SIZE 1
+
+
+void MipsTable::translate_all() {
+    q_iter = q_table->q_list.begin();
+    for (; q_iter != q_table->q_list.end(); q_iter++) {
+        //cout << "# " << endl;
+        q_iter->emit(true);
+        translate(*q_iter);
+    }
+}
+
+
+void MipsTable::translate(Q & q) {
+    if (q.is_commutative()) {
+        commutative_translate(q);
+    } else if (q.is_incommutative()) {
+        incommutative_translate(q);
+    } else if (q.is_branch()) {
+        branch_translate(q);
+    } else if (q.op == Q::NONE) {
+        move_translate(q);
+    } else if (q.op == Q::LABEL) {
+        label_translate(q);
+    } else if (q.op == Q::AT) {
+        array_read_translate(q);
+    } else if (q.op == Q::TO) {
+        array_write_translate(q);
+    } else if (q.is_print()) {
+        print_translate(q);
+    }
+}
+
+
 void MipsTable::init_opt_info(q_ptr & qp) {
     qp->dst && (qp->dst->used = false);
     qp->dst && (qp->dst->defined = false);
@@ -33,3 +70,4 @@ void MipsTable::display_temp_map() {
     }
     cout << endl;
 }
+

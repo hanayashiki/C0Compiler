@@ -68,3 +68,14 @@ sym_list SymbolUtils::intersection(sym_list & left, sym_list & right, bool do_so
 
     return new_list;
 }
+
+int SymbolUtils::get_const_value(Symbol* sym) {
+    assert(sym->const_flag);
+    if (sym->type == Symbol::CHAR) {
+        return (int)sym->character_value;
+    }
+    if (sym->type == Symbol::INT) {
+        return (int)sym->integer_value;
+    }
+}
+

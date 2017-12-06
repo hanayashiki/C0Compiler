@@ -14,20 +14,20 @@ MipsCode::MipsCode(string op_,
     init();
 }
 
-void MipsCode::lw(int tg_reg, int offset) {
-    fprintf(out_file, "lw $%d 0x%x($%d)\n", tg_reg, offset, _sp);
+void MipsCode::lw(int tg_reg, int offset, int base_reg) {
+    fprintf(out_file, "lw $%d %d($%d)\n", tg_reg, offset, base_reg);
 }
 
-void MipsCode::lb(int tg_reg, int offset) {
-    fprintf(out_file, "lb $%d 0x%x($%d)\n", tg_reg, offset, _sp);
+void MipsCode::lb(int tg_reg, int offset, int base_reg) {
+    fprintf(out_file, "lb $%d %d($%d)\n", tg_reg, offset, base_reg);
 }
 
-void MipsCode::sw(int src_reg, int offset) {
-    fprintf(out_file, "sw $%d 0x%x($%d)\n", src_reg, offset, _sp);
+void MipsCode::sw(int src_reg, int offset, int base_reg) {
+    fprintf(out_file, "sw $%d %d($%d)\n", src_reg, offset, base_reg);
 }
 
-void MipsCode::sb(int src_reg, int offset) {
-    fprintf(out_file, "sb $%d 0x%x($%d)\n", src_reg, offset, _sp);
+void MipsCode::sb(int src_reg, int offset, int base_reg) {
+    fprintf(out_file, "sb $%d %d($%d)\n", src_reg, offset, base_reg);
 }
 
 void MipsCode::addiu(int tg_reg, int src_reg, int imm) {
@@ -40,10 +40,6 @@ void MipsCode::addu(int tg_reg, int left_reg, int right_reg) {
 
 void MipsCode::subu(int tg_reg, int left_reg, int right_reg) {
     fprintf(out_file, "subu $%d $%d $%d\n", tg_reg, left_reg, right_reg);
-}
-
-void MipsCode::move(int tg_reg, int src_reg) {
-    fprintf(out_file, "addiu $%d $%d 0\n", tg_reg, src_reg);
 }
 
 void MipsCode::mul(int dst_reg, int left_reg, int right_reg) {
@@ -76,4 +72,30 @@ void MipsCode::xori(int dst_reg, int left_reg, int imm) {
 void MipsCode::sltiu(int dst_reg, int left_reg, int imm) {
     fprintf(out_file, "sltiu $%d $%d %d\n", dst_reg, left_reg,
         imm);
+}
+
+void MipsCode::label_(string l) {
+    fprintf(out_file, "%s:\n", l.c_str());
+}
+
+void MipsCode::beq(int left_reg, int right_reg, string l) {
+    fprintf(out_file, "beq $%d $%d %s\n", left_reg, right_reg,
+        l.c_str());
+}
+
+void MipsCode::bne(int left_reg, int right_reg, string l) {
+    fprintf(out_file, "bne $%d $%d %s\n", left_reg, right_reg,
+        l.c_str());
+}
+
+void MipsCode::j(string l) {
+    fprintf(out_file, "j %s\n", l.c_str());
+}
+
+void MipsCode::sll(int dst_reg, int src_reg, int imm) {
+    fprintf(out_file, "sll $%d $%d %d\n", dst_reg, src_reg, imm);
+}
+
+void MipsCode::syscall() {
+    fprintf(out_file, "syscall\n");
 }

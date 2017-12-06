@@ -45,14 +45,19 @@ public:
     Symbol* findUselessSymbol();
     // utils
     static void init_opt_info(q_ptr & qp);
-    // tranlations
+    // tranlationsd
     void translate_all();
 
     void translate(Quaterion & q);
     void commutative_translate(Quaterion & q);
     void incommutative_translate(Quaterion & q);
+    void branch_translate(Quaterion & q);
     void move_translate(Quaterion & q);
     void label_translate(Quaterion & q);
+    void array_read_translate(Quaterion & q);
+    void array_write_translate(Quaterion & q);
+
+    void print_translate(Quaterion & q);
 
     void load_symbol(Symbol* sym);
     void save_symbol(Symbol* sym);
