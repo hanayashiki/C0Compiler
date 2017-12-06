@@ -5,15 +5,10 @@ void main() {
 	a = b * c;
 	a = b * 2;
 	a = 1;
-	a = d;
-	a = e;
-	a = f;
-	a = g;
-	a = d - e;
-	a = d / e;
-	a = 1 - e;
 	b = 1 / f;
 	if (a == b);
 	if (a == 1);
-	if (a != 1);
+	if (a != 1) {
+		a = 2 * 2;
+	}
 }

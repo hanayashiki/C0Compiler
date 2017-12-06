@@ -1,27 +1,11 @@
 #include "stdafx.h"
 
+using namespace SymbolUtils;
+
 #define MC MipsCode
 #define Q Quaterion
-
-void MipsTable::translate_all() {
-    q_iter = q_table->q_list.begin();
-    for (; q_iter != q_table->q_list.end(); q_iter++) {
-        cout << "-----" << endl;
-        q_iter->emit();
-        cout << ">>>>>" << endl;
-        translate(*q_iter);
-    }
-}
-
-void MipsTable::translate(Q & q) {
-    if (q.is_commutative()) {
-        commutative_translate(q);
-    } else if (q.op == Q::NONE) {
-        move_translate(q);
-    } else if (q.is_incommutative()) {
-        incommutative_translate(q);
-    }
-}
+#define INT_SIZE 4
+#define CHAR_SIZE 1
 
 void MipsTable::incommutative_translate(Q &q) {
     int dst_reg = fetch_symbol(q.dst, false);
@@ -126,3 +110,62 @@ void MipsTable::commutative_translate(Q & q) {
     }
 }
 
+void MipsTable::array_read_translate(Q & q) {
+    // c = a[i], c = A AT i
+    int ptr_reg = fetch_symbol(q.left);
+    int offset = 0;
+    int dst_reg = fetch_symbol(q.dst, false);
+    if (q.right->const_flag) {
+        offset = get_const_value(q.right);
+        if (q.left->type == Symbol::CHAR) {
+            MC::lb(dst_reg, CHAR_SIZE * offset, ptr_reg);
+        }
+        if (q.left->type == Symbol::INT) {
+            MC::lw(dst_reg, INT_SIZE * offset, ptr_reg);
+        }
+    } else {
+        offset = fetch_symbol(q.right);
+        if (q.left->type == Symbol::CHAR) {
+            MC::addu(MC::_at, ptr_reg, offset);
+        } else if (q.left->type == Symbol::INT) {
+            MC::sll(MC::_at, offset, 2); // multiply offset by 4
+            MC::addu(MC::_at, MC::_at, ptr_reg);
+        }
+        if (q.left->type == Symbol::CHAR) {
+            MC::lb(dst_reg, 0, MC::_at);
+        }
+        if (q.left->type == Symbol::INT) {
+            MC::lw(dst_reg, 0, MC::_at);
+        }
+    }
+}
+
+void MipsTable::array_write_translate(Q & q) {
+    // a[i] = b, a = b TO i
+    int ptr_reg = fetch_symbol(q.dst);
+    int offset = 0;
+    int src_reg = fetch_symbol(q.right);
+    if (q.left->const_flag) {
+        offset = get_const_value(q.left);
+        if (q.left->type == Symbol::CHAR) {
+            MC::sb(src_reg, CHAR_SIZE * offset, ptr_reg);
+        }
+        if (q.left->type == Symbol::INT) {
+            MC::sw(src_reg, INT_SIZE * offset, ptr_reg);
+        }
+    } else {
+        offset = fetch_symbol(q.left);
+        if (q.left->type == Symbol::CHAR) {
+            MC::addu(MC::_at, ptr_reg, offset);
+        } else if (q.left->type == Symbol::INT) {
+            MC::sll(MC::_at, offset, 2); // multiply offset by 4
+            MC::addu(MC::_at, MC::_at, ptr_reg);
+        }
+        if (q.left->type == Symbol::CHAR) {
+            MC::sb(src_reg, 0, MC::_at);
+        }
+        if (q.left->type == Symbol::INT) {
+            MC::sw(src_reg, 0, MC::_at);
+        }
+    }    
+}

@@ -49,6 +49,10 @@ bool Syntax::printf_() {
         }
     }
     if (match_type(Token::RIGHT_PARENTHESIS)) {
+        // at the end, output a new line.
+        Symbol* new_line = const_sym('\n', Symbol::CHAR);
+        Q print_q(Q::PRINT_CHAR, new_line);
+        q_table->add_quaterion(print_q);
         next_token();
         return true;
     } else {

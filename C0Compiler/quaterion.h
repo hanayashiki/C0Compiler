@@ -4,7 +4,7 @@ class Quaterion {
 public:
     static FILE* dump_file;
     enum operators {
-        ADD, MULT,
+        ADD, MULT,                      
         SUB, DIV,
         LT, LTE, GT, GTE,
         NE, EQ,
@@ -59,10 +59,13 @@ public:
     Quaterion(int op_name, Symbol* left);
     Quaterion(int op_name);
     Quaterion(Symbol* dst, Symbol* left); // a = b
-    void emit();
+    void emit(bool comment=false);
+    // comm with mips gen
     bool is_endblock();
     bool is_commutative();
     bool is_incommutative();
+    bool is_branch();
+    bool is_print();
 };
 
 static char* op_names[Quaterion::OP_COUNT] =

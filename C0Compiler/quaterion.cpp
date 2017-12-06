@@ -51,7 +51,12 @@ string Quaterion::get_name(Symbol* sym) {
     if (sym->const_flag) {
         if (sym->type == Symbol::CHAR) {
             name = "'";
-            name.push_back(sym->character_value);
+            if (Lexer::isLegalStringChar(sym->character_value)) {
+                name.push_back(sym->character_value);
+            }
+            else {
+                name += "\\n?";
+            }
             name.push_back('\'');
         } else if (sym->type == Symbol::INT) {
             name = to_string((long long int)sym->integer_value);
@@ -76,7 +81,19 @@ bool Quaterion::is_incommutative() {
         (op == LT) || (op == GTE) || (op == LTE);
 }
 
-void Quaterion::emit() {
+bool Quaterion::is_branch() {
+    return (op == BEQZ) || (op == BNEZ) || (op == BEQ) || (op == BNE)
+        || (op == GOTO);
+}
+
+bool Quaterion::is_print() {
+    return (op == PRINT_CHAR) || (op == PRINT_INT) || (op == PRINT_STR);
+}
+
+void Quaterion::emit(bool comment) {
+    if (comment) {
+        fprintf(dump_file, "# ");
+    }
     if ((op >= ADD) && (op <= EQ)) {
         fprintf(dump_file, "%s = %s %s %s;\n",
             get_name(dst).c_str(), get_name(left).c_str(), op_names[op], get_name(right).c_str());

@@ -1,0 +1,7 @@
+void main() {
+	int arr[100], i;
+	for (i = 0; i != 100; i=i+1) {
+		arr[i] = i;
+		printf(arr[i]);
+	}
+}

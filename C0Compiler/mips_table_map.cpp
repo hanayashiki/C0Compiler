@@ -87,17 +87,17 @@ int MipsTable::stack_increment(Symbol* sym) {
         stack_size += INT_SIZE * (sym->array_length);
     }
 
-    return ptr;
+    return stack_size;
 }
 
 void MipsTable::alloc_stack(Symbol* sym) {
-    int ptr = stack_increment(sym);
+    int ptr = -stack_increment(sym); // stack is being dug
     stack_map->insert(mem_map::value_type(sym, ptr));
 }
 
 
 bool MipsTable::p_compare(p & a, p & b) {
-    return a.first < b.first;
+    return a.first > b.first;
 }
 
 void MipsTable::display_stack() {
@@ -116,7 +116,7 @@ void MipsTable::display_stack() {
     
     for (vector<p>::iterator iter = list.begin();
         iter != list.end(); iter++) {
-        printf("@%04x: %s\n", iter->first,
+        printf("@%d: %s\n", iter->first,
             iter->second->name.c_str());
     }
 }
@@ -126,6 +126,11 @@ int MipsTable::fetch_symbol(Symbol* sym, bool load_value) {
     int reg;
     reg_map::iterator iter;
     iter = temp_map->find(sym);
+    if (sym->type == Symbol::LABEL) {
+        // be robust
+        return 0;
+    }
+    assert(!sym->const_flag);
     if ((iter != temp_map->end()) && (iter->second != 0)) {
         // already distributed
         reg = iter->second;
@@ -190,11 +195,19 @@ void MipsTable::map_sym_reg(Symbol* sym, int reg, reg_map* map) {
  }
 
 void MipsTable::load_symbol(Symbol* sym) {
-    if (sym->type == Symbol::INT) {
-        MC::lw((*temp_map)[sym], (*stack_map)[sym]);
-    }
-    if (sym->type == Symbol::CHAR) {
-        MC::lb((*temp_map)[sym], (*stack_map)[sym]);
+    if (!sym->array_flag) {
+        if (sym->type == Symbol::INT) {
+            MC::lw((*temp_map)[sym], (*stack_map)[sym]);
+        }
+        if (sym->type == Symbol::CHAR) {
+            MC::lb((*temp_map)[sym], (*stack_map)[sym]);
+        }
+    } else {
+        // if it is an array, load the base address
+        if (stack_map->find(sym) != stack_map->end()) {
+            MC::addiu((*temp_map)[sym], MC::_sp, (*stack_map)[sym]);
+        }
+        // TODO: global_map
     }
 }
 

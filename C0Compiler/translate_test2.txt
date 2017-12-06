@@ -1,0 +1,8 @@
+void main() {
+	int array[10];
+	int a, b, c;
+	a = 1;
+	b = 2;
+	array[b] = 12;
+	c = array[b];
+}
