@@ -94,6 +94,20 @@ void MipsTable::print_translate(Quaterion & q) {
     MC::syscall();
 }
 
+void MipsTable::scanf_translate(Quaterion & q) {
+    int syscall_num;
+    if (q.op == Q::READ_CHAR) {
+        syscall_num = 12;
+    }
+    if (q.op == Q::READ_INT) {
+        syscall_num = 5;
+    }
+    MC::li(MC::_v0, syscall_num);
+    MC::syscall();
+    int reg = fetch_symbol(q.dst, false);
+    MC::move(reg, MC::_v0);
+}
+
 void MipsTable::push_translate() {
     dig_size = stack_size + 4; // 4 for the return value
     

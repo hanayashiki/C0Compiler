@@ -8,26 +8,68 @@ using namespace SymbolUtils;
 #define CHAR_SIZE 1
 
 void MipsTable::incommutative_translate(Q &q) {
+    //    (op == SUB) || (op == DIV) || (op == GT) ||
+    //    (op == LT) || (op == GTE) || (op == LTE)
     int dst_reg = fetch_symbol(q.dst, false);
     int left_reg, right_reg;
+
+    if ((q.left->const_flag == true) && 
+        (q.right->const_flag == true)) {
+        int result = precompute(q.op, get_const_value(q.left),
+            get_const_value(q.right));
+        MC::li(dst_reg, result);
+        return;
+    }
+
     if (q.left->const_flag == true) {
         MC::addiu(MC::_at, MC::_zero, q.left->integer_value);
         left_reg = MC::_at;
     } else {
         left_reg = fetch_symbol(q.left);
     }
+
     if (q.right->const_flag == true) {
         MC::addiu(MC::_at, MC::_zero, q.right->integer_value);
         right_reg = MC::_at;
     } else {
         right_reg = fetch_symbol(q.right);
     }
+
     if (q.op == Q::SUB) {
         MC::subu(dst_reg, left_reg, right_reg);
     }
     if (q.op == Q::DIV) {
         MC::div(left_reg, right_reg);
         MC::mflo(dst_reg);
+    }
+
+    if (q.op == Q::GT) {
+        if (q.right->const_flag) {
+            MC::sgti(dst_reg, left_reg, get_const_value(q.right));
+        } else {
+            MC::sgt(dst_reg, left_reg, right_reg);
+        }
+    }
+    if (q.op == Q::LT) {
+        if (q.right->const_flag) {
+            MC::slti(dst_reg, left_reg, get_const_value(q.right));
+        } else {
+            MC::slt(dst_reg, left_reg, right_reg);
+        }
+    }
+    if (q.op == Q::GTE) {
+        if (q.right->const_flag) {
+            MC::sgei(dst_reg, left_reg, get_const_value(q.right));
+        } else {
+            MC::sge(dst_reg, left_reg, right_reg);
+        }
+    }
+    if (q.op == Q::LTE) {
+        if (q.right->const_flag) {
+            MC::slei(dst_reg, left_reg, get_const_value(q.right));
+        } else {
+            MC::sle(dst_reg, left_reg, right_reg);
+        }       
     }
 }
 

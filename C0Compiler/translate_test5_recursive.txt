@@ -7,5 +7,7 @@ int fact(int n) {
 }
 
 void main() {
-    printf("This fuckin result is: ", fact(5));
+    int n;
+	scanf(n);
+    printf("This fuckin result is: ", fact(n));
 }

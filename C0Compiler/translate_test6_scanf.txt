@@ -1,0 +1,13 @@
+void main() {
+    int a, b, c;
+	char c1;
+	char c2;
+	char c3;
+	scanf(a, b, c);
+	printf(a + b + c);
+
+	scanf(c1, c2, c3);
+	printf(c3);
+	printf(c2);
+	printf(c1);
+}

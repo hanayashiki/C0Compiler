@@ -44,6 +44,8 @@ void MipsTable::translate(Q & q) {
         get_translate(q);
     } else if (q.op == Q::PROLOG) {
         reserve_regs();
+    } else if ((q.op == Q::READ_CHAR) || (q.op == Q::READ_INT)) {
+        scanf_translate(q);
     }
 }
 
@@ -109,5 +111,20 @@ int MipsTable::reg_of(Symbol* sym) {
         return MC::_at;
     } else {
         return fetch_symbol(sym);
+    }
+}
+
+int MipsTable::precompute(int op, int left, int right) {
+    switch (op) {
+    case Q::GT:
+        return left > right;
+    case Q::LT:
+        return left < right;
+    case Q::GTE:
+        return left >= right;
+    case Q::LTE:
+        return left <= right;
+    default:
+        throw "OP not implemented.\n";
     }
 }

@@ -36,6 +36,10 @@ bool Syntax::scanf_parameter_entry() {
         name = read_token.getName();
         fetch_sym = symbol_table->get_sym(name);
         next_token();
+        if (fetch_sym == NULL) {
+            error_handler(name + " : Undefined identifier. ");
+            return false;
+        }
         if (fetch_sym->const_flag) {
             error_handler("Cannot read to a const. ");
             return false;

@@ -56,6 +56,8 @@ public:
     vector<Quaterion>::iterator get_base(Symbol* func_sym);
     int dig_up(int augment);
     int reg_of(Symbol* sym);
+
+    int precompute(int op, int left, int right);
     // tranlationsd
     void translate_all();
 
@@ -74,6 +76,7 @@ public:
     void get_translate(Quaterion & q);
 
     void print_translate(Quaterion & q);
+    void scanf_translate(Quaterion & q);
 
     void load_symbol(Symbol* sym);
     void save_symbol(Symbol* sym);

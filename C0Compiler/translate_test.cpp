@@ -2,7 +2,7 @@
 #include <time.h>
 
 using namespace SymbolUtils;
-/*
+
 int main() {
     Lexer lexer;
     SymbolTable symbol_table;
@@ -13,7 +13,7 @@ int main() {
     start = clock();
 
     MipsCode::out_file = fopen("mips.asm", "w");
-    FILE* f = fopen("translate_test5_recursive.txt", "r");
+    FILE* f = fopen("translate_test7_operator.txt", "r");
     if (f == NULL) {
         cout << "File not exist. " << endl;
         getchar();
@@ -60,4 +60,4 @@ int main() {
     }
     getchar();
     return 0;
-}*/
+}

@@ -1,0 +1,35 @@
+void main() {
+	int a;
+	int b;
+	a = 100;
+	b = 200;
+	if (a < b) {
+	    if (-1 < 2) {
+		    printf("< is good. ");
+		} 
+	}
+
+	a = 200;
+	b = 100;
+	if (a > b) {
+	    if (200 > -100) {
+		    printf("> is good. ");
+		}
+	}
+
+	a = 200;
+	b = 200;
+	if (a >= b) {
+	    if (200 >= 200) {
+		    if (200 >= -100)
+				printf(">= is good");
+		}
+	}
+	if (a <= b) {
+	    if (200 <= 200) {
+		    if (100 <= 200)
+				printf("<= is good");
+		}
+	}
+
+}

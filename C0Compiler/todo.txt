@@ -10,7 +10,7 @@
 
 	    ADD+, MULT+,                      
         SUB+, DIV+,
-        LT, LTE, GT, GTE,
+        LT+, LTE+, GT+, GTE+,
         NE+, EQ+,
 
         TO+,  // a[i] = b, a = b TO i
@@ -22,25 +22,25 @@
         CAST_CHAR, // a = (char) b
 
         LABEL+,
-        PROLOG,
+        PROLOG+,
 
-        PUSH,    // push parameter
-        CALL,
+        PUSH+,    // push parameter
+        CALL+,
 
-        PRINT_CHAR,
-        PRINT_INT,
-        PRINT_STR,
+        PRINT_CHAR+,
+        PRINT_INT+,
+        PRINT_STR+,
 
         BEQZ+,   // branch on zero
         BNEZ+,   // branch on non-zero
         BEQ+,    // branch on equal
         BNE+,    // branch on not-equal
 
-        GET,    // get returned value
-        READ_CHAR,   // read char
-        READ_INT,    // read integer
+        GET+,    // get returned value
+        READ_CHAR+,   // read char
+        READ_INT+,    // read integer
 
         _LINK,   // directive, link to a label, to avoid jump
-        GOTO,    // unconditional jump
-        RET,
+        GOTO+,    // unconditional jump
+        RET+,
         END     // sentinel

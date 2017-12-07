@@ -56,6 +56,9 @@ public:
 
     static void sll(int dst_reg, int src_reg, int imm);
 
+    static void slt(int dst_reg, int left, int right);
+    static void slti(int dst_reg, int src_reg, int imm);
+
     static void syscall();
     static void la(int dst_reg, string tag);
 
@@ -64,6 +67,12 @@ public:
     static void li(int reg, int const_);
     static void move(int dst_reg, int src_reg);
     static void nop();
+    static void sle(int dst_reg, int left, int right);
+    static void slei(int dst_reg, int left, int imm);
+    static void sgt(int dst_reg, int left, int right);
+    static void sgti(int dst_reg, int left, int imm);
+    static void sge(int dst_reg, int left, int right);
+    static void sgei(int dst_reg, int left, int imm);
     // data
     static void _data();
     static void _asciiz(string tag, string str);

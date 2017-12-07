@@ -133,3 +133,12 @@ void MipsCode::_asciiz(string tag, string str) {
 void MipsCode::nop() {
     fprintf(out_file, "nop\n");
 }
+
+void MipsCode::slt(int dst_reg, int left, int right) {
+    fprintf(out_file, "slt $%d $%d $%d\n", dst_reg, left, right);
+}
+
+void MipsCode::slti(int dst_reg, int src_reg, int imm) {
+    fprintf(out_file, "slti $%d $%d $%d\n", dst_reg, src_reg, imm);
+}
+
