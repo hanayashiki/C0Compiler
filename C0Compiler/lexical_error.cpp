@@ -33,10 +33,16 @@ LexicalError::LexicalError() {
     ErrorDealers.push_back(dealer_illegal_char_inside);
     struct ErrorDealer dealer_illegal_first_char =
     {
-        "Unknown character identified. ",
+        "Unknown token identified. ",
         LegalJudger::is_first
     };
     ErrorDealers.push_back(dealer_illegal_first_char);
+    struct ErrorDealer dealer_illegal_character_constant =
+    {
+        "Illegal character constant. ",
+        NULL
+    };
+    ErrorDealers.push_back(dealer_illegal_character_constant);
 }
 
 bool LegalJudger::is_first(char c) {

@@ -4,4 +4,6 @@ void main() {
 		arr[i] = i;
 		printf(arr[i]);
 	}
+	printf("fuck you leatherman");
+	printf("fuck you");
 }

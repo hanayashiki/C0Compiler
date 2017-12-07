@@ -151,7 +151,9 @@ Token Lexer::getToken() {
 				return token;
 			}
 			else {
-				errorHandler(0);
+                retract();
+				errorHandler(LexicalError::ILLEGAL_FIRST_CHAR);
+                state = IDLE;
 			}
 			break;
 		case IDENTITY_BODY:
@@ -198,7 +200,10 @@ Token Lexer::getToken() {
 				state = CHARACTER_TAIL;
 			}
 			else {
-				errorHandler(0);
+                token.setType(Token::CHARACTER);
+				token.setValue(c);
+                state = CHARACTER_TAIL;
+                errorHandler(LexicalError::ILLEGAL_CHARACTER);
 			}
 			break;
 		case CHARACTER_TAIL:

@@ -13,7 +13,8 @@ public:
         MISSING_SINGLE_QUOTE,
         MISSING_DOUBLE_QUOTE,
         ILLEGAL_CHAR_INSIDE,
-        ILLEGAL_FIRST_CHAR
+        ILLEGAL_FIRST_CHAR,
+        ILLEGAL_CHARACTER
     };
     LexicalError();
     struct ErrorDealer;

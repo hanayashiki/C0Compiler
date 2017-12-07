@@ -1,0 +1,15 @@
+int foo(int param, int param2) {
+	return (param+param2);
+}
+int foo2(int a, int b) {
+	return (a*b);
+}
+
+void main() {
+	int j, k;
+	j = 1;
+	k = 2;
+	printf(foo(j, k));
+	printf(foo2(3, 4));
+	printf("juele.");
+}

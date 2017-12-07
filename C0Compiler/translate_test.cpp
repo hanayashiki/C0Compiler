@@ -1,20 +1,37 @@
 #include "stdafx.h"
+#include <time.h>
 
 using namespace SymbolUtils;
-
+/*
 int main() {
     Lexer lexer;
     SymbolTable symbol_table;
     QuaterionTable q_table;
+    vector<Symbol*> string_table;
+
+    clock_t start,stop;
+    start = clock();
+
     MipsCode::out_file = fopen("mips.asm", "w");
-    FILE* f = fopen("translate_test3_for.txt", "r");
+    FILE* f = fopen("translate_test5_recursive.txt", "r");
+    if (f == NULL) {
+        cout << "File not exist. " << endl;
+        getchar();
+        exit(1);
+    }
     Quaterion::dump_file = stdout;
     lexer.setSource(f);
-    Syntax syntax(&lexer, &symbol_table, &q_table);
+    Syntax syntax(&lexer, &symbol_table, &q_table, &string_table);
     syntax.start();
-    symbol_table.display();
-    q_table.emit();
+    //symbol_table.display();
+    //q_table.emit();
 
+    MipsData md(&string_table, &symbol_table);
+    md.dump_data();
+    MipsCode::_text();
+    if (q_table.entry_symbol) {
+        MipsCode::j(q_table.entry_symbol->start_label->name);
+    }
     Quaterion::dump_file = MipsCode::out_file;
 
     //stack test
@@ -28,10 +45,19 @@ int main() {
         }
     }
 
+    stop = clock();
+    printf("Use Time: %f\n",((double)(stop-start))/CLOCKS_PER_SEC);
     cout << "main ended." << endl;
+
     fclose(MipsCode::out_file);
     fclose(f);
-    system("mips.asm");
+    if (syntax.errors == 0) {
+        //system("java -jar Mars4_5.jar mips.asm");
+        system("mips.asm");
+    } else {
+        cout << "Compilation Error(s): " << syntax.errors 
+            << ". Aborting.\n";
+    }
     getchar();
     return 0;
-}
+}*/

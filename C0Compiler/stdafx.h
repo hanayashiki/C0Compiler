@@ -25,6 +25,7 @@
 #include "quaterion_table.h"
 #include "syntax_error.h"
 #include "syntax.h"
+#include "mips_data.h"
 #include "mips_code.h"
 #include "mips_table.h"
 

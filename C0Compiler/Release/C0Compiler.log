@@ -1,11 +1,11 @@
-﻿生成启动时间为 2017/12/5 10:37:42。
+﻿生成启动时间为 2017/12/7 9:29:48。
      1>项目“D:\C0CompilerForVS2010\C0Compiler\C0Compiler\C0Compiler.vcxproj”在节点 2 上(build 个目标)。
      1>InitializeBuildStatus:
-         正在对“Release\C0Compiler.unsuccessfulbuild”执行 Touch 任务。
+         正在创建“Release\C0Compiler.unsuccessfulbuild”，因为已指定“AlwaysCreate”。
        ClCompile:
          所有输出均为最新。
-         D:\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D WIN32 /D NDEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Yu"StdAfx.h" /Fp"Release\C0Compiler.pch" /Fo"Release\\" /Fd"Release\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt stack_test.cpp
-         stack_test.cpp
+         D:\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D WIN32 /D NDEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Yu"StdAfx.h" /Fp"Release\C0Compiler.pch" /Fo"Release\\" /Fd"Release\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt translate_test.cpp
+         translate_test.cpp
        Link:
          D:\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\C0CompilerForVS2010\C0Compiler\Release\C0Compiler.exe" /INCREMENTAL:NO /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Release\C0Compiler.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"D:\C0CompilerForVS2010\C0Compiler\Release\C0Compiler.pdb" /SUBSYSTEM:CONSOLE /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\C0CompilerForVS2010\C0Compiler\Release\C0Compiler.lib" /MACHINE:X86 Release\assign.obj
          Release\assign_test.obj
@@ -26,8 +26,15 @@
          Release\lexical_error.obj
          Release\match_pattern.obj
          Release\mips_code.obj
-         Release\mips_table.obj
+         Release\mips_code_utils.obj
+         Release\mips_data.obj
+         Release\mips_strategies.obj
+         Release\mips_table_map.obj
+         Release\mips_table_translate_arithmetical.obj
+         Release\mips_table_translate_functional.obj
+         Release\mips_utils.obj
          Release\stack_test.obj
+         Release\translate_test.obj
          Release\wheel_test.obj
          Release\symbol_utils.obj
          Release\printf.obj
@@ -52,6 +59,7 @@
          Release\var_def.obj
          Release\var_def_test.obj
          正在生成代码
+     1>d:\c0compilerforvs2010\c0compiler\c0compiler\symbol_utils.cpp(80): warning C4715: “SymbolUtils::get_const_value”: 不是所有的控件路径都返回值
      1>d:\c0compilerforvs2010\c0compiler\c0compiler\assign.cpp(95): warning C4715: “Syntax::assign”: 不是所有的控件路径都返回值
          已完成代码的生成
          C0Compiler.vcxproj -> D:\C0CompilerForVS2010\C0Compiler\Release\C0Compiler.exe
@@ -64,4 +72,4 @@
 
 生成成功。
 
-已用时间 00:00:02.83
+已用时间 00:00:05.90

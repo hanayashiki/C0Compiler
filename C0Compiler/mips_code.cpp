@@ -81,15 +81,28 @@ void MipsCode::label_(string l) {
 void MipsCode::beq(int left_reg, int right_reg, string l) {
     fprintf(out_file, "beq $%d $%d %s\n", left_reg, right_reg,
         l.c_str());
+    nop();
 }
 
 void MipsCode::bne(int left_reg, int right_reg, string l) {
     fprintf(out_file, "bne $%d $%d %s\n", left_reg, right_reg,
         l.c_str());
+    nop();
 }
 
 void MipsCode::j(string l) {
     fprintf(out_file, "j %s\n", l.c_str());
+    nop();
+}
+
+void MipsCode::jal(string l) {
+    fprintf(out_file, "jal %s\n", l.c_str());
+    nop();
+}
+
+void MipsCode::jr(int src_reg) {
+    fprintf(out_file, "jr $%d\n", src_reg);
+    nop();
 }
 
 void MipsCode::sll(int dst_reg, int src_reg, int imm) {
@@ -98,4 +111,25 @@ void MipsCode::sll(int dst_reg, int src_reg, int imm) {
 
 void MipsCode::syscall() {
     fprintf(out_file, "syscall\n");
+}
+
+void MipsCode::la(int dst_reg, string tag) {
+    fprintf(out_file, "la $%d %s\n", dst_reg, tag.c_str());
+}
+
+void MipsCode::_data() {
+    fprintf(out_file, ".data\n");
+}
+
+void MipsCode::_text() {
+    fprintf(out_file, ".text\n");
+}
+
+void MipsCode::_asciiz(string tag, string str) {
+    fprintf(out_file, "%s: .asciiz \"%s\"\n", 
+        tag.c_str(), str.c_str());
+}
+
+void MipsCode::nop() {
+    fprintf(out_file, "nop\n");
 }

@@ -9,7 +9,7 @@ using namespace SymbolUtils;
 MipsTable::MipsTable(Symbol* func_sym, 
     SymbolTable* symbol_table,
     QuaterionTable* q): q_table(q) {
-    
+    q_iter = get_base(func_sym);
     init_regs();
 
     stack_size = 0;
@@ -19,18 +19,19 @@ MipsTable::MipsTable(Symbol* func_sym,
 
     stack_map = new mem_map;
 
+    // alloc space for return value
+    if (func_sym->type != Symbol::VOID) {
+        ret_sym = new Symbol("%ret_val", func_sym->type);
+        func_sym_table->add_map("%ret_val", ret_sym);
+        alloc_stack(ret_sym);
+    }
+    stack_size = alignment(stack_size, 4); // follow 4-alignment
     // alloc stack space for parameters
     for (sym_list::iterator iter_p = param_list.begin();
         iter_p != param_list.end();
         iter_p++) {
         alloc_stack(*iter_p);
     }
-    // alloc space for return value
-    if (func_sym->type != Symbol::VOID) {
-        ret_sym = new Symbol("%ret_val", func_sym->type);
-        alloc_stack(ret_sym);
-    }
-        
     // alloc space for local variables
 
     sym_list symbol_left = diff(symbol_list, param_list, true);
@@ -53,6 +54,9 @@ MipsTable::MipsTable(Symbol* func_sym,
 void MipsTable::init_regs() {
     global_map = new reg_map();
     temp_map = new reg_map();
+
+    pass_sym = new Symbol("%pass_val", Symbol::VOID);
+
     reg_distrb = vector<Symbol*>(REG_COUNT, NULL);
 }
 
@@ -60,6 +64,7 @@ MipsTable::~MipsTable() {
     delete stack_map;
     delete global_map;
     delete temp_map;
+    //delete ret_sym;
 }
 
 int MipsTable::stack_increment(Symbol* sym) {
@@ -82,9 +87,9 @@ int MipsTable::stack_increment(Symbol* sym) {
     ptr = stack_size;
     // increment
     if (!(sym->array_flag)) {
-        stack_size += INT_SIZE;
+        stack_size += get_simple_size(sym);
     } else {
-        stack_size += INT_SIZE * (sym->array_length);
+        stack_size += get_simple_size(sym) * (sym->array_length);
     }
 
     return stack_size;
@@ -218,4 +223,23 @@ void MipsTable::save_symbol(Symbol* sym) {
     if (sym->type == Symbol::CHAR) {
         MC::sb((*temp_map)[sym], (*stack_map)[sym]);
     }
+}
+
+void MipsTable::reserve_regs() {
+    reserved_reg_ptr = alignment(stack_size, 4) + 4;
+    for (int i = MC::_t0; i < MC::_t9; i++) {
+        int offset = dig_up(4);
+        MC::sw(i, -offset);
+    }
+    int offset = dig_up(4);
+    MC::sw(MC::_ra, -offset);
+}
+
+void MipsTable::reload_regs() {
+    int mem_ptr = reserved_reg_ptr;
+    for (int i = MC::_t0; i < MC::_t9; i++) {
+        MC::lw(i, -mem_ptr);
+        mem_ptr += 4;
+    }
+    MC::lw(MC::_ra, -mem_ptr);
 }

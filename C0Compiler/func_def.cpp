@@ -75,6 +75,9 @@ bool Syntax::func_def() {
     Symbol* label = new_label(new_func->name);
     Q label_q(Q::LABEL, label);
     q_table->add_quaterion(label_q);
+
+    new_func->start_label = label;
+
     Q prolog_q(Q::PROLOG, new_func);
     q_table->add_quaterion(prolog_q);
 
@@ -90,6 +93,9 @@ bool Syntax::func_def() {
     if ((type != Symbol::VOID) && !value_function_return) {
         error_handler("'"+new_func->name+"' should contain 'return'. ");
     }
+
+    Q epilog_q(Q::EPILOG, NULL);
+    q_table->add_quaterion(epilog_q);
 
     return true;
 }

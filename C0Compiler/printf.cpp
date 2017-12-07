@@ -25,6 +25,7 @@ bool Syntax::printf_() {
             str = read_token.getName();
             string_label = new_label("const_str");
             string_label->setString(str);
+            string_table->push_back(string_label);
             Q print_q(Q::PRINT_STR, string_label);
             q_table->add_quaterion(print_q);
             next_token();

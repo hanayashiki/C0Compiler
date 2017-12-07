@@ -1,20 +1,21 @@
 #include "stdafx.h"
 
-#define MC MipsTable
+#define MC MipsCode
 #define Q Quaterion
 #define INT_SIZE 4
 #define CHAR_SIZE 1
 
 
 void MipsTable::translate_all() {
-    q_iter = q_table->q_list.begin();
     for (; q_iter != q_table->q_list.end(); q_iter++) {
         //cout << "# " << endl;
+        if (q_iter->op == Q::EPILOG) {
+            break;
+        }
         q_iter->emit(true);
         translate(*q_iter);
     }
 }
-
 
 void MipsTable::translate(Q & q) {
     if (q.is_commutative()) {
@@ -33,6 +34,16 @@ void MipsTable::translate(Q & q) {
         array_write_translate(q);
     } else if (q.is_print()) {
         print_translate(q);
+    } else if (q.op == Q::PUSH) {
+        push_translate();
+    } else if (q.op == Q::CALL) {
+        call_func_translate(q);
+    } else if (q.op == Q::RET){
+        return_translate(q);
+    } else if (q.op == Q::GET) {
+        get_translate(q);
+    } else if (q.op == Q::PROLOG) {
+        reserve_regs();
     }
 }
 
@@ -71,3 +82,32 @@ void MipsTable::display_temp_map() {
     cout << endl;
 }
 
+vector<Quaterion>::iterator MipsTable::get_base(Symbol* func_sym) {
+    Symbol* label = func_sym->start_label;
+    vector<Quaterion>::iterator iter;
+    for (iter = q_table->q_list.begin();
+        iter != q_table->q_list.end(); iter++) {
+        if (iter->left == label) {
+            break;
+        }
+    }
+    return iter;
+}
+
+int MipsTable::alignment(int size, int augment) {
+    return (size + augment - 1) 
+        / augment * augment;
+}
+
+int MipsTable::dig_up(int augment) {
+    return (stack_size = alignment(stack_size, 4) + augment);
+}
+
+int MipsTable::reg_of(Symbol* sym) {
+    if (sym->const_flag) {
+        MC::const_to_at(get_const_value(sym));
+        return MC::_at;
+    } else {
+        return fetch_symbol(sym);
+    }
+}

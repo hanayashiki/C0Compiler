@@ -129,6 +129,7 @@ SyntaxError::SyntaxError() {
 }
 
 void Syntax::error_handler(int e, string info) {
+    errors++;
     assert((e >= 0) && (e < SyntaxError::DEALER_COUNT));
     struct SyntaxError::ErrorDealer dealer = syntax_error.ErrorDealers.at(e);
     if (read_token.token_id != last_id) {
@@ -143,6 +144,7 @@ void Syntax::error_handler(int e, string info) {
 }
 
 bool Syntax::error_handler(string message, int pid) {
+    errors++;
     if (read_token.token_id != last_id) {
         cout << "Syntax error at line " << read_token.line << " : ";
         cout << message << endl;

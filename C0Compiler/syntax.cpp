@@ -1,9 +1,13 @@
 #include "stdafx.h"
 
-Syntax::Syntax(Lexer * L, SymbolTable * s, QuaterionTable* q) {
+Syntax::Syntax(Lexer * L, SymbolTable * s, QuaterionTable* q,
+    sym_list * string_t) {
     lexer = L;
     symbol_table = s;
     q_table = q;
+    string_table = string_t;
+
+    errors = 0;
 
     last_id = -1;
     token_pointer = token_list.begin();

@@ -40,6 +40,7 @@ public:
     SymbolTable* symbol_table;
     typedef vector<Symbol*> param_list; 
     param_list parameter_type_list;
+    Symbol* start_label;
     void setFunc();
     // label
     void setString(string & s);
@@ -62,4 +63,5 @@ namespace SymbolUtils {
     sym_list intersection(sym_list & left, sym_list & right, 
         bool do_sort=true);
     int get_const_value(Symbol* sym);
+    int get_simple_size(Symbol* sym);
 }

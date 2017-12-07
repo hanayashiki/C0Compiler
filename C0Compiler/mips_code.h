@@ -21,7 +21,7 @@ public:
     int reg_left;
     int reg_right;
     int immediate;
-
+    
     string label;
 
     void init();
@@ -51,13 +51,22 @@ public:
     static void beq(int left_reg, int right_reg, string l);
     static void bne(int left_reg, int right_reg, string l);
     static void j(string l);
+    static void jal(string l);
+    static void jr(int src_reg);
 
     static void sll(int dst_reg, int src_reg, int imm);
 
     static void syscall();
+    static void la(int dst_reg, string tag);
 
     // utils
     static void const_to_at(int c); 
     static void li(int reg, int const_);
     static void move(int dst_reg, int src_reg);
+    static void nop();
+    // data
+    static void _data();
+    static void _asciiz(string tag, string str);
+    // text
+    static void _text();
 };

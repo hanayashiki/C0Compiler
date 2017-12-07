@@ -77,12 +77,72 @@ void MipsTable::print_translate(Quaterion & q) {
     if (q.op == Q::PRINT_INT) {
         syscall_num = 1;
     }
+    if (q.op == Q::PRINT_STR) {
+        syscall_num = 4;
+    }
     MC::li(MC::_v0, syscall_num);
-    if (q.left->const_flag) {
-        MC::li(MC::_a0, get_const_value(q.left));
+    if (q.op != Q::PRINT_STR) {
+        if (q.left->const_flag) {
+            MC::li(MC::_a0, get_const_value(q.left));
+        } else {
+            int src_reg = fetch_symbol(q.left);
+            MC::move(MC::_a0, src_reg);
+        }
     } else {
-        int src_reg = fetch_symbol(q.left);
-        MC::move(MC::_a0, src_reg);
+        MC::la(MC::_a0, q.left->name);
     }
     MC::syscall();
+}
+
+void MipsTable::push_translate() {
+    dig_size = stack_size + 4; // 4 for the return value
+    
+    while (q_iter != q_table->q_list.end()) {
+        if (q_iter->op != Q::PUSH) {
+            MC::addiu(MC::_sp, MC::_sp, -stack_size);
+            q_iter--;
+            break;
+        }
+        int src_reg;
+        Symbol* push_sym = q_iter->left;
+        //cout << "dig_size:" << dig_size << endl;
+        //cout << "stack_size:" << stack_size << endl;
+        dig_size = alignment(dig_size, get_simple_size(push_sym));
+        dig_size += get_simple_size(push_sym);
+        if (push_sym->const_flag) {
+            MC::const_to_at(get_const_value(push_sym));
+            src_reg = MC::_at;
+        } else {
+            src_reg = fetch_symbol(push_sym);
+        }
+        MC::sw(src_reg, -dig_size);
+        q_iter++;
+    }
+
+}
+
+void MipsTable::call_func_translate(Q & q) {
+    if (q.left->type != Symbol::VOID) {
+        int ret_offset = - get_simple_size(q.left) - stack_size;
+        pass_sym->type = q.left->type;
+        (*stack_map)[pass_sym] = ret_offset;
+    }
+    MC::jal(q.left->start_label->name);
+    MC::addiu(MC::_sp, MC::_sp, stack_size);
+}
+
+void MipsTable::return_translate(Q & q) {
+    if (q.left != NULL) {
+        int ret_offset = (*stack_map)[ret_sym];
+        int src_reg = reg_of(q.left);
+        MC::sw(src_reg, ret_offset);
+    }
+    reload_regs();
+    MC::jr(MC::_ra);
+}
+
+void MipsTable::get_translate(Q & q) {
+    int tg_ret = fetch_symbol(q.dst, false);
+    (*temp_map)[pass_sym] = tg_ret;
+    load_symbol(pass_sym);
 }

@@ -79,3 +79,11 @@ int SymbolUtils::get_const_value(Symbol* sym) {
     }
 }
 
+int SymbolUtils::get_simple_size(Symbol* sym) {
+    if (sym->type == Symbol::CHAR) {
+        return 1;
+    }
+    if (sym->type == Symbol::INT) {
+        return 4;
+    }
+}

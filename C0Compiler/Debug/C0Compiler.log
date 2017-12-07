@@ -1,11 +1,11 @@
-﻿生成启动时间为 2017/12/6 15:06:47。
+﻿生成启动时间为 2017/12/7 16:53:37。
      1>项目“D:\C0CompilerForVS2010\C0Compiler\C0Compiler\C0Compiler.vcxproj”在节点 2 上(build 个目标)。
      1>InitializeBuildStatus:
-         正在对“Debug\C0Compiler.unsuccessfulbuild”执行 Touch 任务。
+         正在创建“Debug\C0Compiler.unsuccessfulbuild”，因为已指定“AlwaysCreate”。
        ClCompile:
          所有输出均为最新。
-         D:\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"StdAfx.h" /Fp"Debug\C0Compiler.pch" /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt quaterion.cpp
-         quaterion.cpp
+         D:\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"StdAfx.h" /Fp"Debug\C0Compiler.pch" /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt translate_test.cpp
+         translate_test.cpp
        ManifestResourceCompile:
          所有输出均为最新。
        Link:
@@ -30,6 +30,7 @@
          Debug\match_pattern.obj
          Debug\mips_code.obj
          Debug\mips_code_utils.obj
+         Debug\mips_data.obj
          Debug\mips_strategies.obj
          Debug\mips_table_map.obj
          Debug\mips_table_translate_arithmetical.obj
@@ -73,4 +74,4 @@
 
 生成成功。
 
-已用时间 00:00:00.56
+已用时间 00:00:00.72

@@ -3,12 +3,15 @@
 #include <list>
 
 class Syntax {
+public:
+    int errors; // ´íÎóÌõÊý
 private:
     SyntaxError syntax_error;
 	Lexer* lexer;
     SymbolTable* symbol_table;
     RegexHandler* reg_handler;
     QuaterionTable* q_table;
+    sym_list* string_table;
     vector<Token> token_list;
     vector<Token>::iterator token_pointer;
     bool match_type(int token_type);
@@ -24,7 +27,8 @@ private:
     string pattern_call_func;
     string pattern_assign;
 public:
-	Syntax(Lexer* l, SymbolTable* s, QuaterionTable* q=NULL);
+	Syntax(Lexer* l, SymbolTable* s, QuaterionTable* q=NULL,
+        sym_list * string_table=NULL);
     ~Syntax();
     static string Syntax::anonymous();
     void start();
