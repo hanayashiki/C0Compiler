@@ -20,6 +20,8 @@ int my_function1(int function1_x){
 
 void my_function2(char function2_x,int function2_y){
     int i;
+	printf("param x:",function2_x);
+	printf("param y:",function2_y);
 
     my_var4[0]='H';
     my_var4[1]='E';
@@ -35,8 +37,11 @@ void my_function2(char function2_x,int function2_y){
     my_var4[10]='D';
 
     for(i = 0;i<10;i=i+1){
-        if(i == function2_y)
+        if(i == function2_y) {
+		    printf(function2_y);
+		    printf("edited", i);
             my_var4[i]=function2_x;
+	    }
     }
 
 }
@@ -64,6 +69,7 @@ void main(){
             scanf(function2_arg1,function2_arg2);
             my_function2(function1_arg1,function2_arg2);
             for(i = 0;i<11;i=i+1){
+			    printf(i);
                 printf(my_var4[i]);
             }
         }

@@ -1,0 +1,24 @@
+int i;
+int j;
+int a[2];
+
+void add_i() {
+    i = i + 1;
+
+}
+
+void add_j() {
+    j = j + 1;
+}
+
+int i_add_j() {
+    return (i+j);
+}
+
+void main() {
+    int k;
+    add_i();
+	add_j();
+	k = i_add_j();
+	printf("k==2? k=",k);
+}

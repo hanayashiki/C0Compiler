@@ -1,14 +1,57 @@
-void main() {
-	int a, b, c, d, e, f;
-	char g;
-	a = b + c;
-	a = b * c;
-	a = b * 2;
-	a = 1;
-	b = 1 / f;
-	if (a == b);
-	if (a == 1);
-	if (a != 1) {
-		a = 2 * 2;
+
+
+int arr[6];
+
+void swap(int i, int j) {
+    if (i == j)
+        return;
+	printf(i);
+	printf(j);
+    arr[i] = arr[i] + arr[j];
+	arr[j] = arr[i] - arr[j];
+	arr[i] = arr[i] - arr[j];
+
+}
+void q_sort(int i, int j) {
+    int m, n, k;
+	int p;
+	int pivot;
+	n = i;
+	pivot = arr[j];
+	printf("called: i = ", i);
+	printf("called: j = ", j);
+	if (i >= j) {
+	    
+	    return;
 	}
+	for (m = i; m < j; m = m + 1) {
+	    printf("arr[m]=", arr[m]);
+	    if (arr[m] < pivot) {
+		    printf("arr[m]=", arr[m]);
+			printf("pivot=", pivot);
+		    swap(n, m);
+			n = n+1;
+		}
+	}
+	printf("original: i = ", i);
+	swap(n, j);
+	printf("call: i = ", i);
+	printf("call: j = ", n-1);
+	q_sort(i, n-1);
+	printf("call: i = ", n);
+	printf("call: j = ", j);
+	q_sort(n, j);
+}
+void main() {
+    int i;
+    arr[0] = 5;
+	arr[1] = 4;
+	arr[2] = 3;
+	arr[3] = 2;
+	arr[4] = 1;
+	arr[5] = 6;
+	q_sort(0, 5);
+    for (i=0;i<6;i=i+1) {
+        printf(arr[i]);
+    }
 }

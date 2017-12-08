@@ -21,6 +21,10 @@
 
 #include "symbol.h"
 #include "symbol_table.h"
+
+typedef hash_map<Symbol*, int> reg_map;
+typedef hash_map<Symbol*, int> mem_map;
+
 #include "quaterion.h"
 #include "quaterion_table.h"
 #include "syntax_error.h"

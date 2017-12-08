@@ -87,3 +87,8 @@ int SymbolUtils::get_simple_size(Symbol* sym) {
         return 4;
     }
 }
+
+bool SymbolUtils::in_mem(Symbol* sym) {
+    return (!sym->function_flag) && (!sym->const_flag) &&
+        ((sym->type == Symbol::CHAR) || (sym->type == Symbol::INT));
+}

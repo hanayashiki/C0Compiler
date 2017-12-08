@@ -33,10 +33,17 @@ Symbol* MipsTable::findUselessSymbol() {
     }
     vector<Symbol*> write_backable = 
         diff(in_place_syms, show_up_syms);
+
     if (write_backable.size()) {
         return write_backable[0];
     } else {
-        return in_place_syms[0];
+        show_up_syms.clear();
+        q_iter->dst ? show_up_syms.push_back(q_iter->dst) : 0;
+        q_iter->right ? show_up_syms.push_back(q_iter->right) : 0;
+        q_iter->left ? show_up_syms.push_back(q_iter->left) : 0;
+        vector<Symbol*> write_backable =
+            diff(in_place_syms, show_up_syms);
+        return write_backable[0];
     }
 }
 

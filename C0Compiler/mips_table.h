@@ -16,15 +16,12 @@ public:
     QuaterionTable* q_table;
 
     MipsTable(Symbol* func_sym, SymbolTable* symbol_table,
-        QuaterionTable* q);
+        QuaterionTable* q, mem_map* r_m);
     q_ptr q_iter;   // 翻译指针
     ~MipsTable();
     void init_regs();
 
     Symbol* ret_sym;   // 函数返回的对象的指针
-
-    typedef hash_map<Symbol*, int> reg_map;
-    typedef hash_map<Symbol*, int> mem_map;
  
     reg_map* global_map; // 对象-局部寄存器分配
     reg_map* temp_map;   // 对象-全局寄存器分配
@@ -40,6 +37,9 @@ public:
     int alloc_temp_reg(Symbol*);
     void map_sym_reg(Symbol* sym, int reg, reg_map* map);
     int temp_write_back();
+    void unmap_all_regs();
+    /*void write_back_root_vars();
+    void write_back_all_vars();*/
     void reserve_regs();
     void reload_regs();
 
@@ -69,6 +69,7 @@ public:
     void label_translate(Quaterion & q);
     void array_read_translate(Quaterion & q);
     void array_write_translate(Quaterion & q);
+    void minus_translate(Quaterion & q);
 
     void push_translate();
     void call_func_translate(Quaterion & q);
@@ -80,4 +81,6 @@ public:
 
     void load_symbol(Symbol* sym);
     void save_symbol(Symbol* sym);
+
+    static void exit();
 };

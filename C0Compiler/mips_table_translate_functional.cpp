@@ -10,6 +10,7 @@ using namespace SymbolUtils;
 void MipsTable::label_translate(Q & q) {
     if (q.op == Q::LABEL) {
         MC::label_(q.left->name);
+        unmap_all_regs();
     }
 }
 
@@ -109,11 +110,8 @@ void MipsTable::scanf_translate(Quaterion & q) {
 }
 
 void MipsTable::push_translate() {
-    dig_size = stack_size + 4; // 4 for the return value
-    
     while (q_iter != q_table->q_list.end()) {
         if (q_iter->op != Q::PUSH) {
-            MC::addiu(MC::_sp, MC::_sp, -stack_size);
             q_iter--;
             break;
         }
@@ -129,13 +127,22 @@ void MipsTable::push_translate() {
         } else {
             src_reg = fetch_symbol(push_sym);
         }
-        MC::sw(src_reg, -dig_size);
+
+        //fprintf(MipsCode::out_file, "# %s @ $%d\n", reg_distrb[src_reg]->name.c_str(), src_reg);
+        if (push_sym->type == Symbol::INT) {
+            MC::sw(src_reg, -dig_size);
+        }
+        if (push_sym->type == Symbol::CHAR) {
+            MC::sb(src_reg, -dig_size);
+        }
         q_iter++;
     }
-
 }
 
 void MipsTable::call_func_translate(Q & q) {
+    dig_size = stack_size + 4;
+    // »Ö¸´ÍÚ¾ò
+    MC::addiu(MC::_sp, MC::_sp, -stack_size);
     if (q.left->type != Symbol::VOID) {
         int ret_offset = - get_simple_size(q.left) - stack_size;
         pass_sym->type = q.left->type;
@@ -151,12 +158,22 @@ void MipsTable::return_translate(Q & q) {
         int src_reg = reg_of(q.left);
         MC::sw(src_reg, ret_offset);
     }
-    reload_regs();
-    MC::jr(MC::_ra);
+    if (func->name == "main") {
+        MC::j("__exit__");
+    } else {
+        reload_regs();
+        MC::jr(MC::_ra);
+    }
 }
 
 void MipsTable::get_translate(Q & q) {
     int tg_ret = fetch_symbol(q.dst, false);
     (*temp_map)[pass_sym] = tg_ret;
     load_symbol(pass_sym);
+}
+
+void MipsTable::exit() {
+    MC::label_("__exit__");
+    MC::li(MC::_v0, 10);
+    MC::syscall();
 }

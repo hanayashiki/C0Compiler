@@ -63,6 +63,7 @@ public:
     Quaterion(int op_name);
     Quaterion(Symbol* dst, Symbol* left); // a = b
     void emit(bool comment=false);
+    void emit(string str);
     // comm with mips gen
     bool is_endblock();
     bool is_commutative();

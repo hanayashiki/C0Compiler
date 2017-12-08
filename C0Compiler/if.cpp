@@ -68,7 +68,9 @@ bool Syntax::if_comparison(Symbol* if_false, int right_end) {
         op = Q::EQ;
         next_token();
     } else if (match_type(right_end)) {
-        return false; 
+        Q beqz_q(Q::BEQZ, NULL, left, if_false);
+        q_table->add_quaterion(beqz_q);
+        return left; 
     }
 
     right = expression();

@@ -95,7 +95,7 @@ bool Syntax::for_augment(Q & aug_q) {
         op = Q::ADD;
         next_token();
     } else if (match_type(Token::MINUS)) {
-        op = Q::MINUS;
+        op = Q::SUB;
         next_token();
     } else {
         error_handler("'+' or '-' is needed. ");
@@ -110,7 +110,7 @@ bool Syntax::for_augment(Q & aug_q) {
         return false;
     }
 
-    aug_q = Q(Q::ADD, left_sym, right_sym, step_sym);
+    aug_q = Q(op, left_sym, right_sym, step_sym);
     return true;
 
 }

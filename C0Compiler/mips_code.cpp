@@ -139,6 +139,6 @@ void MipsCode::slt(int dst_reg, int left, int right) {
 }
 
 void MipsCode::slti(int dst_reg, int src_reg, int imm) {
-    fprintf(out_file, "slti $%d $%d $%d\n", dst_reg, src_reg, imm);
+    fprintf(out_file, "slti $%d $%d %d\n", dst_reg, src_reg, imm);
 }
 

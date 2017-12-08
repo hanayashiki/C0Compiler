@@ -9,11 +9,11 @@
 void MipsTable::translate_all() {
     for (; q_iter != q_table->q_list.end(); q_iter++) {
         //cout << "# " << endl;
+        q_iter->emit(true);
+        translate(*q_iter);
         if (q_iter->op == Q::EPILOG) {
             break;
         }
-        q_iter->emit(true);
-        translate(*q_iter);
     }
 }
 
@@ -24,7 +24,7 @@ void MipsTable::translate(Q & q) {
         incommutative_translate(q);
     } else if (q.is_branch()) {
         branch_translate(q);
-    } else if (q.op == Q::NONE) {
+    } else if ((q.op == Q::NONE) || (q.op == Q::CAST_CHAR) || (q.op == Q::CAST_INT)) {
         move_translate(q);
     } else if (q.op == Q::LABEL) {
         label_translate(q);
@@ -38,7 +38,7 @@ void MipsTable::translate(Q & q) {
         push_translate();
     } else if (q.op == Q::CALL) {
         call_func_translate(q);
-    } else if (q.op == Q::RET){
+    } else if ((q.op == Q::RET) || (q.op == Q::EPILOG)){
         return_translate(q);
     } else if (q.op == Q::GET) {
         get_translate(q);
@@ -46,6 +46,20 @@ void MipsTable::translate(Q & q) {
         reserve_regs();
     } else if ((q.op == Q::READ_CHAR) || (q.op == Q::READ_INT)) {
         scanf_translate(q);
+    } else if (q.op == Q::MINUS) {
+        minus_translate(q);
+    } else {
+        cout << "Warning: untranslated: ";
+        FILE * old = q.dump_file;
+        q.dump_file = stdout;
+        q.emit();
+        q.dump_file = old;
+        cout << endl;
+        //assert(0);
+    }
+    if (q.dst != NULL) {
+        save_symbol(q.dst);
+        map_sym_reg(q.dst, 0, temp_map);
     }
 }
 

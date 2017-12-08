@@ -69,7 +69,7 @@ string Quaterion::get_name(Symbol* sym) {
 
 bool Quaterion::is_endblock() {
     return (op == CALL) || (op == BEQZ) || (op == BNEZ)
-        || (op == RET) || (op == GOTO);
+        || (op == RET) || (op == GOTO) || (op == EPILOG);
 }
 
 bool Quaterion::is_commutative() {
@@ -88,6 +88,10 @@ bool Quaterion::is_branch() {
 
 bool Quaterion::is_print() {
     return (op == PRINT_CHAR) || (op == PRINT_INT) || (op == PRINT_STR);
+}
+
+void Quaterion::emit(string str) {
+    fprintf(dump_file, "%s\n", str.c_str());
 }
 
 void Quaterion::emit(bool comment) {

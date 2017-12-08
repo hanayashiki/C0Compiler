@@ -1,0 +1,29 @@
+char c[3];
+
+void initialize_char_array() {
+    c[0] = '0';
+	c[1] = '1';
+	c[2] = '2';
+}
+
+void modify_char_array(int x, char ch) {
+
+    c[x] = ch;
+}
+
+void main() {
+    int x;
+	int i;
+	char ch;
+	char d;
+	initialize_char_array();
+    printf("original c[3] = 0 1 2. ");
+    printf("input x:");
+	scanf(x);
+	printf("input ch:");
+	scanf(ch);
+	modify_char_array(x, ch);
+	for (i = 0; i < 3; i=i+1) {
+	    printf(c[i]);
+	}
+}

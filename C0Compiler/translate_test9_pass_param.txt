@@ -1,0 +1,12 @@
+void u(int a, char b) {
+	printf("a=1 ? ", a);
+	printf("b=b ? ", b);
+}
+
+void main() {
+	int a;
+	char b;
+	a = 1;
+	b = 'b';
+	u(b,a);
+}

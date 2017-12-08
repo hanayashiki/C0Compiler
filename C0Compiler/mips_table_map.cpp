@@ -8,8 +8,9 @@ using namespace SymbolUtils;
 
 MipsTable::MipsTable(Symbol* func_sym, 
     SymbolTable* symbol_table,
-    QuaterionTable* q): q_table(q) {
+    QuaterionTable* q, mem_map * r_m): q_table(q), root_map(r_m) {
     q_iter = get_base(func_sym);
+    func = func_sym;
     init_regs();
 
     stack_size = 0;
@@ -22,10 +23,9 @@ MipsTable::MipsTable(Symbol* func_sym,
     // alloc space for return value
     if (func_sym->type != Symbol::VOID) {
         ret_sym = new Symbol("%ret_val", func_sym->type);
-        func_sym_table->add_map("%ret_val", ret_sym);
         alloc_stack(ret_sym);
     }
-    stack_size = alignment(stack_size, 4); // follow 4-alignment
+    stack_size = 4; // always leave a place for ret_val, for consistency
     // alloc stack space for parameters
     for (sym_list::iterator iter_p = param_list.begin();
         iter_p != param_list.end();
@@ -48,7 +48,6 @@ MipsTable::MipsTable(Symbol* func_sym,
     }
     // alloc space for registers
     // ....
-
 }
 
 void MipsTable::init_regs() {
@@ -61,6 +60,7 @@ void MipsTable::init_regs() {
 }
 
 MipsTable::~MipsTable() {
+    printf("deleted\n");
     delete stack_map;
     delete global_map;
     delete temp_map;
@@ -71,15 +71,8 @@ int MipsTable::stack_increment(Symbol* sym) {
     const int INT_SIZE = 4;
     const int CHAR_SIZE = 1;
     int ptr = 0;
-    int single_size = 0;
-
-    sym->display();
+    int single_size = get_simple_size(sym);
     
-    if (sym->type == Symbol::INT) {
-        single_size = 4;
-    } else if (sym->type == Symbol::CHAR) {
-        single_size = 1;
-    }
     // alignment
     stack_size = ((stack_size + single_size - 1) 
         / single_size * single_size);
@@ -118,7 +111,7 @@ void MipsTable::display_stack() {
 
     sort(list.begin(), list.end(), p_compare); 
     // 被外界调用了，要加 static！
-    
+    cout << func->name << " stack:\n";
     for (vector<p>::iterator iter = list.begin();
         iter != list.end(); iter++) {
         printf("@%d: %s\n", iter->first,
@@ -130,28 +123,34 @@ int MipsTable::fetch_symbol(Symbol* sym, bool load_value) {
     // 注意全局变量的处理
     int reg;
     reg_map::iterator iter;
+    mem_map::iterator iter_global;
     iter = temp_map->find(sym);
+    iter_global = root_map->find(sym);
+
     if (sym->type == Symbol::LABEL) {
         // be robust
         return 0;
     }
     assert(!sym->const_flag);
+
     if ((iter != temp_map->end()) && (iter->second != 0)) {
         // already distributed
         reg = iter->second;
+       // fprintf(MipsCode::out_file, "# already there %s @ $%d\n", sym->name.c_str(), reg);
     } else {
         if (reg = alloc_temp_reg(sym)) {
-            if (load_value) {
-                load_symbol(sym);
-            }
+           // fprintf(MipsCode::out_file, "# alloc reg %s @ $%d\n", sym->name.c_str(), reg);
         } else {
             temp_write_back();
-            // mips code here
             reg = alloc_temp_reg(sym);  
         }
-        
     }
-    display_temp_map();
+    if (load_value) {
+       // fprintf(MipsCode::out_file, "# loading reg %s @ $%d\n", sym->name.c_str(), reg);
+        load_symbol(sym);
+    }
+    //display_temp_map();
+    fprintf(MipsCode::out_file, "# fetch %s @ $%d\n", sym->name.c_str(), reg);
     //cout << sym->name << " at $" << reg << "; " << endl;
     return reg;
 }
@@ -200,46 +199,97 @@ void MipsTable::map_sym_reg(Symbol* sym, int reg, reg_map* map) {
  }
 
 void MipsTable::load_symbol(Symbol* sym) {
+    int offset, base;
+    if (root_map->find(sym) != root_map->end()) {
+        offset = (*root_map)[sym];
+        base = MC::_gp;
+    } else {
+        offset = (*stack_map)[sym];
+        base = MC::_sp;
+    }
+    fprintf(MC::out_file, "# load %s\n", sym->name.c_str());
     if (!sym->array_flag) {
         if (sym->type == Symbol::INT) {
-            MC::lw((*temp_map)[sym], (*stack_map)[sym]);
+            MC::lw((*temp_map)[sym], offset, base);
         }
         if (sym->type == Symbol::CHAR) {
-            MC::lb((*temp_map)[sym], (*stack_map)[sym]);
+            MC::lb((*temp_map)[sym], offset, base);
         }
     } else {
         // if it is an array, load the base address
-        if (stack_map->find(sym) != stack_map->end()) {
-            MC::addiu((*temp_map)[sym], MC::_sp, (*stack_map)[sym]);
-        }
-        // TODO: global_map
+        MC::addiu((*temp_map)[sym], base, offset);
+        // TODO: root_map
     }
 }
 
 void MipsTable::save_symbol(Symbol* sym) {
-    if (sym->type == Symbol::INT) {
-        MC::sw((*temp_map)[sym], (*stack_map)[sym]);
+    int offset, base;
+    fprintf(MC::out_file, "# save %s\n", sym->name.c_str());
+    if (root_map->find(sym) != root_map->end()) {
+        offset = (*root_map)[sym];
+        base = MC::_gp;
+    } else {
+        offset = (*stack_map)[sym];
+        base = MC::_sp;
     }
-    if (sym->type == Symbol::CHAR) {
-        MC::sb((*temp_map)[sym], (*stack_map)[sym]);
+    if (sym->type == Symbol::INT && !sym->array_flag) {
+        MC::sw((*temp_map)[sym], offset, base);
+    }
+    if (sym->type == Symbol::CHAR && !sym->array_flag) {
+        MC::sb((*temp_map)[sym], offset, base);
     }
 }
 
 void MipsTable::reserve_regs() {
     reserved_reg_ptr = alignment(stack_size, 4) + 4;
-    for (int i = MC::_t0; i < MC::_t9; i++) {
+    for (int i = MC::_t0; i <= MC::_t9; i++) {
         int offset = dig_up(4);
         MC::sw(i, -offset);
     }
     int offset = dig_up(4);
     MC::sw(MC::_ra, -offset);
+
+    dig_size = stack_size + 4;
 }
 
 void MipsTable::reload_regs() {
     int mem_ptr = reserved_reg_ptr;
-    for (int i = MC::_t0; i < MC::_t9; i++) {
+    for (int i = MC::_t0; i <= MC::_t9; i++) {
         MC::lw(i, -mem_ptr);
         mem_ptr += 4;
     }
     MC::lw(MC::_ra, -mem_ptr);
+}
+/*
+void MipsTable::write_back_root_vars() {
+    for (sym_list::iterator iter = reg_distrb.begin();
+        iter != reg_distrb.end(); iter++) {
+        if (root_map->find(*iter) != root_map->end()) {
+            fprintf(MC::out_file, "# write back root %s\n", (*iter)->name.c_str());
+            save_symbol(*iter);
+            map_sym_reg(*iter, 0, temp_map);
+        }
+    }
+}*/
+/*
+void MipsTable::write_back_all_vars() {
+    fprintf(MC::out_file, "# ---write back all---\n");
+
+    for (sym_list::iterator iter = reg_distrb.begin();
+        iter != reg_distrb.end(); iter++) {
+        if ((*iter) != NULL) {
+            fprintf(MC::out_file, "# write back all: %s\n", (*iter)->name.c_str());
+            save_symbol(*iter);
+            map_sym_reg(*iter, 0, temp_map); 
+        }
+    }
+}*/
+
+void MipsTable::unmap_all_regs() {
+    for (sym_list::iterator iter = reg_distrb.begin();
+        iter != reg_distrb.end(); iter++) {
+        if ((*iter) != NULL) {
+            map_sym_reg(*iter, 0, temp_map); 
+        }
+    }
 }

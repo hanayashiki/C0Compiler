@@ -58,8 +58,22 @@ bool Syntax::call_func_list(Symbol* func_sym) {
             error_handler("Too few parameters. ");
             return false;
         }
-        Symbol* temp = temp_symbol((*iter)->type);
+        Symbol* temp = temp_symbol((*iter)->type, false);
         Symbol* value = expression();
+        
+        if (temp->type != value->type) {
+            if (temp->type == Symbol::CHAR) {
+                Q cast_q(temp, value);
+                q_table->add_quaterion(cast_q);
+            } else {
+                Q cast_q(temp, value);
+                q_table->add_quaterion(cast_q);
+            }
+        } else {
+            delete(temp);
+            temp = value;
+        }
+
         if (match_type(Token::COMMA)) {
             if ((iter < param_types.end()-1)) {
                 next_token();
@@ -72,7 +86,7 @@ bool Syntax::call_func_list(Symbol* func_sym) {
             error_handler("Parameter list miss match. ");
             return false;
         }
-        Q push_q(Q::PUSH, value);
+        Q push_q(Q::PUSH, temp);
         q_table->add_quaterion(push_q);
     }
    

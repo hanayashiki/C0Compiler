@@ -8,12 +8,13 @@ int main() {
     SymbolTable symbol_table;
     QuaterionTable q_table;
     vector<Symbol*> string_table;
+    mem_map root_map;
 
     clock_t start,stop;
     start = clock();
 
     MipsCode::out_file = fopen("mips.asm", "w");
-    FILE* f = fopen("translate_test7_operator.txt", "r");
+    FILE* f = fopen("foreign_test2_hushen.txt", "r");
     if (f == NULL) {
         cout << "File not exist. " << endl;
         getchar();
@@ -26,8 +27,9 @@ int main() {
     //symbol_table.display();
     //q_table.emit();
 
-    MipsData md(&string_table, &symbol_table);
+    MipsData md(&string_table, &symbol_table, &root_map);
     md.dump_data();
+    md.map_root();
     MipsCode::_text();
     if (q_table.entry_symbol) {
         MipsCode::j(q_table.entry_symbol->start_label->name);
@@ -39,12 +41,12 @@ int main() {
     for (sym_list::iterator ptr = l.begin();
         ptr != l.end(); ptr++) {
         if ((*ptr)->function_flag) {
-            MipsTable m_table((*ptr), &symbol_table, &q_table);
+            MipsTable m_table((*ptr), &symbol_table, &q_table, &root_map);
             m_table.translate_all();
             m_table.display_stack();
         }
     }
-
+    MipsTable::exit();
     stop = clock();
     printf("Use Time: %f\n",((double)(stop-start))/CLOCKS_PER_SEC);
     cout << "main ended." << endl;

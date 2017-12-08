@@ -73,6 +73,7 @@ public:
     static void sgti(int dst_reg, int left, int imm);
     static void sge(int dst_reg, int left, int right);
     static void sgei(int dst_reg, int left, int imm);
+    static void mns(int dst_reg, int src_reg);
     // data
     static void _data();
     static void _asciiz(string tag, string str);

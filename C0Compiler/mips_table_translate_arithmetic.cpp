@@ -76,7 +76,7 @@ void MipsTable::incommutative_translate(Q &q) {
 void MipsTable::move_translate(Q &q) {
     int dst_reg = fetch_symbol(q.dst, false);
     if (q.left->const_flag == false) {
-        int src_reg = fetch_symbol(q.left, false);
+        int src_reg = fetch_symbol(q.left);
         MC::move(dst_reg, src_reg);
     } else {
         int immediate;
@@ -183,7 +183,7 @@ void MipsTable::array_read_translate(Q & q) {
 }
 
 void MipsTable::array_write_translate(Q & q) {
-    // a[i] = b, a = b TO i
+    // a[i] = b
     int ptr_reg = fetch_symbol(q.dst);
     int offset = 0;
     int src_reg = fetch_symbol(q.right);
@@ -197,17 +197,23 @@ void MipsTable::array_write_translate(Q & q) {
         }
     } else {
         offset = fetch_symbol(q.left);
-        if (q.left->type == Symbol::CHAR) {
+        if (q.dst->type == Symbol::CHAR) {
             MC::addu(MC::_at, ptr_reg, offset);
-        } else if (q.left->type == Symbol::INT) {
+        } else if (q.dst->type == Symbol::INT) {
             MC::sll(MC::_at, offset, 2); // multiply offset by 4
             MC::addu(MC::_at, MC::_at, ptr_reg);
         }
-        if (q.left->type == Symbol::CHAR) {
+        if (q.dst->type == Symbol::CHAR) {
             MC::sb(src_reg, 0, MC::_at);
         }
-        if (q.left->type == Symbol::INT) {
+        if (q.dst->type == Symbol::INT) {
             MC::sw(src_reg, 0, MC::_at);
         }
     }    
+}
+
+void MipsTable::minus_translate(Q & q) {
+    int dst_reg = fetch_symbol(q.dst, false);
+    int src_reg = fetch_symbol(q.left);
+    MC::mns(dst_reg, src_reg);
 }

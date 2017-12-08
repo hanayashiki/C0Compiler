@@ -48,7 +48,7 @@ void Syntax::retract_token() {
 
 string Syntax::anonymous() {
     static long long int num = 0;
-    return "UNNAMED_" + to_string(num++);
+    return "%UNNAMED_" + to_string(num++);
 }
 
 void Syntax::add_sym(Symbol* sym) {

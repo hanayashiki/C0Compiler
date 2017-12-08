@@ -64,4 +64,5 @@ namespace SymbolUtils {
         bool do_sort=true);
     int get_const_value(Symbol* sym);
     int get_simple_size(Symbol* sym);
+    bool in_mem(Symbol* sym);
 }

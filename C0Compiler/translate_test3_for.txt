@@ -1,9 +1,24 @@
+int k;
+int g;
+void func(int i) {
+	k = g+k;
+	g = k-g;
+	k = k-g;
+}
+
 void main() {
-	int arr[100], i;
-	for (i = 0; i != 100; i=i+1) {
-		arr[i] = i;
-		printf(arr[i]);
+    int i, j, time;
+	time = 4;
+	k = 12345;
+	g = 54321;
+	for (i = 0; i < time; i = i + 1) {
+	    for (j = 0; j < time; j = j + 1) {
+			if (i == j) {
+				printf(g);
+			}
+		    printf("i=", i);
+			func(j);
+			printf("   j=", j);
+		}
 	}
-	printf("fuck you leatherman");
-	printf("fuck you");
 }

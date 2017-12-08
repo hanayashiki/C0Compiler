@@ -45,3 +45,9 @@ void MipsCode::sgei(int dst_reg, int left, int imm) {
     slti(_at, left, imm);
     xori(dst_reg, _at, 1);
 }
+
+void MipsCode::mns(int dst_reg, int src_reg) {
+    // -a = ~a + 1
+    xori(_at, src_reg, 0xFFFFFFFF);
+    addiu(dst_reg, _at, 1);
+}
