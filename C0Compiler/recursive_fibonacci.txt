@@ -1,0 +1,11 @@
+int fibo(int i) {
+    if (i < 2) 
+	    return (1);
+	else
+	    return (fibo(i-1) + fibo(i-2)); 
+}
+
+void main() {
+    printf("fibo(0)=1?", fibo(0));
+	printf("fibo(6)=13?", fibo(6));
+}

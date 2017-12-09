@@ -3,7 +3,8 @@
 #define Q Quaterion
 
 bool Syntax::if_statement() {
-    Symbol *if_false = new_label("if_false", false);
+    Symbol *if_false = new_label("if_false");
+    Symbol *if_end = new_label("if_end");
     if (match_type(Token::IF)) {
         next_token();
     } else {
@@ -29,16 +30,20 @@ bool Syntax::if_statement() {
     }
 
     statement_try();
+    Q goto_q(Q::GOTO, if_end);
+    q_table->add_quaterion(goto_q);
 
     Q label_q(Q::LABEL, if_false);
     q_table->add_quaterion(label_q);
+
 
     if (match_type(Token::ELSE)) {
         next_token();
         statement_try();
     }
+    Q end_q(Q::LABEL, if_end);
+    q_table->add_quaterion(end_q);
 
-    add_sym(if_false);
     return true;
 }
 

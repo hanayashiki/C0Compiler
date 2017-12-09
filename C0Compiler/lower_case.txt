@@ -1,0 +1,17 @@
+void main() {
+    int _;
+	char input_char;
+	char output_char;
+    for (_ = 0; 1; _ = _ + 1) {
+	    printf("This is supposed to convert your capital letter into lowercase letter. ");
+		scanf(input_char);
+		if (input_char >= 'A') {
+		    if (input_char <= 'Z') {
+			    output_char = input_char - ('A' - 'a');
+			    printf(output_char);
+			} else {
+			    printf(input_char);
+			}
+		} 
+	}
+}

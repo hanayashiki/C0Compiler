@@ -65,11 +65,13 @@ bool Syntax::func_def() {
     if (match_type(Token::RIGHT_PARENTHESIS)) {
         next_token();
     } else {
-        error_handler(SyntaxError::FUNCTION_MISSING_RIGHT_PARENTHESIS);
+        error_handler("')' is needed. ");
     }
     // statement block
     if (match_type(Token::LEFT_BRACE)) {
         next_token();
+    } else {
+        error_handler("'{' is needed. ");
     }
 
     Symbol* label = new_label(new_func->name);
