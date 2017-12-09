@@ -88,6 +88,10 @@ bool Syntax::switch_() {
         }
     }
 
+    if (default_matched == false) {
+        error_handler("Missing default in switch statement. ");
+    }
+
     // '}'
     if (match_type(Token::RIGHT_BRACE)) {
         next_token();

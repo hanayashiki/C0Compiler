@@ -1,0 +1,15 @@
+void main() {
+    int _; char c;
+	for (_=0; 1; _ = _ + 1) {
+		printf("This is supposed to map a:1 b:2 c:3 else:0");
+		scanf(c);
+		switch (c) {
+			case 'a': 
+				printf(1);
+			case 'b':
+				printf(2);
+			case 'c':
+				printf(3);
+		}
+	}
+}

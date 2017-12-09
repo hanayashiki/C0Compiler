@@ -14,7 +14,7 @@ int main() {
     start = clock();
 
     MipsCode::out_file = fopen("mips.asm", "w");
-    FILE* f = fopen("lower_case.txt", "r");
+    FILE* f = fopen("switch.txt", "r");
     if (f == NULL) {
         cout << "File not exist. " << endl;
         getchar();
