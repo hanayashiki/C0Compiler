@@ -74,7 +74,13 @@ void MipsTable::incommutative_translate(Q &q) {
 }
 
 void MipsTable::move_translate(Q &q) {
+	if (q.dst->const_flag) {
+		cout << "caught" << endl;
+		q.dump_file = stdout;
+		q.emit();
+	}
     int dst_reg = fetch_symbol(q.dst, false);
+
     if (q.left->const_flag == false) {
         int src_reg = fetch_symbol(q.left);
         MC::move(dst_reg, src_reg);

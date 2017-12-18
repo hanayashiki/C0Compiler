@@ -144,8 +144,8 @@ void MipsTable::call_func_translate(Q & q) {
     // »Ö¸´ÍÚ¾ò
     MC::addiu(MC::_sp, MC::_sp, -stack_size);
     if (q.left->type != Symbol::VOID) {
-        int ret_offset = - get_simple_size(q.left) - stack_size;
-        pass_sym->type = q.left->type;
+        int ret_offset = - 4 - stack_size;
+        pass_sym->type = Symbol::INT;
         (*stack_map)[pass_sym] = ret_offset;
     }
     MC::jal(q.left->start_label->name);
@@ -168,8 +168,10 @@ void MipsTable::return_translate(Q & q) {
 
 void MipsTable::get_translate(Q & q) {
     int tg_ret = fetch_symbol(q.dst, false);
-    (*temp_map)[pass_sym] = tg_ret;
-    load_symbol(pass_sym);
+	int sym_ret = fetch_symbol(pass_sym);
+	MC::move(tg_ret, sym_ret);
+	map_sym_reg(pass_sym, 0, temp_map);
+	// special for pass_sym: valid only once
 }
 
 void MipsTable::exit() {

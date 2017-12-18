@@ -57,7 +57,6 @@ bool Syntax::assign(bool non_array) {
                     to_string((long long int)expr_temp->integer_value)
                     +"]");
         }
-
         if (match_type(Token::RIGHT_BRACKET)) {
             next_token();
         } else {

@@ -1,0 +1,45 @@
+char c;
+int aaa;
+char global[10];
+int a;
+
+
+char get_a_1() {
+	return ('a');
+}
+
+char get_a_2() {
+	return (97);
+}
+
+int get_a_3() {
+	return (97);
+}
+
+int get_a_4() {
+	return ('a');
+}
+
+void pass_a_1(int a) {
+	char cast_char;
+	cast_char = a;
+	printf(cast_char);
+}
+
+void pass_a_2(char a) {
+	printf(a);
+}
+
+void main() {
+	char ch;
+	printf("this is supposed to get 7 a's. ");
+	printf(get_a_1());
+	printf(get_a_2());
+	ch = get_a_3();
+	printf(ch);
+	ch = get_a_4();
+	printf(ch);
+	pass_a_1(97);
+	pass_a_1('a');
+	pass_a_2(ch);
+}

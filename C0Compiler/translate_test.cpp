@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include <time.h>
-/*
+
 using namespace SymbolUtils;
 
 int main() {
@@ -14,7 +14,7 @@ int main() {
     start = clock();
 
     MipsCode::out_file = fopen("mips.asm", "w");
-    FILE* f = fopen("public_test.txt", "r");
+    FILE* f = fopen("debug.txt", "r");
     if (f == NULL) {
         cout << "File not exist. " << endl;
         getchar();
@@ -54,12 +54,12 @@ int main() {
     fclose(MipsCode::out_file);
     fclose(f);
     if (syntax.errors == 0) {
-        //system("java -jar Mars4_5.jar mips.asm");
-        system("mips.asm");
+		system("mips.asm");
+        system("java -jar Mars4_5.jar mips.asm");
     } else {
         cout << "Compilation Error(s): " << syntax.errors 
             << ". Aborting.\n";
     }
     getchar();
     return 0;
-}*/
+}

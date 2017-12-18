@@ -22,7 +22,7 @@ MipsTable::MipsTable(Symbol* func_sym,
 
     // alloc space for return value
     if (func_sym->type != Symbol::VOID) {
-        ret_sym = new Symbol("%ret_val", func_sym->type);
+        ret_sym = new Symbol("%ret_val", Symbol::INT);
         alloc_stack(ret_sym);
     }
     stack_size = 4; // always leave a place for ret_val, for consistency
@@ -131,6 +131,9 @@ int MipsTable::fetch_symbol(Symbol* sym, bool load_value) {
         // be robust
         return 0;
     }
+	if (sym->const_flag) {
+		sym->display();
+	}
     assert(!sym->const_flag);
 
     if ((iter != temp_map->end()) && (iter->second != 0)) {
