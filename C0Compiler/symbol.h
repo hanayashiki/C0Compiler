@@ -1,6 +1,7 @@
 // 定义所有有信息的符号
 
 class SymbolTable;
+class BasicBlock;
 
 class Symbol {
 private:
@@ -18,6 +19,8 @@ public:
     bool function_flag;
     // label
     bool string_flag;
+	bool jumped_to;
+	BasicBlock* basic_block;
     enum symbol_types {
         UNKNOWN,
         CHAR,

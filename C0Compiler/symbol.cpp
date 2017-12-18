@@ -4,6 +4,7 @@ void Symbol::init() {
     array_flag = false;
     function_flag = false;
     string_flag = false;
+	jumped_to = false;
 }
 
 Symbol::Symbol(string name_, int type_, bool const_): 

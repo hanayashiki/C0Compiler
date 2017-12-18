@@ -2,6 +2,7 @@ void main() {
     int _;
 	char input_char;
 	char output_char;
+	printf(-'c');
     for (_ = 0; 1; _ = _ + 1) {
 	    printf("This is supposed to convert your capital letter into lowercase letter. ");
 		scanf(input_char);

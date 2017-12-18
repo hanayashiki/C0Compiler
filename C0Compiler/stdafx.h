@@ -16,6 +16,8 @@
 #include "token.h"
 #include "lexical_error.h"
 #include "lexer.h"
+#include "dataset.h"
+
 
 #include "regex_handler.h"
 
@@ -33,6 +35,8 @@ typedef hash_map<Symbol*, int> mem_map;
 #include "mips_code.h"
 #include "mips_table.h"
 
+#include "basicblock.h"
+#include "flow.h"
 
 
 

@@ -33,7 +33,7 @@ bool Syntax::call_func(Symbol* target_symbol) {
         throw e;
         return false;
     }
-    read_token.display();
+    // read_token.display();
     if (match_type(Token::RIGHT_PARENTHESIS)) {
         next_token();
     } else {

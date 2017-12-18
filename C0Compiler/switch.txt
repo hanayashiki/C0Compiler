@@ -10,6 +10,8 @@ void main() {
 				printf(2);
 			case 'c':
 				printf(3);
+			default:
+				printf(0);
 		}
 	}
 }

@@ -14,6 +14,6 @@ bool QuaterionTable::add_quaterion(Quaterion & q) {
 void QuaterionTable::emit() {
     for (QList::iterator iter = q_list.begin();
         iter != q_list.end(); iter++) {
-            iter->emit();
+        iter->emit();
     }
 }

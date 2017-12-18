@@ -1,5 +1,7 @@
 #include "stdafx.h"
 
+class BasicBlock;
+
 class Quaterion {
 public:
     static FILE* dump_file;
@@ -60,7 +62,7 @@ public:
     Quaterion(int op_name, Symbol*, Symbol*, Symbol*);
     Quaterion(int op_name, Symbol* dst, Symbol* left);
     Quaterion(int op_name, Symbol* left);
-    Quaterion(int op_name);
+
     Quaterion(Symbol* dst, Symbol* left); // a = b
     void emit(bool comment=false);
     void emit(string str);
@@ -69,7 +71,13 @@ public:
     bool is_commutative();
     bool is_incommutative();
     bool is_branch();
+	bool is_unconditional_jump();
+	bool is_jump();
     bool is_print();
+	bool is_action();
+	// for optimization
+	bool beginning;
+	BasicBlock* basic_block;
 };
 
 static char* op_names[Quaterion::OP_COUNT] =

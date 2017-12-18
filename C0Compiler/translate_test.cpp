@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include <time.h>
-
+/*
 using namespace SymbolUtils;
 
 int main() {
@@ -14,7 +14,7 @@ int main() {
     start = clock();
 
     MipsCode::out_file = fopen("mips.asm", "w");
-    FILE* f = fopen("switch.txt", "r");
+    FILE* f = fopen("public_test.txt", "r");
     if (f == NULL) {
         cout << "File not exist. " << endl;
         getchar();
@@ -62,4 +62,4 @@ int main() {
     }
     getchar();
     return 0;
-}
+}*/

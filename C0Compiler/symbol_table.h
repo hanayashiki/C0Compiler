@@ -19,6 +19,7 @@ public:
     bool in_map(string name);
     bool in_current_map(string & name);
 	Symbol* get_sym(string name);
-    sym_list get_all();
+    sym_list get_all(int starting_id = 0);
+	sym_list get_closure(Symbol* func_sym);
     void display();
 };

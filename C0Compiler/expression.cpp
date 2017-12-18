@@ -20,12 +20,11 @@ Symbol* Syntax::expression(Symbol* target_symbol) {
         return NULL;
     }
     if (minus_flag) {
-        Symbol* temp_minus = temp_symbol(left->type);
+        Symbol* temp_minus = temp_symbol(Symbol::INT);
 
         if (left->const_flag) {
             temp_minus->const_flag = true;
-            temp_minus->character_value = -(left->character_value);
-            temp_minus->integer_value = -(left->integer_value);
+            temp_minus->integer_value = -get_const_value(left);
         } else {
             Q minus_q(Q::MINUS, temp_minus, left);
             q_table->add_quaterion(minus_q);

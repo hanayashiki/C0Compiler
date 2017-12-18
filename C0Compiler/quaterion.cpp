@@ -6,7 +6,9 @@ void Quaterion::init(int op_name) {
     dst = NULL;
     left = NULL;
     right = NULL;
+	basic_block = NULL;
     op = op_name;
+	beginning = false;
 }
 
 Quaterion::Quaterion(int op_name,
@@ -20,6 +22,9 @@ Quaterion::Quaterion(int op_name,
         label = dst_;
         // special: dst to store the label
     }
+	if ((op_name >= BEQZ) && (op_name <= BNEZ)) {
+		label = right_;
+	}
 }
 
 Quaterion::Quaterion(int op_name,
@@ -37,6 +42,9 @@ Quaterion::Quaterion(int op_name,
     } else {
         left = left_;
     }
+	if (op_name == GOTO) {
+		label = left_;
+	}
 }
 
 Quaterion::Quaterion(Symbol* dst_,
@@ -86,8 +94,20 @@ bool Quaterion::is_branch() {
         || (op == GOTO);
 }
 
+bool Quaterion::is_unconditional_jump() {
+	return (op == GOTO) || (op == RET);
+}
+
+bool Quaterion::is_jump() {
+	return is_branch() || is_unconditional_jump();
+}
+
 bool Quaterion::is_print() {
     return (op == PRINT_CHAR) || (op == PRINT_INT) || (op == PRINT_STR);
+}
+
+bool Quaterion::is_action() {
+	return (op != LABEL) && (op != PROLOG) && (op != EPILOG);
 }
 
 void Quaterion::emit(string str) {

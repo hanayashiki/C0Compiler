@@ -135,7 +135,7 @@ bool Syntax::func_def_parameter_pair(Symbol* func_sym) {
         type = Symbol::CHAR;
         next_token();
     } else {
-        read_token.display();
+        //read_token.display();
         //cout << "false at type match\n";
         return false;
     }
