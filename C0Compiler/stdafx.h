@@ -36,7 +36,11 @@ typedef hash_map<Symbol*, int> mem_map;
 #include "mips_table.h"
 
 #include "basicblock.h"
+#include "dnode.h"
+#include "dag.h"
 #include "flow.h"
+
+
 
 
 

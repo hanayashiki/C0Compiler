@@ -44,6 +44,8 @@ public:
         EPILOG,
         RET,
 
+		SELF,
+
         END      // sentinel
     };
     static const int OP_COUNT = END;
@@ -62,6 +64,7 @@ public:
     Quaterion(int op_name, Symbol*, Symbol*, Symbol*);
     Quaterion(int op_name, Symbol* dst, Symbol* left);
     Quaterion(int op_name, Symbol* left);
+	Quaterion();
 
     Quaterion(Symbol* dst, Symbol* left); // a = b
     void emit(bool comment=false);
@@ -118,6 +121,8 @@ static char* op_names[Quaterion::OP_COUNT] =
     "GOTO",
 
     "EPILOG",
-    "RET"
+    "RET",
+
+	"SELF"
 };
 

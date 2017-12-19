@@ -1,4 +1,5 @@
 #include "stdafx.h"
+#include "dataset.h"
 
 #define GET_VEC(x) ((x)/32)
 #define GET_OFFSET(x) ((x)%32)
@@ -40,6 +41,12 @@ bool dataSet<elem>::map_elem(int idx, bool in) {
         bit_vec.at(vec) &= ~(1 << GET_OFFSET(idx));
     }
     return true;
+}
+
+template<class elem>
+bool dataSet<elem>::included(int idx)
+{
+	return ((bit_vec.at(GET_VEC(idx)) & (1 << GET_OFFSET(idx))) != 0);
 }
 
 template<class elem>

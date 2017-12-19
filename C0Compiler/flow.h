@@ -21,5 +21,7 @@ public:
 	bool calculate_active_out(BasicBlock * block);
 	bool calculate_active_in(BasicBlock * block);
 
+	void dag_optimize();
+
 	void display_blocks();
 };

@@ -14,6 +14,7 @@ public:
     void set_elem_list(vector<elem> * e_l);
 
     bool map_elem(int idx, bool in=true);
+	bool included(int idx);
     
     void set_union(dataSet & src1, dataSet & src2);
     void set_intersect(dataSet & src1, dataSet & src2);

@@ -1,10 +1,10 @@
 #include "stdafx.h"
-/*
+
 int main() {
 	Lexer lexer;
 	SymbolTable symbol_table;
 	QuaterionTable q_table;
-	FILE* f = fopen("bblock_1.txt", "r");
+	FILE* f = fopen("dag_1.txt", "r");
 	Quaterion::dump_file = stdout;
 	lexer.setSource(f);
 	Syntax syntax(&lexer, &symbol_table, &q_table);
@@ -23,9 +23,10 @@ int main() {
 			flow_map.generate_flow_map(q_table.q_list);
 			flow_map.display_blocks();
 			flow_map.activity_analysis();
+			flow_map.dag_optimize();
 		}
 	}
 
 	getchar();
 	return 0;
-}*/
+}

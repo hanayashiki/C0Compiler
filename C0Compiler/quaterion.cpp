@@ -47,6 +47,11 @@ Quaterion::Quaterion(int op_name,
 	}
 }
 
+Quaterion::Quaterion()
+{
+	init(NONE);
+}
+
 Quaterion::Quaterion(Symbol* dst_,
     Symbol* left_) {
     init(NONE);
@@ -142,17 +147,20 @@ void Quaterion::emit(bool comment) {
     }
     if ((op >= BEQZ) && (op <= BNEZ)) {
         fprintf(dump_file, "%s %s %s;\n",
-            op_names[op], get_name(left).c_str(), get_name(right).c_str());
+            op_names[op], get_name(left).c_str(), get_name(label).c_str());
     }
     if ((op >= BEQ) && (op <= BNE)) {
         fprintf(dump_file, "%s %s %s %s;\n",
             op_names[op], get_name(left).c_str(), get_name(right).c_str(),
             get_name(label).c_str());
     }
+	if (op == GOTO) {
+		fprintf(dump_file, "%s %s;\n", op_names[op], get_name(label).c_str());
+	}
     if ((op >= GET) && op <= (READ_INT)) {
         fprintf(dump_file, "%s %s;\n", op_names[op], get_name(dst).c_str());
     }
-    if ((op >= _LINK) && (op <= RET)) {
+    if ((op >= _LINK) && (op <= RET) && (op != GOTO)) {
         if (left != NULL) {
             fprintf(dump_file, "%s %s;\n", op_names[op], get_name(left).c_str());
         } else {
