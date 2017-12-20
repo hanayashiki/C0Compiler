@@ -95,6 +95,9 @@ bool Syntax::func_def() {
     if ((type != Symbol::VOID) && !value_function_return) {
         error_handler("'"+new_func->name+"' should contain 'return'. ");
     }
+	if ((type == Symbol::VOID) && value_function_return) {
+		error_handler("'" + new_func->name + "' should not contain 'return'. ");
+	}
 
     Q epilog_q(Q::EPILOG, NULL);
     q_table->add_quaterion(epilog_q);

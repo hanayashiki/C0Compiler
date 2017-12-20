@@ -1,0 +1,25 @@
+int pp;
+void main()
+{
+    int a;
+    int b;
+    int c;
+    a = 1;
+    b = 2;
+    c = 3;
+    a = 10 * b;
+    printf("a=%d ", a);
+    a = b * 10;
+    printf("a=%d ", a);
+    a = b / 2;
+    printf("a=%d ", a);
+    a = 100 / b;
+    printf("a=%d ", a);
+    a = 1 - b;
+    printf("a=%d ", a);
+    a = 1 + b;
+    printf("a=%d ", a);
+
+
+    return;
+}

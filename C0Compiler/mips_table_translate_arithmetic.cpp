@@ -123,7 +123,7 @@ void MipsTable::commutative_translate(Q & q) {
             MC::addiu(dst_reg, src_reg, immediate);
         }
         if (q.op == Q::MULT) {
-            MC::addiu(dst_reg, MC::_at, immediate); 
+            MC::addiu(MC::_at, MC::_zero, immediate);
             MC::mul(dst_reg, src_reg, MC::_at);
         }
         if (q.op == Q::EQ) {

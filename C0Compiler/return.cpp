@@ -4,7 +4,6 @@
 
 bool Syntax::return_() {
     struct SyntaxError::StatementException e = {""};
-    value_function_return = true;
     if (match_type(Token::RETURN)) {
         next_token();
     } else {
@@ -13,6 +12,7 @@ bool Syntax::return_() {
     // return[°Æ(°Ø£º±Ì¥Ô Ω£æ°Æ)°Ø] 
     if (match_type(Token::LEFT_PARENTHESIS)) {
         next_token();
+		value_function_return = true;
         Symbol* ret_sym = expression();
         if (match_type(Token::RIGHT_PARENTHESIS)) {
             next_token();

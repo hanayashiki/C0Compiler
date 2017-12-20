@@ -1,0 +1,28 @@
+int pp;
+void main()
+{
+    const int A=1;
+    const char a='a';
+    int input1, input2, input3;
+    int x[6],i,j,k;
+    i = 1;
+    j = i;
+	printf("j=",j);
+    j = j + i;
+	printf("j=",j);
+    i = -i * 10;
+    i = +i + 'x' - a;
+    k = +-10-10;
+    k = --1+k;
+    i = i + j + k;
+    j = i - j;
+	printf("j=",j);
+    k = i * j;
+    i = i / j;
+    i = i + A;
+    printf("i=",i);
+    printf("j=",j);
+	pp = j;
+    printf("k=",k);
+    printf("");
+}

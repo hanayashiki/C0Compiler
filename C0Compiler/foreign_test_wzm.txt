@@ -1,0 +1,199 @@
+const int test_global_int = 3;
+const char test_global_char = 'c';
+int test_global_int_0;
+char test_global_char_1,test_global_char_2 ;
+int global_array[10];
+int return_self(int t)
+{
+    return (t);
+}
+char int2char(int m)
+{
+    return(m + 'a');
+}
+void void_func()
+{
+    
+}
+int test_exp()
+{
+    int i;
+    int j;
+    int k;
+    i = 3;
+    j = 4;
+    k = 5;
+    k = (i+j+k)*(i+j+k);
+    return (k);
+}
+void test_scanf()
+{
+    int  space_1,space_2;
+    char space_3;
+    printf("test scanf start\n");
+    scanf(space_1,space_2,space_3);
+    printf(space_1);
+    printf("\n");
+    printf(space_2);
+    printf("\n");
+    printf(space_3);
+    printf("\n");
+    printf("test scanf end\n");
+
+}
+void test_if(int test_num)
+{
+    if(test_num / 2 == 0)
+    {
+        printf("0");
+        if(test_num - 2*(test_num / 2) == 0)
+            printf("0\n");
+        else
+            printf("1\n");
+    }
+    else
+    {
+        printf("1");
+        if(test_num - 2*(test_num / 2) == 0)
+            printf("0\n");
+        else
+            printf("1\n");
+    }
+    if (test_num == 3)
+        printf("test if end\n");
+}
+int test_switch(int test_num)
+{
+    switch (test_num)
+    {
+    case 0:
+        return (2);
+    case 1:
+        return (1);
+    case 2:
+        return (0);
+    default:
+        {
+            printf("test switch end\n");
+            return (-1);
+        }
+    }
+}
+char test_loop(int length,int width)
+{
+    int i;
+    int array[10];
+    i = 0;
+    if (length > 10)
+        return ('b');
+    for(i = 0;i < length;i = i + 1)
+    {
+        array[i] = width*(i+1);
+        printf (array[i]);
+    }
+    return ('g');
+}
+void quick_sort_init()
+{
+    int i,read_temp;
+    i = 0;
+    for(i = 0;i < 10;i = i + 1)
+    {
+        scanf(read_temp);
+        global_array[i] = read_temp;
+    }
+}
+void quick_sort(int array_head,int array_end)
+{
+    int i,j;
+    int temp,flag;
+    i = 0;
+    j = 0;
+    if (array_head >= array_end)
+        return ;
+    flag = 0;
+    for (j = array_end;flag == 0;j = j - 1)
+    {
+        if (global_array[j] < global_array[array_head])
+            flag = 1;
+        if (j <= array_head)
+            flag = 1;
+    }
+    j = j + 1;
+    for(i = array_head + 1; i <= j; i = i +1)
+    {
+        if (global_array[i] > global_array[array_head])
+        {
+            temp = global_array[i];
+            global_array[i] = global_array[j];
+            global_array[j] = temp;
+            flag = 0;
+            for (j = array_end;flag == 0;j = j - 1)
+            {
+                if (global_array[j] < global_array[array_head])
+                    flag = 1;
+                if (j <= array_head)
+                    flag = 1;
+            }
+            j = j + 1;
+        }
+    }
+    temp = global_array[array_head];
+    global_array[array_head] = global_array[j];
+    global_array[j] = temp;
+    quick_sort(array_head,return_self(j - 1));
+    quick_sort(return_self(j) + 1,array_end);
+}
+
+void main()
+{
+    int i;
+    char m;
+    printf("hello world\n");
+    printf(test_global_int+3);
+    printf(test_global_char);
+    test_global_int_0 = 4;
+    test_global_int_0 = test_global_int_0 + 0;
+    printf("\ntest_global_int_0 + 0 = \n",test_global_int_0);
+    test_global_char_1 = '1';
+    test_global_char_2 = test_global_char_1;
+    test_global_char_1 = '2';
+    printf(test_global_char_1);
+    printf(test_global_char_2);
+    printf("\n");
+    test_scanf();
+    printf("test if start\n");
+    test_if(0);
+    test_if(1);
+    test_if(2);
+    test_if(3);
+    printf("test switch start\n");
+    test_global_int_0 = test_switch(0);
+    printf(test_global_int_0);
+    test_global_int_0 = test_switch(1);
+    printf(test_global_int_0);
+    test_global_int_0 = test_switch(2);
+    printf(test_global_int_0);
+    test_global_int_0 = test_switch(3);
+    printf("test loop start\n");
+    test_global_char_1 = test_loop(-1,-1);
+    test_global_char_1 = test_loop(5,5);
+    test_global_char_2 = test_loop(11,11);
+    printf("\n");
+    printf(test_global_char_1);
+    printf(test_global_char_2);
+    printf("\n");
+    printf("test loop end\n");
+    printf("quick sort start\n");
+    quick_sort_init();
+    quick_sort(0,9);
+    for(i = 0;i < 10; i = i + 1)
+    {
+       m = int2char(i);
+       printf(global_array[i]);
+       printf(m);
+       printf(" ");
+    }
+    printf("\nquick sort end\n");
+    printf("pass\n");
+}

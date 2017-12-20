@@ -21,10 +21,9 @@ MipsTable::MipsTable(Symbol* func_sym,
     stack_map = new mem_map;
 
     // alloc space for return value
-    if (func_sym->type != Symbol::VOID) {
-        ret_sym = new Symbol("%ret_val", Symbol::INT);
-        alloc_stack(ret_sym);
-    }
+    ret_sym = new Symbol("%ret_val", Symbol::INT);
+    alloc_stack(ret_sym);
+
     stack_size = 4; // always leave a place for ret_val, for consistency
     // alloc stack space for parameters
     for (sym_list::iterator iter_p = param_list.begin();

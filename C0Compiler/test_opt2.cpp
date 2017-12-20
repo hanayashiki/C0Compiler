@@ -1,5 +1,5 @@
 #include "stdafx.h"
-
+/*
 int main() {
 	Lexer lexer;
 	SymbolTable symbol_table;
@@ -29,4 +29,4 @@ int main() {
 
 	getchar();
 	return 0;
-}
+}*/

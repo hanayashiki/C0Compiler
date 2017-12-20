@@ -61,7 +61,7 @@ void Syntax::add_sym(Symbol* sym) {
 
 Symbol* Syntax::temp_symbol(int type, bool save) {
     static long long int num = 0;
-    string name = "t" + to_string(num++);
+    string name = "%t" + to_string(num++);
     Symbol* t = new Symbol(name, type);
     if (save) {
         add_sym(t);

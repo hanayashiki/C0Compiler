@@ -1,0 +1,96 @@
+const int name1=1,name2=2,name3=-3;
+const char namea='a',nameb='b',__name='_';
+int test_result;
+
+int abs(int a){
+	if (a>=0)
+		return(a*1/-1*-1);
+	if (a<=-2){
+		return(a/(0-a)*a);
+	}
+}
+
+char int2ch(int name1){
+    switch(name1){
+        case 65: return ('A');
+        case 66: return ('B');
+	case 67: return ('C');
+	case 68: return ('D');
+	case 69: return ('E');
+	default:{}
+    }
+    return ('Z');
+}
+
+void test_gram(){
+	const int cint1=1;
+	const char cchar1='_';
+	int a,b[3],c[1],d[2], qwer;
+	char i,j[2],k[6],l;
+	int e;
+	i='_';
+	l='v';
+	a=-5;
+	b[0]=7;
+	b[cint1]=abs(-3*a+b[b[0]-a*-1+a/2]/3);
+	printf("b[1]:",b[1]);
+	j[cchar1-i]=int2ch((b[cint1]*(-65/-17-a)+a)/2);
+	printf("j[0]+1:",j[0]+1);
+	b[b[b[1]-16]-a*-4-a]=-+35*a+b[0]/-1*b[1];
+	printf("b[2]:",b[2]);
+	c[-4/-5]=74741/(-+35*a+b[0]/-1*b[1]+2*b[b[b[cint1]-16]-a*-4-a]);
+	printf("c[0]: ",c[0]);
+	e=b[2];
+	switch(b[1]){
+    		case 17:{
+        		d[-c[0]/445-c[0]/-444]=(c[3-(a*-1+4)/3]+b[-(a+1)/4])/(i+l);
+			printf("d[1]:",d[1]);
+        		d[2*(d[cint1]-3)+d[1]]=i/a;
+			printf("d[0]:",d[0]);
+		
+        		if (d[0]==-19){
+            			if(d[0]>a*4){
+                			if(d[0]<-18){
+						j[('C'+'A'-cchar1)/19]=int2ch(('A'+5)/5*('B'-61)+a+a/a);
+                    				if(d[0]+19)
+                        			j[1]='Z';
+
+                			}
+            			}
+        		}
+			for(qwer=0; qwer<10; qwer = qwer-1){
+				j[1]=int2ch(j[1]+1);
+				e = e + j[1];
+				if(j[1]>='E')
+					qwer=100;
+			}
+			printf("e: ",e);
+        		switch(e+-260){
+        			case 0:{
+            				printf("pass");
+            				return;
+				}
+				default:{}
+        		}
+		}
+		default:{}
+	}
+	printf("Something wrong");
+	return;
+	
+	
+}
+
+void test_fun(){
+	
+	
+	
+}
+
+void main(){
+	test_result=0;
+	
+	test_gram();
+	
+	
+}
