@@ -48,22 +48,36 @@ void MipsTable::branch_translate(Q & q) {
             int v_left = get_const_value(q.left);
             int v_right = get_const_value(q.right);
             if (v_left == v_right) {
-                MC::j(q.label->name);
-            }
-        } else if (q.left->const_flag) {
-            MC::addiu(MC::_at, MC::_zero, get_const_value(q.left));
-            src_reg = MC::_at;
-        } else if (q.right->const_flag) {
-            MC::addiu(MC::_at, MC::_zero, get_const_value(q.right));
-            cmp_reg = MC::_at;            
-        } else {
-            cmp_reg = fetch_symbol(q.right);
-        }
-        if (q.op == Q::BEQ) {
-            MC::beq(src_reg, cmp_reg, q.label->name);
-        } else {
-            MC::bne(src_reg, cmp_reg, q.label->name);
-        }
+				if (q.op == Q::BEQ) {
+					MC::j(q.label->name);
+				}
+			}
+			else {
+				if (q.op == Q::BNE) {
+					MC::j(q.label->name);
+				}
+			}
+		}
+		else {
+			if (q.left->const_flag) {
+				MC::addiu(MC::_at, MC::_zero, get_const_value(q.left));
+				src_reg = MC::_at;
+				cmp_reg = fetch_symbol(q.right);
+			}
+			else if (q.right->const_flag) {
+				MC::addiu(MC::_at, MC::_zero, get_const_value(q.right));
+				cmp_reg = MC::_at;
+			}
+			else {
+				cmp_reg = fetch_symbol(q.right);
+			}
+			if (q.op == Q::BEQ) {
+				MC::beq(src_reg, cmp_reg, q.label->name);
+			}
+			else {
+				MC::bne(src_reg, cmp_reg, q.label->name);
+			}
+		}
     }
     if (q.op == Q::GOTO) {
         MC::j(q.left->name);

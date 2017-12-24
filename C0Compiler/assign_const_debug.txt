@@ -4,6 +4,7 @@ void main()
     int a;
     int b;
     int c;
+
     a = 1;
     b = 2;
     c = 3;
@@ -19,7 +20,12 @@ void main()
     printf("a=%d ", a);
     a = 1 + b;
     printf("a=%d ", a);
-
-
-    return;
+    a = 'a' + b;
+    printf("a=%d ", a);
+    a = 'a' * b;
+    printf("a=%d ", a);
+    a = 'a' / b;
+    printf("a=%d ", a);
+    a = 'c' / c;
+    printf("a=%d ", a);
 }
