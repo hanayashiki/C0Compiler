@@ -2,7 +2,7 @@
 #include <time.h>
 
 using namespace SymbolUtils;
-/*
+
 int main() {
 	Lexer lexer;
 	SymbolTable symbol_table;
@@ -62,4 +62,4 @@ int main() {
 	}
 	getchar();
 	return 0;
-}*/
+}

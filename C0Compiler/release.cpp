@@ -2,7 +2,7 @@
 #include <time.h>
 
 using namespace SymbolUtils;
-
+/*
 int main() {
 	string file_name;
 
@@ -65,4 +65,4 @@ int main() {
 	}
 	getchar();
 	return 0;
-}
+}*/

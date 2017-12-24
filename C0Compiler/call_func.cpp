@@ -51,6 +51,7 @@ bool Syntax::call_func(Symbol* target_symbol) {
 }
 
 bool Syntax::call_func_list(Symbol* func_sym) {
+	vector<Symbol*> to_push;
     vector<Symbol*> & param_types = func_sym->parameter_type_list;
     for (vector<Symbol*>::iterator iter = param_types.begin();
         iter != param_types.end(); iter++) {
@@ -86,9 +87,11 @@ bool Syntax::call_func_list(Symbol* func_sym) {
             error_handler("Parameter list miss match. ");
             return false;
         }
-        Q push_q(Q::PUSH, temp);
-        q_table->add_quaterion(push_q);
+		to_push.push_back(temp);
     }
-   
+	for (int idx = 0; idx < to_push.size(); idx++) {
+		Q push_q(Q::PUSH, to_push[idx]);
+		q_table->add_quaterion(push_q);
+	}
     return true;
 }
