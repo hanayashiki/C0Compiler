@@ -1,6 +1,6 @@
 const int a = 1;
 const int b = 1;
-const char c = 'c';
+char c;
 
 int move(int a,int b)
 {
@@ -14,7 +14,13 @@ int move(int a,int b)
     return(a+b);
 }
 
+void read_c() {
+    char c;
+	scanf(c);
+}
+
 void main()
 {
-	printf(move(b,a));
+	read_c();
+	scanf(c);
 }

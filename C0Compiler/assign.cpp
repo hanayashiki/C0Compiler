@@ -8,6 +8,8 @@ bool Syntax::assign(bool non_array) {
 
     struct SyntaxError::StatementException e = {""};
 
+	printfd("fuckyou%d", 1);
+
     if (match_type(Token::IDENTITY)) {
         left_name = read_token.getName();
         left_sym = symbol_table->get_sym(left_name);

@@ -75,7 +75,8 @@ int Syntax::get_type(int left_type, int right_type) {
 
 Symbol* Syntax::new_label(string prefix, bool save) {
     static long long int num = 0;
-    string name = prefix + "_" + to_string(num++);
+    //string name = prefix + "_" + to_string((long long int)hash_int(num++));
+    string name = prefix + "_" + to_string((num++));
     Symbol* t = new Symbol(name, Symbol::LABEL);
     if (save) {
         add_sym(t);

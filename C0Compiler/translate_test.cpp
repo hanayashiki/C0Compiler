@@ -14,7 +14,7 @@ int main() {
 	start = clock();
 
 	MipsCode::out_file = fopen("mips.asm", "w");
-	FILE* f = fopen("coverage_test.txt", "r");
+	FILE* f = fopen("bug_test.txt", "r");
 	if (f == NULL) {
 		cout << "File not exist. " << endl;
 		getchar();
@@ -54,7 +54,8 @@ int main() {
 	fclose(MipsCode::out_file);
 	fclose(f);
 	if (syntax.errors == 0) {
-		system("java -jar Mars4_5.jar mips.asm");
+		system("mips.asm");
+		//system("java -jar Mars4_5.jar mips.asm");
 	}
 	else {
 		cout << "Compilation Error(s): " << syntax.errors

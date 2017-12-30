@@ -52,6 +52,8 @@ bool Syntax::scanf_parameter_entry() {
             op = Q::READ_INT;
         } else if (fetch_sym->type == Symbol::CHAR) {
             op = Q::READ_CHAR;
+        } else {
+            assert(0);
         }
         Q read_q(op, fetch_sym, NULL, NULL);
         q_table->add_quaterion(read_q);

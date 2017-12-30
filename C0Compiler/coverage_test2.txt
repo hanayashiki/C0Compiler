@@ -1,0 +1,52 @@
+const char ch = 'c';
+
+int test() {
+	char ch;
+	scanf(ch);
+	printf(ch);
+	return (0);
+}
+
+int func(int a, int b, int c) {
+	return (a + b + c);
+}
+
+int mirror(int a) {
+	return (a);
+}
+
+void main() {
+	char ch;
+	int two, three;
+	two = 2;
+	three = 3;
+
+	if (6 >= 6) {
+		printf(func(1 , mirror(2), mirror(3)));
+	}
+
+	if (7 >= 6) {
+		printf("xxx");
+	}
+
+	if (1 <= 2) {
+		printf("xxxxxx");
+	}
+
+	if (2 <= 2) {
+		printf("xx");
+	}
+
+	if (2 <= two) {
+		printf("ssxx");
+	}
+
+	if (2 < three) {
+		printf("dxx");
+	}
+
+	if (two != three) {
+		printf("sadswddaw");
+	}
+
+}

@@ -94,3 +94,6 @@ bool SymbolUtils::in_mem(Symbol* sym) {
         ((sym->type == Symbol::CHAR) || (sym->type == Symbol::INT));
 }
 
+int SymbolUtils::hash_int(int a) {
+    return abs((int)(a*2654435761));
+}

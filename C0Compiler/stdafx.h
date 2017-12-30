@@ -13,6 +13,7 @@
 #include <set>
 #include <vector>
 
+#include "debugutils.h"
 #include "token.h"
 #include "lexical_error.h"
 #include "lexer.h"

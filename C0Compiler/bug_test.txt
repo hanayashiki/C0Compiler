@@ -1,0 +1,121 @@
+const int  M = 32768, a = 2;
+const char MODE = 'f';
+
+int pra, factors [1024], number;
+char mode;
+
+void init(){
+	int i;
+	pra = 0;
+	mode = 'a';
+	for(i = 1024 - 1; i >= 0; i = i - 1){
+		factors[i] = 0;
+	}
+	return;
+}  
+
+void getmode(){
+    scanf(mode);
+	return;
+}
+
+void getnumber(){
+	scanf(number);
+	return;	
+}
+
+int getResult(int i, int r){
+	if(i < number + -1){
+		r = i * getResult(i + 1, r);
+	}
+	return (r);
+}
+
+void error(int num){
+	switch(num){
+		case 1:
+			printf("The mode is illegal.");			
+		case 2:
+			printf("The number is too large.");
+		case 3:
+			printf("The number should not be negative or zero.");
+		default: 
+			;
+	}
+	return;
+}
+
+char check(int preFactor){ 
+	if(number / preFactor * preFactor!= number){
+		return ('n');
+	}
+	else{
+		return ('y'); 
+	}
+}
+
+void getFactors(){
+	int i;
+	char isFactor;
+	for(i = 1; i <= number; i = i + 1){
+		isFactor = check(i);
+		if(isFactor == 'y'){
+			factors[pra] = i;
+			pra = pra + 1;
+		}
+	}
+	return;
+} 
+
+void output(char mode, int result){
+	int i;
+	printf("mode:",mode);
+	printf("result:");
+	switch(mode){
+		case 'f':
+			for(i = 0; i < pra; i = i + 1){
+				printf(factors[i]);
+			}
+		case 's':
+			printf(result);
+		default:
+			;
+	}
+	return;
+}
+
+void main(){
+	int result;
+	init();
+	getmode();
+	getnumber();
+	scanf(result);
+	if(number <= 0){
+	    error(3);
+		return;
+	}
+	switch(mode){
+		case 'f':
+			if(number > M){
+				error(2);
+				return;
+			}else{
+				getFactors();
+			}
+		case 's':
+			if(number > 32){
+				error(2);
+				return;
+			}
+			else{
+				result = getResult(1, 1);
+		    	}
+		default:
+		    	{
+				error(1);
+				return;
+				}
+	}
+	output(mode,result);
+	return;
+}  
