@@ -100,7 +100,7 @@ bool Quaterion::is_branch() {
 }
 
 bool Quaterion::is_unconditional_jump() {
-	return (op == GOTO) || (op == RET);
+	return (op == GOTO);
 }
 
 bool Quaterion::is_jump() {
@@ -115,8 +115,27 @@ bool Quaterion::is_action() {
 	return (op != LABEL) && (op != PROLOG) && (op != EPILOG);
 }
 
+bool Quaterion::is_simple() {
+	return is_commutative() ||
+		is_incommutative() ||
+		(op == AT) ||
+		(op == TO) ||
+		(op == NONE) ||
+		(op == MINUS) ||
+		(op == CAST_INT) ||
+		(op == CAST_CHAR);
+}
+
 void Quaterion::emit(string str) {
     fprintf(dump_file, "%s\n", str.c_str());
+}
+
+void Quaterion::emit_debug()
+{
+	FILE* old_dump_file = dump_file;
+	dump_file = stdout;
+	emit();
+	dump_file = old_dump_file;
 }
 
 void Quaterion::emit(bool comment) {

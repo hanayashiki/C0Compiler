@@ -131,9 +131,9 @@ int MipsTable::fetch_symbol(Symbol* sym, bool load_value) {
         return 0;
     }
 	if (sym->const_flag) {
-		sym->display();
+		//sym->display();
 	}
-    assert(!sym->const_flag);
+    //assert(!sym->const_flag);
 
     if ((iter != temp_map->end()) && (iter->second != 0)) {
         // already distributed
@@ -173,8 +173,9 @@ int MipsTable::temp_write_back() {
     // a symbol that will not be used will be written back to
     // memory
     Symbol* to_write_back = findUselessSymbol();
-
-    save_symbol(to_write_back);
+	if (in_mem(to_write_back)) {
+		save_symbol(to_write_back);
+	}
     map_sym_reg(to_write_back, 0, temp_map);
     // map to zero is unmapping
     
@@ -202,26 +203,33 @@ void MipsTable::map_sym_reg(Symbol* sym, int reg, reg_map* map) {
 
 void MipsTable::load_symbol(Symbol* sym) {
     int offset, base;
-    if (root_map->find(sym) != root_map->end()) {
-        offset = (*root_map)[sym];
-        base = MC::_gp;
-    } else {
-        offset = (*stack_map)[sym];
-        base = MC::_sp;
-    }
-    fprintf(MC::out_file, "# load %s\n", sym->name.c_str());
-    if (!sym->array_flag) {
-        if (sym->type == Symbol::INT) {
-            MC::lw((*temp_map)[sym], offset, base);
-        }
-        if (sym->type == Symbol::CHAR) {
-            MC::lb((*temp_map)[sym], offset, base);
-        }
-    } else {
-        // if it is an array, load the base address
-        MC::addiu((*temp_map)[sym], base, offset);
-        // TODO: root_map
-    }
+	if (!sym->const_flag) {
+		if (root_map->find(sym) != root_map->end()) {
+			offset = (*root_map)[sym];
+			base = MC::_gp;
+		}
+		else {
+			offset = (*stack_map)[sym];
+			base = MC::_sp;
+		}
+		fprintf(MC::out_file, "# load %s\n", sym->name.c_str());
+		if (!sym->array_flag) {
+			if (sym->type == Symbol::INT) {
+				MC::lw((*temp_map)[sym], offset, base);
+			}
+			if (sym->type == Symbol::CHAR) {
+				MC::lb((*temp_map)[sym], offset, base);
+			}
+		}
+		else {
+			// if it is an array, load the base address
+			MC::addiu((*temp_map)[sym], base, offset);
+			// TODO: root_map
+		}
+	}
+	else {
+		MC::li((*temp_map)[sym], get_const_value(sym));
+	}
 }
 
 void MipsTable::save_symbol(Symbol* sym) {

@@ -13,9 +13,14 @@ DNode::~DNode()
 }
 
 void DNode::add_sym(Symbol* sym) {
-	if (placed_syms.find(sym) == placed_syms.end()) {
+	if (!has_sym(sym)) {
 		placed_syms.insert(sym);
 	}
+}
+
+bool DNode::has_sym(Symbol * sym)
+{
+	return placed_syms.find(sym) != placed_syms.end();
 }
 
 void DNode::display() {

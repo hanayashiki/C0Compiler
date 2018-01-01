@@ -35,6 +35,9 @@ bool Syntax::var_entry(int basic_type) {
     if (match_type(Token::IDENTITY)) {
         name = read_token.getName();
         new_sym = new Symbol(name, basic_type);
+		if (current_scope == NULL) {
+			new_sym->global = true;
+		}
         next_token();
     } else {
         error_handler(SyntaxError::VARIABLE_DECLARATION_MISSING_IDENTIFIER);

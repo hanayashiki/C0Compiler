@@ -20,6 +20,8 @@ public:
     // label
     bool string_flag;
 	bool jumped_to;
+	// global
+	bool global;
 	BasicBlock* basic_block;
     enum symbol_types {
         UNKNOWN,

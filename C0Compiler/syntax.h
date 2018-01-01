@@ -14,6 +14,9 @@ private:
     sym_list* string_table;
     vector<Token> token_list;
     vector<Token>::iterator token_pointer;
+
+	Symbol* current_scope;
+
     bool match_type(int token_type);
     bool match_pattern(string p, int token_count);
 

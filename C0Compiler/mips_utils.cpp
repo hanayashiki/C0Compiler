@@ -138,6 +138,10 @@ int MipsTable::precompute(int op, int left, int right) {
         return left >= right;
     case Q::LTE:
         return left <= right;
+	case Q::SUB:
+		return left - right;
+	case Q::DIV:
+		return left / right;
     default:
         throw "OP not implemented.\n";
     }

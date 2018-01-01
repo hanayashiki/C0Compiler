@@ -3,7 +3,7 @@
 
 using namespace SymbolUtils;
 
-int main() {
+int main__() {
 	Lexer lexer;
 	SymbolTable symbol_table;
 	QuaterionTable q_table;
@@ -14,7 +14,7 @@ int main() {
 	start = clock();
 
 	MipsCode::out_file = fopen("mips.asm", "w");
-	FILE* f = fopen("bug_test.txt", "r");
+	FILE* f = fopen("public_test.txt", "r");
 	if (f == NULL) {
 		cout << "File not exist. " << endl;
 		getchar();

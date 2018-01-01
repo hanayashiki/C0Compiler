@@ -26,6 +26,7 @@ public:
 	bool fake;
 
 	void add_sym(Symbol* sym);
+	bool has_sym(Symbol* sym);
 	void display();
 	
 };

@@ -6,6 +6,7 @@ Syntax::Syntax(Lexer * L, SymbolTable * s, QuaterionTable* q,
     symbol_table = s;
     q_table = q;
     string_table = string_t;
+	current_scope = NULL;
 
     errors = 0;
 

@@ -1,0 +1,11 @@
+int func(int a) {
+	return (a);
+}
+
+void main() {
+	int a;
+	a = 1;
+	printf(a);
+	a = func(2);
+	printf(a);
+}

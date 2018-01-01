@@ -5,6 +5,7 @@ void Symbol::init() {
     function_flag = false;
     string_flag = false;
 	jumped_to = false;
+	global = false;
 }
 
 Symbol::Symbol(string name_, int type_, bool const_): 

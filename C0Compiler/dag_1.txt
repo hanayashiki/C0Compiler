@@ -1,15 +1,36 @@
+int func(int a) {
+	return (a);
+} 
 void main() {
-	int t, a, b, c;
+	int t, a, b, c, d;
+	int arr[10];
+	int arr2[10];
 	a = 1;
 	b = 2;
+	arr[a] = 1;
 	if (1) {
 		t = a;
 		c = t + b;
 		b = a + b;
 		t = 2 * a;
+		arr[a] = a;
+		arr2[a] = a;
+		arr[a + b] = b;
+		d = 2 * arr[a];
+		a = func(a);
 	}
-	a = a;
+	a = arr[a];
+	arr2[a] = arr2[a];
 	b = b;
 	c = c;
 	t = t;
+	d = d;
+	if (1) {
+		a = arr[a];
+		arr2[a] = arr2[a];
+		b = b;
+		c = c;
+		t = t;
+		d = d;
+	}
 }

@@ -16,12 +16,13 @@ public:
 
 	void translate();
 	void q_interpret(Quaterion & q);
-	void jump_q_interpret(Quaterion & q);
+	void action_q_interpret(Quaterion & q);
 
 	void add_node(int op, Symbol* dst_sym, Symbol* left_sym,
 		Symbol* right_sym);
-	void add_jump_node(int op, Symbol* left_sym, Symbol* right_sym,
+	void add_action_node(int op, Symbol* left_sym, Symbol* right_sym,
 		Symbol* label_sym);
+	void add_setting_node(int op, Symbol* dst_sym);
 	void add_false_node(Quaterion & q);
 	DNode* find_node(Symbol* sym);
 	DNode* find_value(int op, Symbol* dst, DNode* left, DNode* right);

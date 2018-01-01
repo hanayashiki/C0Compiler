@@ -18,7 +18,7 @@ void MipsTable::branch_translate(Q & q) {
     // (op == BEQZ) || (op == BNEZ) || (op == BEQ) || (op == BNE)
     // || (op == GOTO)
     int src_reg = 0;
-    if (q.left->type != Symbol::LABEL && !q.left->const_flag) {
+    if (q.left && q.left->type != Symbol::LABEL && !q.left->const_flag) {
         src_reg = fetch_symbol(q.left);
     }
 
@@ -26,20 +26,20 @@ void MipsTable::branch_translate(Q & q) {
         if (q.left->const_flag) {
             int v = get_const_value(q.left);
             if (v == 0) {
-                MC::j(q.right->name);
+                MC::j(q.label->name);
             }
         } else {
-            MC::beq(src_reg, MC::_zero, q.right->name);
+            MC::beq(src_reg, MC::_zero, q.label->name);
         }
     }
     if (q.op == Q::BNEZ) {
         if (q.left->const_flag) {
             int v = get_const_value(q.left);
             if (v != 0) {
-                MC::j(q.right->name);
+                MC::j(q.label->name);
             }
         } else {
-            MC::bne(src_reg, MC::_zero, q.right->name);
+            MC::bne(src_reg, MC::_zero, q.label->name);
         }
     }
     if ((q.op == Q::BEQ) || (q.op == Q::BNE)) {
@@ -80,7 +80,7 @@ void MipsTable::branch_translate(Q & q) {
 		}
     }
     if (q.op == Q::GOTO) {
-        MC::j(q.left->name);
+        MC::j(q.label->name);
     }
 }
 

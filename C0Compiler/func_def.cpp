@@ -54,6 +54,7 @@ bool Syntax::func_def() {
 
     add_sym(new_func);
     symbol_table = new_func->symbol_table; // enter new table
+	current_scope = new_func;
 
     // (int a, int b...)
     func_def_parameter_list(new_func);
@@ -101,6 +102,8 @@ bool Syntax::func_def() {
 
     Q epilog_q(Q::EPILOG, NULL);
     q_table->add_quaterion(epilog_q);
+
+	current_scope = NULL;
 
     return true;
 }

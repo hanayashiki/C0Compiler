@@ -50,7 +50,7 @@ bool Flow::calculate_active_in(BasicBlock * block) {
 	block->active_in.set_union(block->use, diff);
 	int new_size = block->active_in.size();
 	assert(new_size >= old_size);
-	cout << "active_in: " << old_size << " -> " << new_size << endl;
+	//cout << "active_in: " << old_size << " -> " << new_size << endl;
  	if (new_size > old_size) {
 		return true;
 	}
@@ -65,13 +65,13 @@ bool Flow::calculate_active_out(BasicBlock * block) {
 	for (vector<BasicBlock*>::iterator b_iter = block->next.begin();
 		b_iter != block->next.end();
 		b_iter++) {
-		cout << block->id << " - " << (*b_iter)->id << endl;
+		// cout << block->id << " - " << (*b_iter)->id << endl;
 		block->active_out.set_union(block->active_out,
 			(*b_iter)->active_in);
 	}
 	int new_size = block->active_out.size();
 	assert(new_size >= old_size);
-	cout << "active_out: " << old_size << " -> " << new_size << endl;
+	//cout << "active_out: " << old_size << " -> " << new_size << endl;
 	if (new_size > old_size) {
 		return true;
 	}

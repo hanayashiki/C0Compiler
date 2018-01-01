@@ -69,6 +69,7 @@ public:
     Quaterion(Symbol* dst, Symbol* left); // a = b
     void emit(bool comment=false);
     void emit(string str);
+	void emit_debug();
     // comm with mips gen
     bool is_endblock();
     bool is_commutative();
@@ -78,6 +79,7 @@ public:
 	bool is_jump();
     bool is_print();
 	bool is_action();
+	bool is_simple();
 	// for optimization
 	bool beginning;
 	BasicBlock* basic_block;
@@ -91,7 +93,7 @@ static char* op_names[Quaterion::OP_COUNT] =
     "!=", "==",
 
     "[]=",
-    "[]=",
+    "=[]",
 
     "",
     "-",

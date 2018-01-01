@@ -34,8 +34,8 @@ void Flow::generate_flow_map(vector<Quaterion> & q_list) {
 
 	get_interval(q_list, func_sym, q_begin, q_end);
 
-	for (vector<Q>::iterator q_iter = q_list.begin(); 
-		q_iter != q_list.end(); q_iter++) {
+	for (vector<Q>::iterator q_iter = q_begin;
+		q_iter != q_end; q_iter++) {
 		if (next_as_beginning) {
 			q_iter->beginning = true;
 			next_as_beginning = false;
@@ -45,33 +45,38 @@ void Flow::generate_flow_map(vector<Quaterion> & q_list) {
 			assert(q_iter->label);
 			q_iter->label->jumped_to = true;
 		}
+		if (q_iter->op == Q::CALL) {
+			q_iter->beginning = true;
+			next_as_beginning = true;
+		}
 	}
 
-	for (vector<Q>::iterator q_iter = q_list.begin();
-		q_iter != q_list.end(); q_iter++) {
+	for (vector<Q>::iterator q_iter = q_begin;
+		q_iter != q_end; q_iter++) {
 		if (q_iter->op == Q::LABEL && q_iter->left->jumped_to == true) {
 			q_iter->beginning = true;
 		}
 	}
 
 	int idx = 0;
-	vector<Q>::iterator q_iter = q_list.begin();
-	while (q_iter != q_list.end()) {
+	vector<Q>::iterator q_iter = q_begin;
+	while (q_iter != q_list.end() && q_iter != q_end) {
 		if (q_iter->beginning == true) {
-			vector<Q>::iterator q_begin = q_iter;
-			vector<Q>::iterator q_end = q_iter;
+			vector<Q>::iterator b_begin = q_iter;
+			vector<Q>::iterator b_end = q_iter;
 			do {
 				q_iter++;
-			} while (q_iter != q_list.end() && q_iter->beginning == false);
-			q_end = q_iter; // end should be the one after the real end
+			} while (q_iter != q_list.end() && (q_iter != q_end)
+				&& (q_iter->beginning == false));
+			b_end = q_iter; // end should be the one after the real end
 
 			BasicBlock * basic_block = new BasicBlock(symbol_list,
-				q_begin, q_end);
+				b_begin, b_end);
 			basic_block->id = idx++;
-			q_begin->basic_block = basic_block;
+			b_begin->basic_block = basic_block;
 
-			if (q_begin->op == Q::LABEL) {
-				q_begin->left->basic_block = basic_block;
+			if (b_begin->op == Q::LABEL) {
+				b_begin->left->basic_block = basic_block;
 			}
 
 			flow_map.push_back(basic_block);
@@ -113,9 +118,10 @@ void Flow::get_interval(vector<Quaterion> & q_list,
 			break;
 		}
 	}
-	for (; iter != q_list.end(); iter++) {
+	for (;
+		iter != q_list.end(); iter++) {
 		if (iter->op == Q::EPILOG) {
-			end = iter;
+			end = iter + 1;
 			return;
 		}
 	}

@@ -205,10 +205,10 @@ void MipsTable::array_write_translate(Q & q) {
 	int src_reg = fetch_symbol(q.right);
 	if (q.left->const_flag) {
 		offset = get_const_value(q.left);
-		if (q.left->type == Symbol::CHAR) {
+		if (q.dst->type == Symbol::CHAR) {
 			MC::sb(src_reg, CHAR_SIZE * offset, ptr_reg);
 		}
-		if (q.left->type == Symbol::INT) {
+		if (q.dst->type == Symbol::INT) {
 			MC::sw(src_reg, INT_SIZE * offset, ptr_reg);
 		}
 	}

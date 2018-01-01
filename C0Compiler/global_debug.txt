@@ -1,0 +1,9 @@
+int a;
+
+void get() {
+	scanf(a);
+}
+
+void main() {
+	get();
+}

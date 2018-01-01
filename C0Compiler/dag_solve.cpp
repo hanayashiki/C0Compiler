@@ -8,10 +8,15 @@ void DAG::extract_needed() {
 		sn_iter = sym_node_map.begin();
 		sn_iter != sym_node_map.end();
 		sn_iter++) {
-		if (in_mem(sn_iter->first) && 
-			active_out.included(sn_iter->first->id)) {
-			DNode* needed_node = sn_iter->second;
+		Symbol* sym = sn_iter->first;
+		DNode* needed_node = sn_iter->second;
+		if (in_mem(sym) && active_out.included(sym->id) ||
+			sym->global) {
 			set_needed(needed_node);
+			coutd << "Set need: " << needed_node->idx << endl;
+		}
+		else {
+			coutd << "Not needed: " << needed_node->idx << endl;
 		}
 	}
 }
@@ -66,19 +71,29 @@ void DAG::dump_quaterion() {
 		// Q new_q();
 		DNode* dnode = *d_iter;
 		set_represent_sym(dnode);
+		coutd << "examine node " << dnode->idx << endl;
+		for (set<Symbol*>::iterator s_iter
+			= dnode->placed_syms.begin();
+			s_iter != dnode->placed_syms.end();
+			s_iter++) {
+			coutd << (*s_iter)->name << endl;
+		}
 		if (dnode->needed == false) {
 			// 这个节点不需要
+			coutd << "not needed\n";
 			continue;
 		}
-		if (dnode->op == Quaterion::SELF) {
+		else if (dnode->op == Quaterion::SELF) {
 			// 要做常量传播
+			coutd << "propagated \n";
 			overlap_propagation(dnode);
-			continue;
 		}
 		else if (dnode->fake) {
+			coutd << "fake node \n";
 			new_q_table.add_quaterion(dnode->q);
 		}
 		else {
+			coutd << "added \n";
 			Quaterion new_q;
 			new_q.op = dnode->op;
 			if (dnode->left) {

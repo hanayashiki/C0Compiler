@@ -34,6 +34,7 @@ void BasicBlock::init_symbols() {
 
 void BasicBlock::calculate_def_use() {
     // @require:init_symbols() launched
+
     for (vector<Quaterion*>::iterator q_ptr_iter = q_list.begin();
         q_ptr_iter != q_list.end();
         q_ptr_iter++) {
@@ -62,6 +63,12 @@ void BasicBlock::calculate_def_use() {
 				def.map_elem(dst_sym->id);
 			}
 		}
+		/*if ((*q_ptr_iter)->op == Quaterion::CALL) {
+			for (sym_list::iterator s_iter = symbol_list.begin();
+				s_iter != symbol_list.end(); s_iter++) {
+
+			}
+		}*/
     }
 }
 
