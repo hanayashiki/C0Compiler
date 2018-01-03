@@ -75,6 +75,7 @@ bool Syntax::func_def() {
         error_handler("'{' is needed. ");
     }
 
+	q_table->q_idx = 0;
     Symbol* label = new_label(new_func->name);
     Q label_q(Q::LABEL, label);
     q_table->add_quaterion(label_q);

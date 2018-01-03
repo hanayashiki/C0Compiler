@@ -56,6 +56,7 @@ public:
     // optimization
     bool used;
     bool defined;
+	int global_reg;
 };
 
 namespace SymbolUtils {

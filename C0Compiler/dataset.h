@@ -3,9 +3,8 @@
 
 template<class elem> 
 class dataSet {
-private:
-    vector<elem> * elem_list;
 public:
+	vector<elem> * elem_list;
     vector<int> bit_vec;
 
 	dataSet();
@@ -14,15 +13,20 @@ public:
     void set_elem_list(vector<elem> * e_l);
 
     bool map_elem(int idx, bool in=true);
+	bool map_elem_list(vector<int> & idx_l);
 	bool included(int idx);
     
     void set_union(dataSet & src1, dataSet & src2);
     void set_intersect(dataSet & src1, dataSet & src2);
     void set_difference(dataSet & src1, dataSet & src2);
 
+	bool is_crossed(dataSet<elem> & ds);
+
 	int size();
+	int u_size();
 
     void in_display(void (*display)(elem & e) = NULL);  // display that is included
+
 };
 
 #define GET_VEC(x) ((x)/32)
@@ -65,6 +69,16 @@ bool dataSet<elem>::map_elem(int idx, bool in) {
         bit_vec.at(vec) &= ~(1 << GET_OFFSET(idx));
     }
     return true;
+}
+
+template<class elem>
+inline bool dataSet<elem>::map_elem_list(vector<int>& idx_l)
+{
+	for (vector<int>::iterator iter = idx_l.begin();
+		iter != idx_l.end(); iter++) {
+		map_elem(*iter, true);
+	}
+	return true;
 }
 
 template<class elem>
@@ -127,4 +141,21 @@ int dataSet<elem>::size() {
 		}
 	}
 	return count;
+}
+
+template<class elem>
+int dataSet<elem>::u_size() {
+	return elem_list->size();
+}
+
+template<class elem>
+bool dataSet<elem>::is_crossed(dataSet<elem> & ds) {
+	for (unsigned idx = 0; idx <= GET_VEC(ds.elem_list->size() - 1);
+		idx++) {
+		int and = bit_vec.at(idx) & ds.bit_vec.at(idx);
+		if (and != 0) {
+			return true;
+		}
+	}
+	return false;
 }

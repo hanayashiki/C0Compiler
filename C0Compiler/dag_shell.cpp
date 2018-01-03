@@ -112,7 +112,7 @@ void DAG::add_setting_node(int op, Symbol* dst_sym) {
 	new_node->idx = node_idx++;
 	new_node->op = op;
 	
-	if (op == Quaterion::READ_CHAR || op == Quaterion::READ_CHAR) {
+	if (op == Quaterion::READ_CHAR || op == Quaterion::READ_INT) {
 		set_needed(new_node);
 	}
 

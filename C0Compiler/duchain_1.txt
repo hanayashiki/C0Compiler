@@ -1,0 +1,10 @@
+void main() {
+	int a, b, c, d, i;
+	a = 1;
+	b = a;
+	c = a;
+	a = 2;
+	if (1) {
+		printf(b + c);
+	}
+}

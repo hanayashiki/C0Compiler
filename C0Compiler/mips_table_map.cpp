@@ -30,6 +30,7 @@ MipsTable::MipsTable(Symbol* func_sym,
         iter_p != param_list.end();
         iter_p++) {
         alloc_stack(*iter_p);
+
     }
     // alloc space for local variables
 
@@ -125,6 +126,11 @@ int MipsTable::fetch_symbol(Symbol* sym, bool load_value) {
     mem_map::iterator iter_global;
     iter = temp_map->find(sym);
     iter_global = root_map->find(sym);
+
+	if (sym->global_reg && !sym->array_flag) {
+		fprintf(MipsCode::out_file, "# fetch %s @ $%d global\n", sym->name.c_str(), sym->global_reg);
+		return sym->global_reg;
+	}
 
     if (sym->type == Symbol::LABEL) {
         // be robust
@@ -234,6 +240,9 @@ void MipsTable::load_symbol(Symbol* sym) {
 
 void MipsTable::save_symbol(Symbol* sym) {
     int offset, base;
+	if (sym->global_reg) {
+		return;
+	}
     fprintf(MC::out_file, "# save %s\n", sym->name.c_str());
     if (root_map->find(sym) != root_map->end()) {
         offset = (*root_map)[sym];
@@ -259,6 +268,25 @@ void MipsTable::reserve_regs() {
     int offset = dig_up(4);
     MC::sw(MC::_ra, -offset);
 
+	for (vector<Symbol*>::iterator iter_p =
+		func->parameter_type_list.begin();
+		iter_p != func->parameter_type_list.end();
+		iter_p++) {
+		if ((*iter_p)->global_reg) {
+			Symbol* sym = *iter_p;
+			int offset = (*stack_map)[sym];
+			int reg = sym->global_reg;
+			if (sym->type == Symbol::INT) {
+				coutd << sym->name << " @";
+				coutd << offset << endl;
+				MC::say("# get param global: " + sym->name + "\n");
+				MC::lw(reg, offset, MC::_sp);
+			}
+			if (sym->type == Symbol::CHAR) {
+				MC::lb(reg, offset, MC::_sp);
+			}
+		}
+	}
     dig_size = stack_size + 4;
 }
 

@@ -19,7 +19,7 @@
 #include "lexer.h"
 #include "dataset.h"
 
-
+#include "fastgraph.h"
 #include "regex_handler.h"
 
 #include "symbol.h"
@@ -39,6 +39,8 @@ typedef hash_map<Symbol*, int> mem_map;
 #include "basicblock.h"
 #include "dnode.h"
 #include "dag.h"
+#include "duchain.h"
+#include "regdistributor.h"
 #include "flow.h"
 
 

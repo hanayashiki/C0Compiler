@@ -6,7 +6,8 @@ QuaterionTable::QuaterionTable() {
 }
 
 bool QuaterionTable::add_quaterion(Quaterion & q) {
-    q_list.push_back(q);
+	q.idx = q_idx++;
+	q_list.push_back(q);
     //q.emit();
     return true;
 }
@@ -14,6 +15,7 @@ bool QuaterionTable::add_quaterion(Quaterion & q) {
 void QuaterionTable::emit() {
     for (QList::iterator iter = q_list.begin();
         iter != q_list.end(); iter++) {
-        iter->emit();
+		coutd << (iter - q_list.begin()) << ": ";
+		iter->emit();
     }
 }

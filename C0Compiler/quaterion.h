@@ -59,6 +59,7 @@ public:
 
     Symbol* label;
     int op;
+	int idx;
 
     void init(int op_name);
     Quaterion(int op_name, Symbol*, Symbol*, Symbol*);

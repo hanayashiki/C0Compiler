@@ -79,4 +79,18 @@ public:
     static void _asciiz(string tag, string str);
     // text
     static void _text();
+	static void say(string words) {
+		fprintf(out_file, "%s", words.c_str());
+	}
+};
+
+static int __global_regs__[8] = {
+	MipsCode::_s0,
+	MipsCode::_s1,
+	MipsCode::_s2,
+	MipsCode::_s3,
+	MipsCode::_s4,
+	MipsCode::_s5,
+	MipsCode::_s6,
+	MipsCode::_s7
 };

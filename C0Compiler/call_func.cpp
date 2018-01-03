@@ -66,10 +66,13 @@ bool Syntax::call_func_list(Symbol* func_sym) {
             if (temp->type == Symbol::CHAR) {
                 Q cast_q(temp, value);
                 q_table->add_quaterion(cast_q);
+				warning("Mismatched type of parameter. ");
             } else {
                 Q cast_q(temp, value);
                 q_table->add_quaterion(cast_q);
+				warning("Mismatched type of parameter. ");
             }
+			add_sym(temp);
         } else {
             delete(temp);
             temp = value;

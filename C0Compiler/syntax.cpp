@@ -66,7 +66,10 @@ Symbol* Syntax::temp_symbol(int type, bool save) {
     Symbol* t = new Symbol(name, type);
     if (save) {
         add_sym(t);
-    }
+	}
+	else {
+		//coutd << "not included: " << name << endl;
+	}
     return t;
 }
 

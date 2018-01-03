@@ -8,6 +8,7 @@ Symbol* MipsTable::findUselessSymbol() {
 	q_ptr scan_ptr;
 	vector<Symbol*> in_place_syms(reg_distrb.begin() + MC::_t0,
 		reg_distrb.begin() + MC::_t7 + 1);
+	// 被分配了临时寄存器的 Symbol
 	vector<Symbol*> show_up_syms;
 	for (scan_ptr = q_iter; scan_ptr != q_table->q_list.end() &&
 		!scan_ptr->is_endblock();

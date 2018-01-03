@@ -1,0 +1,15 @@
+void main() {
+	const int cint1=1;
+	const char cchar1='_';
+	int a,b[3],c[1],d[2], qwer;
+	char i,j[2],k[6],l;
+	int e;
+	i='_';
+	l='v';
+	a=-5;
+	b[0]=7;
+	b[cint1]=(-3*a+b[b[0]-a*-1+a/2]/3);
+	printf("b[1]:",b[1]);
+	b[b[b[1]-16]-a*-4-a]=-+35*a+b[0]/-1*b[1];
+	printf("b[2]:",b[2]);
+}

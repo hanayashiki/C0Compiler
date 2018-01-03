@@ -1,5 +1,5 @@
 #include "stdafx.h"
-
+/*
 bool do_opt = false;
 
 int main() {
@@ -75,4 +75,4 @@ int main() {
 
 	getchar();
 	return 0;
-}
+}*/
