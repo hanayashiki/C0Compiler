@@ -38,7 +38,7 @@ void DAG::set_represent_sym(DNode* dn) {
 		s_iter != dn->placed_syms.end();
 		s_iter++) {
 		Symbol* sym = *s_iter;
-		if (sym->const_flag || use.included(sym->id)) { 
+		if (sym->const_flag) { 
 			// 常数必然是需要的
 			// use 从基本块看来也是常数，因此也必须是需要的
 			dn->calculated_sym = sym;
@@ -49,8 +49,7 @@ void DAG::set_represent_sym(DNode* dn) {
 		s_iter != dn->placed_syms.end();
 		s_iter++) {
 		Symbol* calculated = *s_iter;
-		if (calculated->const_flag || 
-			active_out.included(calculated->id)) { // 变量是否被后继需要
+		if (active_out.included(calculated->id)) { // 变量是否被后继需要
 			dn->calculated_sym = calculated;
 			return;
 		}
@@ -117,6 +116,7 @@ void DAG::overlap_propagation(DNode* dn) {
 		s_iter != dn->placed_syms.end();
 		s_iter++) {
 		Symbol* sym = *s_iter;
+		coutd << "propagating: " << sym->name << endl;
 		if (in_mem(sym) && sym != dn->calculated_sym && active_out.included(sym->id)) {
 			if (sym_node_map[sym] == dn) {
 				// 当前节点不是“最终”节点，这样的传播毫无意义
@@ -124,8 +124,11 @@ void DAG::overlap_propagation(DNode* dn) {
 				// calculated_sym 所取代
 				Quaterion new_q(sym, dn->calculated_sym);
 				new_q_table.add_quaterion(new_q);
+				coutd << "propagation succeed: " + sym->name << endl;
 			}
 		}
+		coutd << in_mem(sym) << (sym != dn->calculated_sym);
+
 	}
 }
 

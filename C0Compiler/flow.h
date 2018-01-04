@@ -31,6 +31,7 @@ public:
 
 class Flow {
 private:
+	int quat_idx;
 	sym_list & symbol_list;
 	Symbol* func_sym;
 	vector<DUNet> dunet_list;

@@ -2,7 +2,7 @@
 /*
 bool do_opt = false;
 
-int main() {
+int main_test_opt2() {
 	Lexer lexer;
 	SymbolTable symbol_table;
 	QuaterionTable q_table;

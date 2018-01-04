@@ -1,8 +1,8 @@
 #include "stdafx.h"
-
+/*
 bool do_opt = true;
 
-int main() {
+int main_duchain() {
 	Lexer lexer;
 	SymbolTable symbol_table;
 	QuaterionTable q_table;
@@ -75,4 +75,4 @@ int main() {
 
 	getchar();
 	return 0;
-}
+}*/

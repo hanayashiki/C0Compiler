@@ -1,6 +1,7 @@
 #include "stdafx.h"
 
 void Flow::dag_optimize() {
+	quat_idx = 0;
 	for (FlowMap::iterator b_iter = flow_map.begin();
 		b_iter != flow_map.end();
 		b_iter++) {
@@ -24,6 +25,7 @@ void Flow::regenerate_qlist(DAG & dag) {
 		dag.new_q_table.q_list.begin();
 		q_iter != dag.new_q_table.q_list.end();
 		q_iter++) {
+		q_iter->idx = quat_idx++;
 		optimized_qlist.push_back(*q_iter);
 	}
 }
