@@ -115,7 +115,9 @@ bool Syntax::semicolon_handler() {
     if (match_type(Token::SEMICOLON)) {
         next_token();
     } else {
-        error_handler(SyntaxError::MISSING_SEMICOLON);
+        //error_handler(SyntaxError::MISSING_SEMICOLON);
+		error_handler("';' is needed. ",
+			RegexHandler::JUMP_TO_NEXT_STATEMENT);
     }
     return true;
 }

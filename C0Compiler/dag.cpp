@@ -11,6 +11,7 @@ DNode* DAG::find_node(Symbol* sym) {
 		new_node->idx = node_idx++;
 		new_node->add_sym(sym);
 		new_node->op = Quaterion::SELF;
+		new_node->calculated_sym = sym;
 		sym_node_map.insert(pair<Symbol*, DNode*>(sym, new_node));
 		node_list.push_back(new_node);
 		return new_node;

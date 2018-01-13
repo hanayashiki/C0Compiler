@@ -38,7 +38,7 @@ void DAG::set_represent_sym(DNode* dn) {
 		s_iter != dn->placed_syms.end();
 		s_iter++) {
 		Symbol* sym = *s_iter;
-		if (sym->const_flag) { 
+		if (sym->const_flag) {
 			// 常数必然是需要的
 			// use 从基本块看来也是常数，因此也必须是需要的
 			dn->calculated_sym = sym;
@@ -69,7 +69,9 @@ void DAG::dump_quaterion() {
 		d_iter != node_list.end(); d_iter++) {
 		// Q new_q();
 		DNode* dnode = *d_iter;
-		set_represent_sym(dnode);
+		if (dnode->calculated_sym == NULL) {
+			set_represent_sym(dnode);
+		}
 		coutd << "examine node " << dnode->idx << endl;
 		for (set<Symbol*>::iterator s_iter
 			= dnode->placed_syms.begin();
@@ -117,14 +119,17 @@ void DAG::overlap_propagation(DNode* dn) {
 		s_iter++) {
 		Symbol* sym = *s_iter;
 		coutd << "propagating: " << sym->name << endl;
-		if (in_mem(sym) && sym != dn->calculated_sym && active_out.included(sym->id)) {
-			if (sym_node_map[sym] == dn) {
-				// 当前节点不是“最终”节点，这样的传播毫无意义
-				// 因为上层节点不会引用 sym，sym在基本块中存储被
-				// calculated_sym 所取代
-				Quaterion new_q(sym, dn->calculated_sym);
-				new_q_table.add_quaterion(new_q);
-				coutd << "propagation succeed: " + sym->name << endl;
+		if (sym != dn->calculated_sym) {
+			if (in_mem(sym) && active_out.included(sym->id)
+				|| sym->global) {
+				if (sym_node_map[sym] == dn) {
+					// 当前节点不是“最终”节点，这样的传播毫无意义
+					// 因为上层节点不会引用 sym，sym在基本块中存储被
+					// calculated_sym 所取代
+					Quaterion new_q(sym, dn->calculated_sym);
+					new_q_table.add_quaterion(new_q);
+					coutd << "propagation succeed: " + sym->name << endl;
+				}
 			}
 		}
 		coutd << in_mem(sym) << (sym != dn->calculated_sym);

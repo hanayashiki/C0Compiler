@@ -1,0 +1,16 @@
+int g;
+
+void change_g() {
+	int a, b, c, d, e, f;
+	a = 1;
+	b = a;
+	c = b;
+	d = c;
+	e = d;
+	g = e;
+}
+
+void main() {
+	int a, b;
+	a = (+b - 1); 
+}

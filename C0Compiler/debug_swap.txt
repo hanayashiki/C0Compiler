@@ -1,0 +1,17 @@
+int arr[6];
+
+void swap(int i, int j) {
+    if (i == j)
+        return;
+    arr[i] = arr[i] + arr[j];
+	arr[j] = arr[i] - arr[j];
+	arr[i] = arr[i] - arr[j];
+}
+
+void main() {
+	arr[0] = 1;
+	arr[1] = 2;
+	swap(0, 1);
+	printf(arr[0]);
+	printf(arr[1]);
+}

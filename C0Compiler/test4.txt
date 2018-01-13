@@ -1,0 +1,193 @@
+int	pp;
+int	arr[100];
+
+void write_global_arr( int idx )
+{
+	arr[idx] = 233;
+}
+
+
+char return_256()
+{
+	return(256);
+}
+
+
+void push_const_test( int c, char ch )
+{
+	printf( "c==1?", c );
+	printf( "ch==1?", c );
+}
+
+
+void param_test_256( char c )
+{
+	printf( "c=0?", c + 0 );
+}
+
+
+void find_any_duplicate()
+{
+	int	arr[5];
+	int	tmp;
+	int	fast;
+	int	slow;
+
+	printf( "Enter 5 numbers ranging from 0 - 3," );
+	printf( "and this is supposed to find one of the digit that appears more than once." );
+
+	for ( pp = 0; pp < 5; pp = pp + 1 )
+	{
+		scanf( tmp );
+		if ( tmp < 0 )
+		{
+			printf( "Number limit exceeded" );
+			return;
+		}
+		if ( tmp > 3 )
+		{
+			printf( "Number limit exceeded" );
+			return;
+		}
+		arr[pp] = tmp;
+	}
+
+	fast	= 4;
+	slow	= 4;
+	for ( pp = 0; pp == 0; pp = pp + 1 )
+	{
+		fast	= arr[arr[fast]];
+		slow	= arr[slow];
+		pp	= -1;
+		if ( fast == slow )
+		{
+			pp = 1;
+		}
+	}
+	slow = 4;
+	for ( pp = 0; pp == 0; pp = pp + 1 )
+	{
+		fast	= arr[fast];
+		slow	= arr[slow];
+		pp	= -1;
+		if ( fast == slow )
+		{
+			pp = 1;
+		}
+	}
+	printf( "repeated: ", slow );
+}
+
+
+void main()
+{
+	int	a;
+	int	b;
+	int	c;
+	int	temp;
+	int	local_arr[10];
+	char	test_char;
+
+	a	= 1;
+	b	= 2;
+	c	= 3;
+	a	= 10 * b;
+	printf( "a=%d ", a );
+	a = b * 10;
+	printf( "a=%d ", a );
+	a = b / 2;
+	printf( "a=%d ", a );
+	a = 100 / b;
+	printf( "a=%d ", a );
+	a = 1 - b;
+	printf( "a=%d ", a );
+	a = 1 + b;
+	printf( "a=%d ", a );
+	a = 'a' + b;
+	printf( "a=%d ", a );
+	a = 'a' * b;
+	printf( "a=%d ", a );
+	a = 'a' / b;
+	printf( "a=%d ", a );
+	a = 'c' / c;
+	printf( "a=33?%d ", a );
+
+	switch ( a )
+	{
+	case 0:
+		printf( "Unexpected 1. " );
+	case 1:
+		printf( "Unexpected 2. " );
+	default:
+		printf( "default pass" );
+	}
+
+	test_char = return_256() + '0';
+
+	printf( "test_char=0?%d", test_char );
+
+	param_test_256( return_256() );
+
+	push_const_test( 1, 1 );
+
+	if ( 33 == 33 )
+	{
+		printf( "constant '==' passed" );
+	} else {
+		printf( "wrong constant '=='" );
+	}
+
+	if ( a > 'a' )
+	{
+		printf( "Unexpected 3. " );
+	} else {
+		printf( "if right const passed" );
+	}
+
+	if ( 'a' > a )
+	{
+		printf( "if left const passed" );
+	} else {
+		printf( "Unexpected 4. " );
+	}
+
+	if ( 'a' != a )
+	{
+		printf( "if not equal passed" );
+	} else {
+		printf( "Unexpected 5. " );
+	}
+
+	if ( 33 == a )
+	{
+		printf( "if equal passed" );
+	} else {
+		printf( "Unexpected 5. " );
+	}
+
+	if ( 256 > -114514 )
+	{
+		printf( "if precompute passed" );
+	} else {
+		printf( "Unexpected 5. " );
+	}
+
+	printf( "a=33, b=2, c=3" );
+	temp = a + b;
+	printf( "temp=35?", temp );
+	temp = a - b;
+	printf( "temp=31?", temp );
+	temp = a / c;
+	printf( "temp=11?", temp );
+	temp = a * 3;
+	printf( "temp=99?", temp );
+	temp = -a;
+	printf( "temp=-33?", temp );
+
+	write_global_arr( 33 );
+	printf( "arr[33]=233? ", arr[33] );
+	local_arr[3] = 233;
+	printf( "local_arr[3]=233? ", local_arr[3] );
+
+	find_any_duplicate();
+}

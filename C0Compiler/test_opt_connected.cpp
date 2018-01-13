@@ -1,6 +1,6 @@
 #include "stdafx.h"
 
-bool do_opt = true;
+bool do_opt = false;
 bool do_dag = true;
 bool do_reg = true;
 
@@ -91,7 +91,7 @@ int main() {
 		MipsTable::exit();
 		fclose(MipsCode::out_file);
 		fclose(f);
-		system("mips.asm");
+		system("java -jar Mars4_5.jar mips.asm");
 	}
 	else {
 		cout << "Compilation Error(s): " << syntax.errors

@@ -18,7 +18,7 @@ void DAG::translate() {
 		if ((*q_iter)->is_simple()) {
 			q_interpret(**q_iter);
 		}
-		else if ((*q_iter)->is_jump() || 
+		else if ((*q_iter)->is_jump() ||
 			(*q_iter)->op == Q::PUSH ||
 			(*q_iter)->op == Q::PRINT_CHAR ||
 			(*q_iter)->op == Q::PRINT_INT ||
@@ -111,7 +111,7 @@ void DAG::add_setting_node(int op, Symbol* dst_sym) {
 	DNode* new_node = new DNode();
 	new_node->idx = node_idx++;
 	new_node->op = op;
-	
+
 	if (op == Quaterion::READ_CHAR || op == Quaterion::READ_INT) {
 		set_needed(new_node);
 	}
