@@ -1,0 +1,161 @@
+factorial_0:
+PROLOG factorial;
+%t0 = f <= 1;
+if == 0 go to: %t0 if_false_1;
+RET 1;
+GOTO if_end_2;
+if_false_1:
+%t3 = f - 1;
+PUSH %t3;
+CALL factorial;
+GET %t1;
+%t4 = f * %t1;
+RET %t4;
+if_end_2:
+EPILOG;
+display_error_3:
+PROLOG display_error;
+%t5 = error_code == 1;
+if == 0 go to: %t5 case_end_5;
+PRINT_STR const_str_6;
+PRINT_CHAR '\n?';
+GOTO switch_end_4;
+case_end_5:
+%t6 = error_code == 2;
+if == 0 go to: %t6 case_end_7;
+PRINT_STR const_str_8;
+PRINT_CHAR '\n?';
+GOTO switch_end_4;
+case_end_7:
+%t7 = error_code == 3;
+if == 0 go to: %t7 case_end_9;
+PRINT_STR const_str_10;
+PRINT_CHAR '\n?';
+GOTO switch_end_4;
+case_end_9:
+%t8 = error_code == 4;
+if == 0 go to: %t8 case_end_11;
+PRINT_STR const_str_12;
+PRINT_CHAR '\n?';
+GOTO switch_end_4;
+case_end_11:
+%t9 = error_code == 5;
+if == 0 go to: %t9 case_end_13;
+PRINT_STR const_str_14;
+PRINT_CHAR '\n?';
+GOTO switch_end_4;
+case_end_13:
+PRINT_STR const_str_16;
+PRINT_CHAR '\n?';
+GOTO switch_end_4;
+case_end_15:
+switch_end_4:
+EPILOG;
+expression_test_17:
+PROLOG expression_test;
+this_is_1 = 1;
+RET this_is_1;
+EPILOG;
+for_factorial_18:
+PROLOG for_factorial;
+f = m;
+%t28 = m - 1;
+m = %t28;
+GOTO for_block_21;
+for_condition_19:
+if == 0 go to: m for_end_20;
+for_block_21:
+%t29 = f * m;
+f = %t29;
+m = m - 1;
+GOTO for_condition_19;
+for_end_20:
+RET f;
+EPILOG;
+main_22:
+PROLOG main;
+error_code = 0;
+READ_INT m;
+READ_INT n;
+CALL expression_test;
+GET %t30;
+if == go to: %t30 1 if_false_23;
+PRINT_STR const_str_25;
+PRINT_CHAR '\n?';
+GOTO if_end_24;
+if_false_23:
+if_end_24:
+%t31 = m > 10;
+if == 0 go to: %t31 if_false_26;
+error_code = 1;
+GOTO if_end_27;
+if_false_26:
+if_end_27:
+%t32 = m < 0;
+if == 0 go to: %t32 if_false_28;
+error_code = 2;
+GOTO if_end_29;
+if_false_28:
+if_end_29:
+%t33 = n > 10;
+if == 0 go to: %t33 if_false_30;
+error_code = 3;
+GOTO if_end_31;
+if_false_30:
+if_end_31:
+%t34 = n < 0;
+if == 0 go to: %t34 if_false_32;
+error_code = 4;
+GOTO if_end_33;
+if_false_32:
+if_end_33:
+%t35 = m - n;
+%t36 = %t35 < 0;
+if == 0 go to: %t36 if_false_34;
+error_code = 5;
+GOTO if_end_35;
+if_false_34:
+if_end_35:
+PUSH error_code;
+CALL display_error;
+if != go to: error_code 0 if_false_36;
+PUSH m;
+CALL factorial;
+GET %t38;
+fact_m = %t38;
+PUSH n;
+CALL factorial;
+GET %t40;
+fact_n = %t40;
+%t44 = m - n;
+PUSH %t44;
+CALL factorial;
+GET %t42;
+fact_m_sub_n = %t42;
+PRINT_STR const_str_38;
+PRINT_INT fact_m;
+PRINT_CHAR '\n?';
+PRINT_STR const_str_39;
+PUSH m;
+CALL for_factorial;
+GET %t45;
+PRINT_INT %t45;
+PRINT_CHAR '\n?';
+PRINT_STR const_str_40;
+PRINT_INT fact_n;
+PRINT_CHAR '\n?';
+PRINT_STR const_str_41;
+PUSH n;
+CALL for_factorial;
+GET %t47;
+PRINT_INT %t47;
+PRINT_CHAR '\n?';
+PRINT_STR const_str_42;
+%t49 = fact_m / fact_n;
+%t50 = %t49 / fact_m_sub_n;
+PRINT_INT %t50;
+PRINT_CHAR '\n?';
+GOTO if_end_37;
+if_false_36:
+if_end_37:
+EPILOG;

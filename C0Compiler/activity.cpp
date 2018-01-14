@@ -7,11 +7,11 @@ void Flow::calculate_use_def() {
 		BasicBlock* block = *b_iter;
 		block->init_symbols();
 		block->calculate_def_use();
-		cout << "------block " << (*b_iter)->id << "------" << endl;
-		cout << "-----def: -----" << endl;
-		block->def.in_display();
-		cout << "-----use: -----" << endl;
-		block->use.in_display();
+		if (verbose) cout << "------block " << (*b_iter)->id << "------" << endl;
+		if (verbose) cout << "-----def: -----" << endl;
+		if (verbose) block->def.in_display();
+		if (verbose) cout << "-----use: -----" << endl;
+		if (verbose) block->use.in_display();
 	}
 } 
 
@@ -32,13 +32,13 @@ void Flow::activity_analysis() {
 		b_iter != flow_map.end();
 		b_iter++) {
 		BasicBlock* block = *b_iter;
-		cout << "------block " << (*b_iter)->id << "------" << endl;
-		block->q_display();
-		cout << "-----active_in: -----" << endl;
-		block->active_in.in_display();
-		cout << "-----active_out: -----" << endl;
-		block->active_out.in_display();
-		cout << endl;
+		if (verbose) cout << "------block " << (*b_iter)->id << "------" << endl;
+		if (verbose) block->q_display();
+		if (verbose) cout << "-----active_in: -----" << endl;
+		if (verbose) block->active_in.in_display();
+		if (verbose) cout << "-----active_out: -----" << endl;
+		if (verbose) block->active_out.in_display();
+		if (verbose) cout << endl;
 	}
 }
 

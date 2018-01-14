@@ -59,6 +59,6 @@ sym_list SymbolTable::get_closure(Symbol* func_sym) {
 	int id = l.size();
 	sym_list l_f = func_sym->symbol_table->get_all(id);
 	l.insert(l.end(), l_f.begin(), l_f.end());
-	cout << func_sym->name << " closure size: " << l.size() << endl;
+	if (verbose) cout << func_sym->name << " closure size: " << l.size() << endl;
 	return l;
 }
