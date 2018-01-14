@@ -8,19 +8,19 @@ void Flow::dag_optimize() {
 		DAG dag(*b_iter);
 		//cout << "dag begin\n";
 		dag.translate();
-		if (verbose) dag.display();
+		dag.display();
 		dag.dump_quaterion();
-		if (verbose) cout << "--------quaterions optimized--------\n";
+		cout << "--------quaterions optimized--------\n";
 		coutd << func_sym->name << endl;
-		if (verbose) cout << "------------------------------------\n";
-		if (verbose) dag.new_q_table.emit();
-		if (verbose) cout << "-----quaterions optimized end-----\n";
+		cout << "------------------------------------\n";
+		dag.new_q_table.emit();
+		cout << "-----quaterions optimized end-----\n";
 		regenerate_qlist(dag);
 	}
 }
 
 void Flow::regenerate_qlist(DAG & dag) {
-	if (verbose) dag.new_q_table.q_list.begin()->emit_debug();
+	dag.new_q_table.q_list.begin()->emit_debug();
 	for (vector<Quaterion>::iterator q_iter =
 		dag.new_q_table.q_list.begin();
 		q_iter != dag.new_q_table.q_list.end();

@@ -27,13 +27,13 @@ void MipsData::map_root() {
         if (in_mem(sym)) {
             heap_size = MT::alignment(heap_size, get_simple_size(sym));
             (*root_map)[iter->second] = heap_size;
-            coutd << "Map " << sym->name << " at " << heap_size << ":";
+            cout << "Map " << sym->name << " at " << heap_size << ":";
             if (!sym->array_flag) {
                 heap_size += get_simple_size(sym);
             } else {
                 heap_size += sym->array_length * get_simple_size(sym);
             }
-            coutd << heap_size << endl;
+            cout << heap_size << endl;
         }
     }
 }

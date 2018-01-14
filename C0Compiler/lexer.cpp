@@ -230,7 +230,7 @@ Token Lexer::getToken() {
 				errorHandler(LexicalError::ILLEGAL_CHAR_INSIDE);
                 token.setType(Token::STRING);
 				token.setValue(name_str);
-                coutd << name_str;
+                cout << name_str;
 
 				return token;
 			}

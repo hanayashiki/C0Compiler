@@ -60,7 +60,7 @@ void MipsTable::init_regs() {
 }
 
 MipsTable::~MipsTable() {
-	if (verbose) printf("deleted\n");
+	printf("deleted\n");
 	delete stack_map;
 	delete global_map;
 	delete temp_map;

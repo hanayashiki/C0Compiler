@@ -1,4 +1,3 @@
-﻿  worklist.cpp
-  release.cpp
-  正在生成代码...
+﻿  duchain.cpp
+d:\c0compilerforvs2010\c0compiler\c0compiler\duchain.cpp(65): warning C4018: “<”: 有符号/无符号不匹配
   C0Compiler.vcxproj -> D:\C0CompilerForVS2010\C0Compiler\Debug\C0Compiler.exe

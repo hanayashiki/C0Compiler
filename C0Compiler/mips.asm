@@ -1,75 +1,64 @@
 .data
-const_str_6: .asciiz "m is too big. "
-const_str_8: .asciiz "m is too small"
-const_str_10: .asciiz "n is too big. "
-const_str_12: .asciiz "n is too small. "
-const_str_14: .asciiz "n should be no greater than m."
-const_str_16: .asciiz "no errors seem found. "
-const_str_25: .asciiz "Expression test failed! "
-const_str_38: .asciiz "m! = "
-const_str_39: .asciiz "repeat m! : "
-const_str_40: .asciiz "n! = "
-const_str_41: .asciiz "repeat n! : "
-const_str_42: .asciiz "C(m, n) = "
+const_str_26: .asciiz " "
 .text
 j main_22
 nop
-# factorial_0:
-factorial_0:
-# PROLOG factorial;
-sw $8 -28($29)
-sw $9 -32($29)
-sw $10 -36($29)
-sw $11 -40($29)
-sw $12 -44($29)
-sw $13 -48($29)
-sw $14 -52($29)
-sw $15 -56($29)
-sw $16 -60($29)
-sw $17 -64($29)
-sw $18 -68($29)
-sw $19 -72($29)
-sw $20 -76($29)
-sw $21 -80($29)
-sw $22 -84($29)
-sw $23 -88($29)
-sw $24 -92($29)
-sw $25 -96($29)
-sw $31 -100($29)
-# get param global: f
-lw $18 -8($29)
-# %t0 = f <= 1;
+# quick_sort_0:
+quick_sort_0:
+# PROLOG quick_sort;
+sw $8 -208($29)
+sw $9 -212($29)
+sw $10 -216($29)
+sw $11 -220($29)
+sw $12 -224($29)
+sw $13 -228($29)
+sw $14 -232($29)
+sw $15 -236($29)
+sw $16 -240($29)
+sw $17 -244($29)
+sw $18 -248($29)
+sw $19 -252($29)
+sw $20 -256($29)
+sw $21 -260($29)
+sw $22 -264($29)
+sw $23 -268($29)
+sw $24 -272($29)
+sw $25 -276($29)
+sw $31 -280($29)
+# get param global: array_end
+lw $22 -12($29)
+# %t0 = array_head >= array_end;
 # fetch %t0 @ $16 global
-# fetch f @ $18 global
-addiu $1 $0 1
-addiu $1 $18 -1
-slti $16 $1 1
+# load array_head
+lw $8 -8($29)
+# fetch array_head @ $8
+# fetch array_end @ $22 global
+slt $1 $8 $22
+xori $16 $1 1
 # if == 0 go to: %t0 if_false_1;
 # fetch %t0 @ $16 global
 beq $16 $0 if_false_1
 nop
-# RET 1;
-addiu $1 $0 1
-sw $1 -4($29)
-lw $8 -28($29)
-lw $9 -32($29)
-lw $10 -36($29)
-lw $11 -40($29)
-lw $12 -44($29)
-lw $13 -48($29)
-lw $14 -52($29)
-lw $15 -56($29)
-lw $16 -60($29)
-lw $17 -64($29)
-lw $18 -68($29)
-lw $19 -72($29)
-lw $20 -76($29)
-lw $21 -80($29)
-lw $22 -84($29)
-lw $23 -88($29)
-lw $24 -92($29)
-lw $25 -96($29)
-lw $31 -100($29)
+# RET;
+lw $8 -208($29)
+lw $9 -212($29)
+lw $10 -216($29)
+lw $11 -220($29)
+lw $12 -224($29)
+lw $13 -228($29)
+lw $14 -232($29)
+lw $15 -236($29)
+lw $16 -240($29)
+lw $17 -244($29)
+lw $18 -248($29)
+lw $19 -252($29)
+lw $20 -256($29)
+lw $21 -260($29)
+lw $22 -264($29)
+lw $23 -268($29)
+lw $24 -272($29)
+lw $25 -276($29)
+lw $31 -280($29)
 jr $31
 nop
 # GOTO if_end_2;
@@ -77,790 +66,602 @@ j if_end_2
 nop
 # if_false_1:
 if_false_1:
-# %t3 = f - 1;
-# fetch %t3 @ $16 global
-# fetch f @ $18 global
-addiu $1 $0 1
-subu $16 $18 $1
-# PUSH %t3;
-# fetch %t3 @ $16 global
-sw $16 -108($29)
-# CALL factorial;
-addiu $29 $29 -100
-jal factorial_0
-nop
-addiu $29 $29 100
-# GET %t1;
-# fetch %t1 @ $17 global
-# load %pass_val
-lw $8 -104($29)
-# fetch %pass_val @ $8
-addiu $17 $8 0
-# %t4 = f * %t1;
-# fetch %t4 @ $16 global
-# fetch f @ $18 global
-# fetch %t1 @ $17 global
-mul $16 $18 $17
-# RET %t4;
-# fetch %t4 @ $16 global
-sw $16 -4($29)
-lw $8 -28($29)
-lw $9 -32($29)
-lw $10 -36($29)
-lw $11 -40($29)
-lw $12 -44($29)
-lw $13 -48($29)
-lw $14 -52($29)
-lw $15 -56($29)
-lw $16 -60($29)
-lw $17 -64($29)
-lw $18 -68($29)
-lw $19 -72($29)
-lw $20 -76($29)
-lw $21 -80($29)
-lw $22 -84($29)
-lw $23 -88($29)
-lw $24 -92($29)
-lw $25 -96($29)
-lw $31 -100($29)
-jr $31
-nop
 # if_end_2:
 if_end_2:
-# EPILOG;
-lw $8 -28($29)
-lw $9 -32($29)
-lw $10 -36($29)
-lw $11 -40($29)
-lw $12 -44($29)
-lw $13 -48($29)
-lw $14 -52($29)
-lw $15 -56($29)
-lw $16 -60($29)
-lw $17 -64($29)
-lw $18 -68($29)
-lw $19 -72($29)
-lw $20 -76($29)
-lw $21 -80($29)
-lw $22 -84($29)
-lw $23 -88($29)
-lw $24 -92($29)
-lw $25 -96($29)
-lw $31 -100($29)
-jr $31
-nop
-# display_error_3:
-display_error_3:
-# PROLOG display_error;
-sw $8 -32($29)
-sw $9 -36($29)
-sw $10 -40($29)
-sw $11 -44($29)
-sw $12 -48($29)
-sw $13 -52($29)
-sw $14 -56($29)
-sw $15 -60($29)
-sw $16 -64($29)
-sw $17 -68($29)
-sw $18 -72($29)
-sw $19 -76($29)
-sw $20 -80($29)
-sw $21 -84($29)
-sw $22 -88($29)
-sw $23 -92($29)
-sw $24 -96($29)
-sw $25 -100($29)
-sw $31 -104($29)
-# get param global: error_code
-lw $17 -8($29)
-# %t5 = error_code == 1;
-# fetch %t5 @ $16 global
-# fetch error_code @ $17 global
-xori $1 $17 1
-sltiu $16 $1 1
-# if == 0 go to: %t5 case_end_5;
-# fetch %t5 @ $16 global
-beq $16 $0 case_end_5
-nop
-# PRINT_STR const_str_6;
-addiu $2 $0 4
-la $4 const_str_6
-syscall
-# PRINT_CHAR '\n?';
-addiu $2 $0 11
-addiu $4 $0 10
-syscall
-# GOTO switch_end_4;
-j switch_end_4
-nop
-# case_end_5:
-case_end_5:
-# %t6 = error_code == 2;
-# fetch %t6 @ $16 global
-# fetch error_code @ $17 global
-xori $1 $17 2
-sltiu $16 $1 1
-# if == 0 go to: %t6 case_end_7;
-# fetch %t6 @ $16 global
-beq $16 $0 case_end_7
-nop
-# PRINT_STR const_str_8;
-addiu $2 $0 4
-la $4 const_str_8
-syscall
-# PRINT_CHAR '\n?';
-addiu $2 $0 11
-addiu $4 $0 10
-syscall
-# GOTO switch_end_4;
-j switch_end_4
-nop
-# case_end_7:
-case_end_7:
-# %t7 = error_code == 3;
-# fetch %t7 @ $16 global
-# fetch error_code @ $17 global
-xori $1 $17 3
-sltiu $16 $1 1
-# if == 0 go to: %t7 case_end_9;
-# fetch %t7 @ $16 global
-beq $16 $0 case_end_9
-nop
-# PRINT_STR const_str_10;
-addiu $2 $0 4
-la $4 const_str_10
-syscall
-# PRINT_CHAR '\n?';
-addiu $2 $0 11
-addiu $4 $0 10
-syscall
-# GOTO switch_end_4;
-j switch_end_4
-nop
-# case_end_9:
-case_end_9:
-# %t8 = error_code == 4;
-# fetch %t8 @ $16 global
-# fetch error_code @ $17 global
-xori $1 $17 4
-sltiu $16 $1 1
-# if == 0 go to: %t8 case_end_11;
-# fetch %t8 @ $16 global
-beq $16 $0 case_end_11
-nop
-# PRINT_STR const_str_12;
-addiu $2 $0 4
-la $4 const_str_12
-syscall
-# PRINT_CHAR '\n?';
-addiu $2 $0 11
-addiu $4 $0 10
-syscall
-# GOTO switch_end_4;
-j switch_end_4
-nop
-# case_end_11:
-case_end_11:
-# %t9 = error_code == 5;
-# fetch %t9 @ $16 global
-# fetch error_code @ $17 global
-xori $1 $17 5
-sltiu $16 $1 1
-# if == 0 go to: %t9 case_end_13;
-# fetch %t9 @ $16 global
-beq $16 $0 case_end_13
-nop
-# PRINT_STR const_str_14;
-addiu $2 $0 4
-la $4 const_str_14
-syscall
-# PRINT_CHAR '\n?';
-addiu $2 $0 11
-addiu $4 $0 10
-syscall
-# GOTO switch_end_4;
-j switch_end_4
-nop
-# case_end_13:
-case_end_13:
-# PRINT_STR const_str_16;
-addiu $2 $0 4
-la $4 const_str_16
-syscall
-# PRINT_CHAR '\n?';
-addiu $2 $0 11
-addiu $4 $0 10
-syscall
-# GOTO switch_end_4;
-j switch_end_4
-nop
-# case_end_15:
-case_end_15:
-# switch_end_4:
-switch_end_4:
-# EPILOG;
-lw $8 -32($29)
-lw $9 -36($29)
-lw $10 -40($29)
-lw $11 -44($29)
-lw $12 -48($29)
-lw $13 -52($29)
-lw $14 -56($29)
-lw $15 -60($29)
-lw $16 -64($29)
-lw $17 -68($29)
-lw $18 -72($29)
-lw $19 -76($29)
-lw $20 -80($29)
-lw $21 -84($29)
-lw $22 -88($29)
-lw $23 -92($29)
-lw $24 -96($29)
-lw $25 -100($29)
-lw $31 -104($29)
-jr $31
-nop
-# expression_test_17:
-expression_test_17:
-# PROLOG expression_test;
-sw $8 -12($29)
-sw $9 -16($29)
-sw $10 -20($29)
-sw $11 -24($29)
-sw $12 -28($29)
-sw $13 -32($29)
-sw $14 -36($29)
-sw $15 -40($29)
-sw $16 -44($29)
-sw $17 -48($29)
-sw $18 -52($29)
-sw $19 -56($29)
-sw $20 -60($29)
-sw $21 -64($29)
-sw $22 -68($29)
-sw $23 -72($29)
-sw $24 -76($29)
-sw $25 -80($29)
-sw $31 -84($29)
-# RET 1;
-addiu $1 $0 1
-sw $1 -4($29)
-lw $8 -12($29)
-lw $9 -16($29)
-lw $10 -20($29)
-lw $11 -24($29)
-lw $12 -28($29)
-lw $13 -32($29)
-lw $14 -36($29)
-lw $15 -40($29)
-lw $16 -44($29)
-lw $17 -48($29)
-lw $18 -52($29)
-lw $19 -56($29)
-lw $20 -60($29)
-lw $21 -64($29)
-lw $22 -68($29)
-lw $23 -72($29)
-lw $24 -76($29)
-lw $25 -80($29)
-lw $31 -84($29)
-jr $31
-nop
-# EPILOG;
-lw $8 -12($29)
-lw $9 -16($29)
-lw $10 -20($29)
-lw $11 -24($29)
-lw $12 -28($29)
-lw $13 -32($29)
-lw $14 -36($29)
-lw $15 -40($29)
-lw $16 -44($29)
-lw $17 -48($29)
-lw $18 -52($29)
-lw $19 -56($29)
-lw $20 -60($29)
-lw $21 -64($29)
-lw $22 -68($29)
-lw $23 -72($29)
-lw $24 -76($29)
-lw $25 -80($29)
-lw $31 -84($29)
-jr $31
-nop
-# for_factorial_18:
-for_factorial_18:
-# PROLOG for_factorial;
-sw $8 -24($29)
-sw $9 -28($29)
-sw $10 -32($29)
-sw $11 -36($29)
-sw $12 -40($29)
-sw $13 -44($29)
-sw $14 -48($29)
-sw $15 -52($29)
-sw $16 -56($29)
-sw $17 -60($29)
-sw $18 -64($29)
-sw $19 -68($29)
-sw $20 -72($29)
-sw $21 -76($29)
-sw $22 -80($29)
-sw $23 -84($29)
-sw $24 -88($29)
-sw $25 -92($29)
-sw $31 -96($29)
-# get param global: m
-lw $16 -8($29)
-# f = m;
-# fetch f @ $17 global
-# fetch m @ $16 global
-addiu $17 $16 0
-# m = m - 1;
-# fetch m @ $16 global
-# fetch m @ $16 global
-addiu $1 $0 1
-subu $16 $16 $1
-# GOTO for_block_21;
-j for_block_21
-nop
-# for_condition_19:
-for_condition_19:
-# if == 0 go to: m for_end_20;
-# fetch m @ $16 global
-beq $16 $0 for_end_20
-nop
-# for_block_21:
-for_block_21:
-# f = f * m;
-# fetch f @ $17 global
-# fetch f @ $17 global
-# fetch m @ $16 global
-mul $17 $17 $16
-# m = m - 1;
-# fetch m @ $16 global
-# fetch m @ $16 global
-addiu $1 $0 1
-subu $16 $16 $1
-# GOTO for_condition_19;
-j for_condition_19
-nop
-# for_end_20:
-for_end_20:
-# RET f;
-# fetch f @ $17 global
-sw $17 -4($29)
-lw $8 -24($29)
-lw $9 -28($29)
-lw $10 -32($29)
-lw $11 -36($29)
-lw $12 -40($29)
-lw $13 -44($29)
-lw $14 -48($29)
-lw $15 -52($29)
-lw $16 -56($29)
-lw $17 -60($29)
-lw $18 -64($29)
-lw $19 -68($29)
-lw $20 -72($29)
-lw $21 -76($29)
-lw $22 -80($29)
-lw $23 -84($29)
-lw $24 -88($29)
-lw $25 -92($29)
-lw $31 -96($29)
-jr $31
-nop
-# EPILOG;
-lw $8 -24($29)
-lw $9 -28($29)
-lw $10 -32($29)
-lw $11 -36($29)
-lw $12 -40($29)
-lw $13 -44($29)
-lw $14 -48($29)
-lw $15 -52($29)
-lw $16 -56($29)
-lw $17 -60($29)
-lw $18 -64($29)
-lw $19 -68($29)
-lw $20 -72($29)
-lw $21 -76($29)
-lw $22 -80($29)
-lw $23 -84($29)
-lw $24 -88($29)
-lw $25 -92($29)
-lw $31 -96($29)
-jr $31
-nop
-# main_22:
-main_22:
-# PROLOG main;
-sw $8 -84($29)
-sw $9 -88($29)
-sw $10 -92($29)
-sw $11 -96($29)
-sw $12 -100($29)
-sw $13 -104($29)
-sw $14 -108($29)
-sw $15 -112($29)
-sw $16 -116($29)
-sw $17 -120($29)
-sw $18 -124($29)
-sw $19 -128($29)
-sw $20 -132($29)
-sw $21 -136($29)
-sw $22 -140($29)
-sw $23 -144($29)
-sw $24 -148($29)
-sw $25 -152($29)
-sw $31 -156($29)
-# error_code = 0;
-# fetch error_code @ $18 global
+# flag = 0;
+# fetch flag @ $18 global
 addiu $18 $0 0
-# READ_INT m;
-addiu $2 $0 5
-syscall
-# fetch m @ $8
-addiu $8 $2 0
-# save m
-sw $8 0($28)
-# READ_INT n;
-addiu $2 $0 5
-syscall
-# fetch n @ $8
-addiu $8 $2 0
-# save n
-sw $8 4($28)
-# CALL expression_test;
-addiu $29 $29 -156
-jal expression_test_17
+# j = array_end;
+# fetch j @ $23 global
+# fetch array_end @ $22 global
+addiu $23 $22 0
+# GOTO for_block_5;
+j for_block_5
 nop
-addiu $29 $29 156
-# GET %t30;
-# fetch %t30 @ $16 global
-# load %pass_val
-lw $8 -160($29)
-# fetch %pass_val @ $8
-addiu $16 $8 0
-# if == go to: %t30 1 if_false_23;
-# fetch %t30 @ $16 global
-addiu $1 $0 1
-beq $16 $1 if_false_23
+# for_condition_3:
+for_condition_3:
+# if != go to: flag 0 for_end_4;
+# fetch flag @ $18 global
+addiu $1 $0 0
+bne $18 $1 for_end_4
 nop
-# PRINT_STR const_str_25;
-addiu $2 $0 4
-la $4 const_str_25
-syscall
-# PRINT_CHAR '\n?';
-addiu $2 $0 11
-addiu $4 $0 10
-syscall
-# GOTO if_end_24;
-j if_end_24
+# for_block_5:
+for_block_5:
+# %t2 = global_array[j];
+# load global_array
+addiu $8 $28 0
+# fetch global_array @ $8
+# fetch %t2 @ $19 global
+# fetch j @ $23 global
+sll $1 $23 2
+addu $1 $1 $8
+lw $19 0($1)
+# %t4 = global_array[array_head];
+# load global_array
+addiu $8 $28 0
+# fetch global_array @ $8
+# fetch %t4 @ $17 global
+# load array_head
+lw $9 -8($29)
+# fetch array_head @ $9
+sll $1 $9 2
+addu $1 $1 $8
+lw $17 0($1)
+# %t5 = %t2 < %t4;
+# fetch %t5 @ $16 global
+# fetch %t2 @ $19 global
+# fetch %t4 @ $17 global
+slt $16 $19 $17
+# if == 0 go to: %t5 if_false_6;
+# fetch %t5 @ $16 global
+beq $16 $0 if_false_6
 nop
-# if_false_23:
-if_false_23:
-# if_end_24:
-if_end_24:
-# %t31 = m > 10;
-# fetch %t31 @ $16 global
-# load m
-lw $8 0($28)
-# fetch m @ $8
-addiu $1 $0 10
-addiu $1 $0 10
-slt $16 $1 $8
-# if == 0 go to: %t31 if_false_26;
-# fetch %t31 @ $16 global
-beq $16 $0 if_false_26
-nop
-# error_code = 1;
-# fetch error_code @ $18 global
+# flag = 1;
+# fetch flag @ $18 global
 addiu $18 $0 1
-# GOTO if_end_27;
-j if_end_27
+# GOTO if_end_7;
+j if_end_7
 nop
-# if_false_26:
-if_false_26:
-# if_end_27:
-if_end_27:
-# %t32 = m < 0;
-# fetch %t32 @ $16 global
-# load m
-lw $8 0($28)
-# fetch m @ $8
-addiu $1 $0 0
-slti $16 $8 0
-# if == 0 go to: %t32 if_false_28;
-# fetch %t32 @ $16 global
-beq $16 $0 if_false_28
-nop
-# error_code = 2;
-# fetch error_code @ $18 global
-addiu $18 $0 2
-# GOTO if_end_29;
-j if_end_29
-nop
-# if_false_28:
-if_false_28:
-# if_end_29:
-if_end_29:
-# %t33 = n > 10;
-# fetch %t33 @ $16 global
-# load n
-lw $8 4($28)
-# fetch n @ $8
-addiu $1 $0 10
-addiu $1 $0 10
+# if_false_6:
+if_false_6:
+# if_end_7:
+if_end_7:
+# %t6 = j <= array_head;
+# fetch %t6 @ $16 global
+# fetch j @ $23 global
+# load array_head
+lw $8 -8($29)
+# fetch array_head @ $8
+addiu $1 $23 -1
 slt $16 $1 $8
-# if == 0 go to: %t33 if_false_30;
-# fetch %t33 @ $16 global
-beq $16 $0 if_false_30
+# if == 0 go to: %t6 if_false_8;
+# fetch %t6 @ $16 global
+beq $16 $0 if_false_8
 nop
-# error_code = 3;
-# fetch error_code @ $18 global
-addiu $18 $0 3
-# GOTO if_end_31;
-j if_end_31
+# flag = 1;
+# fetch flag @ $18 global
+addiu $18 $0 1
+# GOTO if_end_9;
+j if_end_9
 nop
-# if_false_30:
-if_false_30:
-# if_end_31:
-if_end_31:
-# %t34 = n < 0;
-# fetch %t34 @ $16 global
-# load n
-lw $8 4($28)
-# fetch n @ $8
+# if_false_8:
+if_false_8:
+# if_end_9:
+if_end_9:
+# j = j - 1;
+# fetch j @ $23 global
+# fetch j @ $23 global
+addiu $1 $0 1
+subu $23 $23 $1
+# GOTO for_condition_3;
+j for_condition_3
+nop
+# for_end_4:
+for_end_4:
+# j = j + 1;
+# fetch j @ $23 global
+# fetch j @ $23 global
+addiu $23 $23 1
+# i = array_head + 1;
+# fetch i @ $20 global
+# load array_head
+lw $8 -8($29)
+# fetch array_head @ $8
+addiu $20 $8 1
+# GOTO for_block_12;
+j for_block_12
+nop
+# for_condition_10:
+for_condition_10:
+# %t9 = i <= j;
+# fetch %t9 @ $16 global
+# fetch i @ $20 global
+# fetch j @ $23 global
+addiu $1 $20 -1
+slt $16 $1 $23
+# if == 0 go to: %t9 for_end_11;
+# fetch %t9 @ $16 global
+beq $16 $0 for_end_11
+nop
+# for_block_12:
+for_block_12:
+# %t11 = global_array[i];
+# load global_array
+addiu $8 $28 0
+# fetch global_array @ $8
+# fetch %t11 @ $18 global
+# fetch i @ $20 global
+sll $1 $20 2
+addu $1 $1 $8
+lw $18 0($1)
+# %t13 = global_array[array_head];
+# load global_array
+addiu $8 $28 0
+# fetch global_array @ $8
+# fetch %t13 @ $17 global
+# load array_head
+lw $9 -8($29)
+# fetch array_head @ $9
+sll $1 $9 2
+addu $1 $1 $8
+lw $17 0($1)
+# %t14 = %t11 > %t13;
+# fetch %t14 @ $16 global
+# fetch %t11 @ $18 global
+# fetch %t13 @ $17 global
+slt $16 $17 $18
+# if == 0 go to: %t14 if_false_13;
+# fetch %t14 @ $16 global
+beq $16 $0 if_false_13
+nop
+# temp = global_array[i];
+# load global_array
+addiu $8 $28 0
+# fetch global_array @ $8
+# fetch temp @ $17 global
+# fetch i @ $20 global
+sll $1 $20 2
+addu $1 $1 $8
+lw $17 0($1)
+# %t18 = global_array[j];
+# load global_array
+addiu $8 $28 0
+# fetch global_array @ $8
+# fetch %t18 @ $18 global
+# fetch j @ $23 global
+sll $1 $23 2
+addu $1 $1 $8
+lw $18 0($1)
+# global_array[i] = %t18;
+# load global_array
+addiu $8 $28 0
+# fetch global_array @ $8
+# fetch %t18 @ $18 global
+# fetch i @ $20 global
+sll $1 $20 2
+addu $1 $1 $8
+sw $18 0($1)
+# save global_array
+# global_array[j] = temp;
+# load global_array
+addiu $8 $28 0
+# fetch global_array @ $8
+# fetch temp @ $17 global
+# fetch j @ $23 global
+sll $1 $23 2
+addu $1 $1 $8
+sw $17 0($1)
+# save global_array
+# flag#1 = 0;
+# fetch flag#1 @ $16 global
+addiu $16 $0 0
+# j = array_end;
+# fetch j @ $23 global
+# fetch array_end @ $22 global
+addiu $23 $22 0
+# GOTO for_block_17;
+j for_block_17
+nop
+# for_condition_15:
+for_condition_15:
+# if != go to: flag#1 0 for_end_16;
+# fetch flag#1 @ $16 global
 addiu $1 $0 0
-slti $16 $8 0
-# if == 0 go to: %t34 if_false_32;
-# fetch %t34 @ $16 global
-beq $16 $0 if_false_32
+bne $16 $1 for_end_16
 nop
-# error_code = 4;
-# fetch error_code @ $18 global
-addiu $18 $0 4
-# GOTO if_end_33;
-j if_end_33
+# for_block_17:
+for_block_17:
+# %t24 = global_array[j];
+# load global_array
+addiu $8 $28 0
+# fetch global_array @ $8
+# fetch %t24 @ $17 global
+# fetch j @ $23 global
+sll $1 $23 2
+addu $1 $1 $8
+lw $17 0($1)
+# %t26 = global_array[array_head];
+# load global_array
+addiu $8 $28 0
+# fetch global_array @ $8
+# fetch %t26 @ $18 global
+# load array_head
+lw $9 -8($29)
+# fetch array_head @ $9
+sll $1 $9 2
+addu $1 $1 $8
+lw $18 0($1)
+# %t27 = %t24 < %t26;
+# fetch %t27 @ $19 global
+# fetch %t24 @ $17 global
+# fetch %t26 @ $18 global
+slt $19 $17 $18
+# if == 0 go to: %t27 if_false_18;
+# fetch %t27 @ $19 global
+beq $19 $0 if_false_18
 nop
-# if_false_32:
-if_false_32:
-# if_end_33:
-if_end_33:
-# %t35 = m - n;
-# fetch %t35 @ $17 global
-# load m
-lw $8 0($28)
-# fetch m @ $8
-# load n
-lw $9 4($28)
-# fetch n @ $9
-subu $17 $8 $9
-# %t36 = %t35 < 0;
-# fetch %t36 @ $16 global
-# fetch %t35 @ $17 global
-addiu $1 $0 0
-slti $16 $17 0
-# if == 0 go to: %t36 if_false_34;
-# fetch %t36 @ $16 global
-beq $16 $0 if_false_34
+# flag#1 = 1;
+# fetch flag#1 @ $16 global
+addiu $16 $0 1
+# GOTO if_end_19;
+j if_end_19
 nop
-# error_code = 5;
-# fetch error_code @ $18 global
-addiu $18 $0 5
-# GOTO if_end_35;
-j if_end_35
+# if_false_18:
+if_false_18:
+# if_end_19:
+if_end_19:
+# %t28 = j <= array_head;
+# fetch %t28 @ $17 global
+# fetch j @ $23 global
+# load array_head
+lw $8 -8($29)
+# fetch array_head @ $8
+addiu $1 $23 -1
+slt $17 $1 $8
+# if == 0 go to: %t28 if_false_20;
+# fetch %t28 @ $17 global
+beq $17 $0 if_false_20
 nop
-# if_false_34:
-if_false_34:
-# if_end_35:
-if_end_35:
-# PUSH error_code;
-# fetch error_code @ $18 global
-sw $18 -164($29)
-# CALL display_error;
-addiu $29 $29 -156
-jal display_error_3
+# flag#1 = 1;
+# fetch flag#1 @ $16 global
+addiu $16 $0 1
+# GOTO if_end_21;
+j if_end_21
 nop
-addiu $29 $29 156
-# if != go to: error_code 0 if_false_36;
-# fetch error_code @ $18 global
-addiu $1 $0 0
-bne $18 $1 if_false_36
+# if_false_20:
+if_false_20:
+# if_end_21:
+if_end_21:
+# j = j - 1;
+# fetch j @ $23 global
+# fetch j @ $23 global
+addiu $1 $0 1
+subu $23 $23 $1
+# GOTO for_condition_15;
+j for_condition_15
 nop
-# PUSH m;
-# load m
-lw $8 0($28)
-# fetch m @ $8
-sw $8 -164($29)
-# CALL factorial;
-addiu $29 $29 -156
-jal factorial_0
+# for_end_16:
+for_end_16:
+# j = j + 1;
+# fetch j @ $23 global
+# fetch j @ $23 global
+addiu $23 $23 1
+# GOTO if_end_14;
+j if_end_14
 nop
-addiu $29 $29 156
-# GET fact_m;
-# fetch fact_m @ $21 global
-# load %pass_val
-lw $9 -160($29)
-# fetch %pass_val @ $9
-addiu $21 $9 0
-# PUSH n;
-# load n
-lw $9 4($28)
-# fetch n @ $9
-sw $9 -164($29)
-# CALL factorial;
-addiu $29 $29 -156
-jal factorial_0
+# if_false_13:
+if_false_13:
+# if_end_14:
+if_end_14:
+# i = i + 1;
+# fetch i @ $20 global
+# fetch i @ $20 global
+addiu $20 $20 1
+# GOTO for_condition_10;
+j for_condition_10
 nop
-addiu $29 $29 156
-# GET fact_n;
-# fetch fact_n @ $19 global
-# load %pass_val
-lw $10 -160($29)
-# fetch %pass_val @ $10
-addiu $19 $10 0
-# %t44 = m - n;
-# fetch %t44 @ $16 global
-# load m
-lw $8 0($28)
-# fetch m @ $8
-# load n
-lw $9 4($28)
-# fetch n @ $9
-subu $16 $8 $9
-# PUSH %t44;
-# fetch %t44 @ $16 global
-sw $16 -164($29)
-# CALL factorial;
-addiu $29 $29 -156
-jal factorial_0
-nop
-addiu $29 $29 156
-# GET fact_m_sub_n;
-# fetch fact_m_sub_n @ $20 global
-# load %pass_val
-lw $10 -160($29)
-# fetch %pass_val @ $10
-addiu $20 $10 0
-# PRINT_STR const_str_38;
-addiu $2 $0 4
-la $4 const_str_38
-syscall
-# PRINT_INT fact_m;
+# for_end_11:
+for_end_11:
+# temp#1 = global_array[array_head];
+# load global_array
+addiu $8 $28 0
+# fetch global_array @ $8
+# fetch temp#1 @ $18 global
+# load array_head
+lw $9 -8($29)
+# fetch array_head @ $9
+sll $1 $9 2
+addu $1 $1 $8
+lw $18 0($1)
+# %t33 = global_array[j];
+# load global_array
+addiu $8 $28 0
+# fetch global_array @ $8
+# fetch %t33 @ $21 global
+# fetch j @ $23 global
+sll $1 $23 2
+addu $1 $1 $8
+lw $21 0($1)
+# global_array[array_head] = %t33;
+# load global_array
+addiu $8 $28 0
+# fetch global_array @ $8
+# fetch %t33 @ $21 global
+# load array_head
+lw $9 -8($29)
+# fetch array_head @ $9
+sll $1 $9 2
+addu $1 $1 $8
+sw $21 0($1)
+# save global_array
+# global_array[j] = temp#1;
+# load global_array
+addiu $8 $28 0
+# fetch global_array @ $8
+# fetch temp#1 @ $18 global
+# fetch j @ $23 global
+sll $1 $23 2
+addu $1 $1 $8
+sw $18 0($1)
+# save global_array
+# PRINT_INT array_head;
 addiu $2 $0 1
-# fetch fact_m @ $21 global
-addiu $4 $21 0
+# load array_head
+lw $9 -8($29)
+# fetch array_head @ $9
+addiu $4 $9 0
 syscall
-# PRINT_CHAR '\n?';
-addiu $2 $0 11
-addiu $4 $0 10
-syscall
-# PRINT_STR const_str_39;
-addiu $2 $0 4
-la $4 const_str_39
-syscall
-# PUSH m;
-# load m
-lw $8 0($28)
-# fetch m @ $8
-sw $8 -164($29)
-# CALL for_factorial;
-addiu $29 $29 -156
-jal for_factorial_18
-nop
-addiu $29 $29 156
-# GET %t45;
-# fetch %t45 @ $16 global
-# load %pass_val
-lw $10 -160($29)
-# fetch %pass_val @ $10
-addiu $16 $10 0
-# PRINT_INT %t45;
+# %t38 = j - 1;
+# fetch %t38 @ $19 global
+# fetch j @ $23 global
+addiu $1 $0 1
+subu $19 $23 $1
+# PRINT_INT %t38;
 addiu $2 $0 1
-# fetch %t45 @ $16 global
-addiu $4 $16 0
-syscall
-# PRINT_CHAR '\n?';
-addiu $2 $0 11
-addiu $4 $0 10
-syscall
-# PRINT_STR const_str_40;
-addiu $2 $0 4
-la $4 const_str_40
-syscall
-# PRINT_INT fact_n;
-addiu $2 $0 1
-# fetch fact_n @ $19 global
+# fetch %t38 @ $19 global
 addiu $4 $19 0
 syscall
 # PRINT_CHAR '\n?';
 addiu $2 $0 11
 addiu $4 $0 10
 syscall
-# PRINT_STR const_str_41;
-addiu $2 $0 4
-la $4 const_str_41
-syscall
-# PUSH n;
-# load n
-lw $9 4($28)
-# fetch n @ $9
-sw $9 -164($29)
-# CALL for_factorial;
-addiu $29 $29 -156
-jal for_factorial_18
-nop
-addiu $29 $29 156
-# GET %t47;
-# fetch %t47 @ $16 global
-# load %pass_val
-lw $10 -160($29)
-# fetch %pass_val @ $10
-addiu $16 $10 0
-# PRINT_INT %t47;
+# %t39 = j + 1;
+# fetch %t39 @ $16 global
+# fetch j @ $23 global
+addiu $16 $23 1
+# PRINT_INT %t39;
 addiu $2 $0 1
-# fetch %t47 @ $16 global
+# fetch %t39 @ $16 global
 addiu $4 $16 0
+syscall
+# PRINT_INT array_end;
+addiu $2 $0 1
+# fetch array_end @ $22 global
+addiu $4 $22 0
 syscall
 # PRINT_CHAR '\n?';
 addiu $2 $0 11
 addiu $4 $0 10
 syscall
-# PRINT_STR const_str_42;
-addiu $2 $0 4
-la $4 const_str_42
-syscall
-# %t49 = fact_m / fact_n;
-# fetch %t49 @ $18 global
-# fetch fact_m @ $21 global
-# fetch fact_n @ $19 global
-div $21 $19
-mflo $18
-# %t50 = %t49 / fact_m_sub_n;
-# fetch %t50 @ $17 global
-# fetch %t49 @ $18 global
-# fetch fact_m_sub_n @ $20 global
-div $18 $20
-mflo $17
-# PRINT_INT %t50;
+# %t42 = j - 1;
+# fetch %t42 @ $17 global
+# fetch j @ $23 global
+addiu $1 $0 1
+subu $17 $23 $1
+# PUSH array_head;
+# load array_head
+lw $9 -8($29)
+# fetch array_head @ $9
+sw $9 -288($29)
+# fetch %t42 @ $17 global
+sw $17 -292($29)
+# CALL quick_sort;
+addiu $29 $29 -280
+jal quick_sort_0
+nop
+addiu $29 $29 280
+# %t44 = j + 1;
+# fetch %t44 @ $16 global
+# fetch j @ $23 global
+addiu $16 $23 1
+# PUSH %t44;
+# fetch %t44 @ $16 global
+sw $16 -288($29)
+# fetch array_end @ $22 global
+sw $22 -292($29)
+# CALL quick_sort;
+addiu $29 $29 -280
+jal quick_sort_0
+nop
+addiu $29 $29 280
+# EPILOG;
+lw $8 -208($29)
+lw $9 -212($29)
+lw $10 -216($29)
+lw $11 -220($29)
+lw $12 -224($29)
+lw $13 -228($29)
+lw $14 -232($29)
+lw $15 -236($29)
+lw $16 -240($29)
+lw $17 -244($29)
+lw $18 -248($29)
+lw $19 -252($29)
+lw $20 -256($29)
+lw $21 -260($29)
+lw $22 -264($29)
+lw $23 -268($29)
+lw $24 -272($29)
+lw $25 -276($29)
+lw $31 -280($29)
+jr $31
+nop
+# main_22:
+main_22:
+# PROLOG main;
+sw $8 -104($29)
+sw $9 -108($29)
+sw $10 -112($29)
+sw $11 -116($29)
+sw $12 -120($29)
+sw $13 -124($29)
+sw $14 -128($29)
+sw $15 -132($29)
+sw $16 -136($29)
+sw $17 -140($29)
+sw $18 -144($29)
+sw $19 -148($29)
+sw $20 -152($29)
+sw $21 -156($29)
+sw $22 -160($29)
+sw $23 -164($29)
+sw $24 -168($29)
+sw $25 -172($29)
+sw $31 -176($29)
+# global_array[0] = 6;
+# load global_array
+addiu $8 $28 0
+# fetch global_array @ $8
+addiu $9 $0 6
+# fetch 6 @ $9
+sw $9 0($8)
+# save global_array
+# global_array[1] = 5;
+# load global_array
+addiu $8 $28 0
+# fetch global_array @ $8
+addiu $10 $0 5
+# fetch 5 @ $10
+sw $10 4($8)
+# save global_array
+# global_array[2] = 4;
+# load global_array
+addiu $8 $28 0
+# fetch global_array @ $8
+addiu $11 $0 4
+# fetch 4 @ $11
+sw $11 8($8)
+# save global_array
+# global_array[3] = 3;
+# load global_array
+addiu $8 $28 0
+# fetch global_array @ $8
+addiu $12 $0 3
+# fetch 3 @ $12
+sw $12 12($8)
+# save global_array
+# global_array[4] = 2;
+# load global_array
+addiu $8 $28 0
+# fetch global_array @ $8
+addiu $13 $0 2
+# fetch 2 @ $13
+sw $13 16($8)
+# save global_array
+# global_array[5] = 1;
+# load global_array
+addiu $8 $28 0
+# fetch global_array @ $8
+addiu $14 $0 1
+# fetch 1 @ $14
+sw $14 20($8)
+# save global_array
+# global_array[6] = 6;
+# load global_array
+addiu $8 $28 0
+# fetch global_array @ $8
+addiu $15 $0 6
+# fetch 6 @ $15
+sw $15 24($8)
+# save global_array
+# global_array[7] = 5;
+# load global_array
+addiu $8 $28 0
+# fetch global_array @ $8
+addiu $14 $0 5
+# fetch 5 @ $14
+sw $14 28($8)
+# save global_array
+# global_array[8] = 4;
+# load global_array
+addiu $8 $28 0
+# fetch global_array @ $8
+addiu $13 $0 4
+# fetch 4 @ $13
+sw $13 32($8)
+# save global_array
+# global_array[9] = 3;
+# load global_array
+addiu $8 $28 0
+# fetch global_array @ $8
+addiu $11 $0 3
+# fetch 3 @ $11
+sw $11 36($8)
+# save global_array
+# PUSH 0;
+addiu $1 $0 0
+sw $1 -184($29)
+addiu $1 $0 9
+sw $1 -188($29)
+# CALL quick_sort;
+addiu $29 $29 -176
+jal quick_sort_0
+nop
+addiu $29 $29 176
+# i = 0;
+# fetch i @ $16 global
+addiu $16 $0 0
+# GOTO for_block_25;
+j for_block_25
+nop
+# for_condition_23:
+for_condition_23:
+# %t68 = i < 10;
+# fetch %t68 @ $17 global
+# fetch i @ $16 global
+addiu $1 $0 10
+slti $17 $16 10
+# if == 0 go to: %t68 for_end_24;
+# fetch %t68 @ $17 global
+beq $17 $0 for_end_24
+nop
+# for_block_25:
+for_block_25:
+# %t70 = global_array[i];
+# load global_array
+addiu $8 $28 0
+# fetch global_array @ $8
+# fetch %t70 @ $17 global
+# fetch i @ $16 global
+sll $1 $16 2
+addu $1 $1 $8
+lw $17 0($1)
+# PRINT_INT %t70;
 addiu $2 $0 1
-# fetch %t50 @ $17 global
+# fetch %t70 @ $17 global
 addiu $4 $17 0
 syscall
 # PRINT_CHAR '\n?';
 addiu $2 $0 11
 addiu $4 $0 10
 syscall
-# GOTO if_end_37;
-j if_end_37
+# PRINT_STR const_str_26;
+addiu $2 $0 4
+la $4 const_str_26
+syscall
+# PRINT_CHAR '\n?';
+addiu $2 $0 11
+addiu $4 $0 10
+syscall
+# i = i + 1;
+# fetch i @ $16 global
+# fetch i @ $16 global
+addiu $16 $16 1
+# GOTO for_condition_23;
+j for_condition_23
 nop
-# if_false_36:
-if_false_36:
-# if_end_37:
-if_end_37:
+# for_end_24:
+for_end_24:
 # EPILOG;
 j __exit__
 nop

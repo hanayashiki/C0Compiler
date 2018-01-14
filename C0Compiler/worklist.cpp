@@ -20,7 +20,7 @@ void Flow::conflict_analyze() {
 	
 	for (vector<DUNet>::iterator iter = dunet_list.begin();
 		iter != dunet_list.end(); iter++) {
-		cout << iter->use_sym->name << ": $" <<
+		coutd << iter->use_sym->name << ": $" <<
 			iter->use_sym->global_reg << endl;
 	}
 }
@@ -38,7 +38,7 @@ void Flow::getDUNets() {
 		coutd << du_chain.tg_sym->name << endl;
 		new_chain.use_sym = du_chain.tg_sym;
 		new_chain.map_elem_list(du_chain.chain);
-		if (verbose) new_chain.in_display_idx();
+		new_chain.in_display_idx();
 		addToList(new_chain);
 		//if ((*s_iter)->name == "r")
 		//	getchar();
@@ -50,7 +50,7 @@ void Flow::getDUNets() {
 			q_iter = (*b_iter)->q_list.begin();
 			q_iter != (*b_iter)->q_list.end();
 			q_iter++) {
-			if (((*q_iter)->dst != NULL) && !(*q_iter)->dst->global && !((*q_iter)->dst->array_flag)) { // a def
+			if (((*q_iter)->dst != NULL) && !(*q_iter)->dst->global) { // a def
 				//coutd << (*q_iter)->dst->name << endl;
 				int b_id = b_iter - flow_map.begin();
 				int q_id = q_iter - (*b_iter)->q_list.begin();
@@ -59,7 +59,7 @@ void Flow::getDUNets() {
 				//coutd << du_chain.tg_sym->name << endl;
 				new_chain.use_sym = du_chain.tg_sym;
 				new_chain.map_elem_list(du_chain.chain);
-				if (verbose) new_chain.in_display_idx();
+				new_chain.in_display_idx();
 				addToList(new_chain);
 			}
 			cur_q_id++;
@@ -83,11 +83,12 @@ void Flow::generateLocSet() {
 void Flow::addToList(DUNet & net) {
 	for (vector<DUNet>::iterator d_iter = dunet_list.begin();
 		d_iter != dunet_list.end(); d_iter++) {
-		if (d_iter->use_sym == net.use_sym && 
+		if (d_iter->use_sym == net.use_sym &&
 			(d_iter->is_crossed(net) ||
-			net.use_sym->array_flag)) {
+			net.use_sym->array_flag)
+			) {
 			d_iter->set_union(*d_iter, net);
-			coutd << "merged: " << d_iter->use_sym->name << endl;
+			cout << "merged: " << d_iter->use_sym->name << endl;
 			return;
 		}
 	}

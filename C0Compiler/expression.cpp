@@ -98,7 +98,7 @@ Symbol* Syntax::expression_tail(Symbol* left) {
 			temp_minus->const_flag = true;
 			temp_minus->character_value = left->character_value;
 			temp_minus->integer_value = left->character_value;
-			//cout << temp_minus->integer_value << endl;
+			cout << temp_minus->integer_value << endl;
 		}
 		else {
 			Q q(Q::CAST_INT, temp_minus, left);
@@ -112,7 +112,7 @@ Symbol* Syntax::expression_tail(Symbol* left) {
 			temp_minus->const_flag = true;
 			temp_minus->character_value = right->character_value;
 			temp_minus->integer_value = right->character_value;
-			//cout << temp_minus->integer_value << endl;
+			cout << temp_minus->integer_value << endl;
 		}
 		else {
 			Q q(Q::CAST_INT, temp_minus, right);

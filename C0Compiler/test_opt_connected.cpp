@@ -1,5 +1,5 @@
 #include "stdafx.h"
-/*
+
 bool do_opt = true;
 bool do_dag = true;
 bool do_reg = true;
@@ -12,13 +12,13 @@ int main() {
 	vector<Symbol*> string_table;
 	mem_map root_map;
 
-	FILE* f = fopen("foreign_test_zhaokaifeng.txt", "r");
+	FILE* f = fopen("test_debug_unknown.txt", "r");
 	MipsCode::out_file = fopen("mips.asm", "w");
 	Quaterion::dump_file = stdout;
 	lexer.setSource(f);
 	Syntax syntax(&lexer, &symbol_table, &q_table, &string_table);
 	syntax.start();
-	if (verbose) symbol_table.display();
+	symbol_table.display();
 	cout << "------quaterion begin------\n";
 	q_table.emit();
 	cout << "-------quaterion end-------\n" << endl;
@@ -42,7 +42,7 @@ int main() {
 						sym_list closure = symbol_table.get_closure(*ptr);
 						Flow flow_map(closure, (*ptr));
 						flow_map.generate_flow_map(q_table.q_list);
-						if (verbose) flow_map.display_blocks();
+						flow_map.display_blocks();
 						flow_map.activity_analysis();
 						flow_map.dag_optimize();
 						new_qlist.insert(new_qlist.end(),
@@ -62,7 +62,7 @@ int main() {
 						sym_list closure = symbol_table.get_closure(*ptr);
 						Flow flow_map(closure, (*ptr));
 						flow_map.generate_flow_map(q_table.q_list);
-						if (verbose) flow_map.display_blocks();
+						flow_map.display_blocks();
 						flow_map.activity_analysis();
 						flow_map.conflict_analyze();
 						new_qlist.insert(new_qlist.end(),
@@ -85,7 +85,7 @@ int main() {
 			if ((*ptr)->function_flag) {
 				MipsTable m_table((*ptr), &symbol_table, &q_table, &root_map);
 				m_table.translate_all();
-				if (verbose) m_table.display_stack();
+				m_table.display_stack();
 			}
 		}
 		MipsTable::exit();
@@ -101,4 +101,4 @@ int main() {
 
 	getchar();
 	return 0;
-}*/
+}

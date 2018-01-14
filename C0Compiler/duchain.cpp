@@ -2,7 +2,7 @@
 Flow* DUChain::flow = NULL;
 
 DUChain::DUChain(int block_id, int quat_id, int start_q_id, Symbol* def_sym)
-	: q_id(start_q_id + 1), tg_sym(def_sym)
+	: tg_sym(def_sym)
 {
 	bool killed;
 	vector<BasicBlock*> Queue;
@@ -34,7 +34,7 @@ DUChain::DUChain(int block_id, int quat_id, int start_q_id, Symbol* def_sym)
 				b_iter != current_block->next.end();
 				b_iter++) {
 				if (visited_blocks.find(*b_iter) == visited_blocks.end()) {
-					bool killed = false;
+					bool killed;
 					visited_blocks.insert(*b_iter);
 					vector<Loc> new_locs = traverse_block(*b_iter, 0,
 						killed);
@@ -66,16 +66,17 @@ DUChain::traverse_block(BasicBlock* b, int from, bool & killed) {
 		Quaterion* q = get_quat(b->id, idx);
 
 		if (q->dst == tg_sym) {
-			killed = true;
-			if ((q->left == tg_sym) || (q->right == tg_sym)) {
+			if (q->left == tg_sym || q->right == tg_sym) {
 				locs.push_back(q->idx);
 			}
-			//coutd << tg_sym->name << " is killed at " << q_id << endl;
-			break;
+			else {
+				killed = true;
+				//coutd << tg_sym->name << " is killed at " << q_id << endl\;
+				break;
+			}
 		}
 		else {
 			locs.push_back(q->idx);
-			q_id++;
 		}
 	}
 	if (!b->active_out.included(tg_sym->id)) {

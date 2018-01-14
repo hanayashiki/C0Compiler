@@ -61,11 +61,6 @@ bool Syntax::call_func_list(Symbol* func_sym) {
         }
         Symbol* temp = temp_symbol((*iter)->type, false);
         Symbol* value = expression();
-
-		if (value == NULL) {
-			error_handler("Bad argument. ");
-			return false;
-		}
         
         if (temp->type != value->type) {
             if (temp->type == Symbol::CHAR) {

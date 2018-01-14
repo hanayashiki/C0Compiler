@@ -109,11 +109,8 @@ void quick_sort(int array_head,int array_end)
     int temp,flag;
     i = 0;
     j = 0;
-    printf("head: ", array_head);
-    printf("      end: ", array_head);
-    if (array_head >= array_end) {
+    if (array_head >= array_end)
         return ;
-    }
     flag = 0;
     for (j = array_end;flag == 0;j = j - 1)
     {

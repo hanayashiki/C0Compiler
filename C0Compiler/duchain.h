@@ -5,7 +5,6 @@ class Flow;
 
 class DUChain {
 public:
-	int q_id;
 	Symbol* tg_sym;
 	static Flow* flow;
 	typedef int Loc; // block id, q id
