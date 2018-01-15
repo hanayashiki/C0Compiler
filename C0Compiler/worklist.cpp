@@ -82,14 +82,18 @@ void Flow::generateLocSet() {
 
 void Flow::addToList(DUNet & net) {
 	for (vector<DUNet>::iterator d_iter = dunet_list.begin();
-		d_iter != dunet_list.end(); d_iter++) {
+		d_iter != dunet_list.end();) {
 		if (d_iter->use_sym == net.use_sym &&
 			(d_iter->is_crossed(net) ||
 			net.use_sym->array_flag)
 			) {
-			d_iter->set_union(*d_iter, net);
-			cout << "merged: " << d_iter->use_sym->name << endl;
-			return;
+			//d_iter->set_union(*d_iter, net);
+			net.set_union(net, *d_iter);
+			d_iter = dunet_list.erase(d_iter);
+			//cout << "merged: " << d_iter->use_sym->name << endl;
+		}
+		else {
+			d_iter++;
 		}
 	}
 	dunet_list.push_back(net);

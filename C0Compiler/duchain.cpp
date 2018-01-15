@@ -69,11 +69,9 @@ DUChain::traverse_block(BasicBlock* b, int from, bool & killed) {
 			if (q->left == tg_sym || q->right == tg_sym) {
 				locs.push_back(q->idx);
 			}
-			else {
-				killed = true;
-				//coutd << tg_sym->name << " is killed at " << q_id << endl\;
-				break;
-			}
+			killed = true;
+			//coutd << tg_sym->name << " is killed at " << q_id << endl\;
+			break;
 		}
 		else {
 			locs.push_back(q->idx);
